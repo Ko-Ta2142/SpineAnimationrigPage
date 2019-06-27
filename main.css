@@ -1,0 +1,66 @@
+﻿/* CSS Document */
+
+body {
+    font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+.block {
+    text-align: center;
+    margin : 0px !important;
+    padding : 0px !important;
+}
+
+.sentenceblock {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color : rgba(41,41,41,1.00);
+    font-size: 1.2em;
+    text-align: center;
+    background-color: rgba(223,223,223,1.00);
+    -webkit-box-shadow: inset 0px 10px 10px rgba(0,0,0,0.23);
+    box-shadow: inset 0px 10px 10px rgba(0,0,0,0.23);
+}
+
+
+.blockcenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.console{
+    display : block;
+    text-align: left;
+    padding : 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-left: 3em;
+    background-color: rgba(41,41,41,1.00);
+    color : rgba(102,199,219,1.00);
+    font-family: "Consolas", "Lucida Console", Monaco, monospace;
+    border-radius: 10px;
+}
+
+.innershadow{
+    -webkit-box-shadow: inset 0px 10px 10px rgba(0,0,0,0.23);
+    box-shadow: inset 0px 10px 10px rgba(0,0,0,0.23);
+}
+
+.strong{
+    color: #b60067;
+    font-weight: bold;
+}
+
+a.linkhover{
+    display: inline-block;
+    background-color: rgba(0,0,0,0.00);
+}
+
+a.linkhover:focus,
+a.linkhover:hover{
+    background-color: rgba(0,255,255,0.20);
+}
+
+

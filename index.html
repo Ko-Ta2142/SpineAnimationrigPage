@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SpineAnimationrig</title>
+<meta name="description" content="Spine animation control tool.">
+<meta property="og:title" content="SpineAnimationrig">
+<meta property="og:description" content="Spine animation control tool.">
+<meta property="og:url" content="https://hoge.org/">
+<meta property="og:image" content="https://hoge.png">
+<meta name="thumbnail" content="http://hoge.org/thumbnail.jpeg">
+<!-- mobile tag -->
+<meta name="viewport" content="width=800">
+<!-- favicon -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="shortcut icon" type="image/png" href="favicon.png">
+<!-- css -->
+<link href="main.css" rel="stylesheet" type="text/css">
+<link href="inout.css" rel="stylesheet" type="text/css">
+<link href="lib/bootstrap.css" rel="stylesheet" type="text/css">
+<!-- script -->
+<script src="lib/jquery-3.3.1.min.js"></script>
+<script src="lib/bootstrap.js"></script>
+</head>
+<body style="min-width: 800px; background-color: #9cb800">    
+<div class="container-fluid">
+    <section id="top" class="row">
+        <div class="col-5 block" style="background-color: #4D4D4D">
+            <video src="images/topimage.mp4" preload="auto" autoplay loop style="width:100%; height:auto"></video>
+        </div>
+        <div class="col-7 block" style="background-color: #00838f">
+            <div style="width:100%; height:100%; display: flex; justify-content: center; align-items: center;">
+                <div style="text-align:center">
+                    <img src="images/SpineAnimationrig.png" alt="SpineAnimationrig"><br>
+                    <img src="images/SpineAnimationrigIcon.png" alt="cute icon">
+                </div>
+            </div>
+        </div>
+    </section>
+      
+    <section class="row sentenceblock" style="background-color: #9cb800; font-size: 1.2em;">
+        <div class="col-6">
+            <h1>Multi track control tool</h1>
+            <div style="color:#000000">
+                You can control multiple <sapn class="strong">spine</sapn>-animation-tracks with timeline.
+                It is Useful for facial expression changes that use many tracks.
+                <br>
+                複数の<sapn class="strong">Spine</sapn>アニメーショントラックをタイムラインでコントロールすることが出来ます。
+                表情変化のようなトラックが多くなるアニメーションでは役立つ筈です。
+            </div>
+        </div>
+        <div class="col-6">
+            <h1>Control value from appside</h1>
+            <div style="color:#000000">
+                You can control the <sapn class="strong">spine</sapn>-animation from the application side using runtime or <sapn class="strong">unity</sapn>-components too easy.
+                <br>
+                ランタイムや<sapn class="strong">unity</sapn>コンポーネントを使って、簡単にアプリケーション側から<sapn class="strong">Spine</sapn>アニメーションをコントロールすることが出来ます。
+            </div>
+        </div>
+    </section>
+      
+    <section class="row">
+        <div class="col-12 block">
+            <img src="images/EditorImage.png" alt="editor image" style="width:100%; height:auto">
+        </div>
+    </section>
+    
+    <section class="row">
+        <div class="col-12" style="height:100px">
+            <!-- emoty -->
+        </div>
+        <div class="col-12" style="text-align: center">
+            <img src="images/seekblend01.gif" alt="ahoge"><br>
+            <span style="font-size: 3em">In preparation. just for a moment :-Q </span><br>
+            <span style="font-size: 3em">現在準備中。ちょっとまってね！</span>
+            <br>
+        </div>
+        <div class="col-12" style="height:100px">
+            <!-- emoty -->
+        </div>
+    </section>
+    
+    <section class="row">
+        <div class="col-12" style="text-align: center">
+            <h1 class="inout inout-box"> information </h1>
+            <div style="font-size: 1.6em">
+                editor platform : windows application<br>
+                file format : binary only (little-endian. support big-endian platform.)<br>
+                runtime : c++ c-sharp delphi unity-component (purecode. no dependency.)<br>
+                sample : c++ c-sharp delphi unity<br>
+                <br>
+            </div>
+        </div>
+    </section>
+
+    <section class="row">
+        <div class="col-12" style="background-color: #00838f; text-align:center">
+            <h1 class="inout inout-box"> contact </h1>
+            <div>
+                <a href="https://twitter.com/k_o_t_a_" class="linkhover">
+                    <img src="images/twitter-icon.png" alt="twitter icon"><br><span style="color:#ffffff">k_o_t_a_</span>
+                </a>
+            </div>
+            <br>
+        </div>
+    </section>
+    
+    <section class="row sentenceblock" style="background-color: #9cb800;">
+        <div class="col-12">
+            <div style="color: #000000; text-align: center; font-size: 1.8em;">
+                <span>copyright Ko-Ta Takeuchi.</span>
+            </div>
+        </div>
+    </section>
+    
+    
+  </div>
+</body>
+<script src="main.js"></script>
+<script>
+    $release = true;
+    // modules
+    minout = new InOutAnimationModule();
+    minout.showareatop = 0.0;
+    minout.showareabottom = 0.9;
+    minout.hideareatop = -1.2;
+    minout.hideareabottom = 1.2;
+    
+    // event
+    function init(){ 
+        minout.run();
+    }
+    function onscroll(){
+        minout.change();
+    }
+    function onresize(){
+        //
+    }
+    $('window').on('load',init());
+    $('window').on('scroll',onscroll());
+    $('window').on('resize',onresize());
+</script>
+</html>
