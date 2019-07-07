@@ -63,4 +63,18 @@ a.linkhover:hover{
     background-color: rgba(0,255,255,0.20);
 }
 
+/* custom */
+
+h1 {
+    color: #ffffff;padding : 6px;
+}
+
+h2 {
+    color : #333333;
+    font-size: 1.2em;
+}
+.maintext {
+    color : #000000;
+    font-size: 1.1em;
+}
 

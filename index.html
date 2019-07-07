@@ -6,9 +6,9 @@
 <meta name="description" content="Spine animation control tool.">
 <meta property="og:title" content="SpineAnimationrig">
 <meta property="og:description" content="Spine animation control tool.">
-<meta property="og:url" content="https://ko-ta2142.github.io/SpineAnimationrigPage/">
-<meta property="og:image" content="https://ko-ta2142.github.io/SpineAnimationrigPage/thumbnail.jpeg">
-<meta name="thumbnail" content="https://ko-ta2142.github.io/SpineAnimationrigPage/thumbnail.jpeg">
+<meta property="og:url" content="https://sameasm.net/spineanimationrig/">
+<meta property="og:image" content="https://sameasm.net/spineanimationrig/thumbnail.jpg">
+<meta name="thumbnail" content="https://sameasm.net/spineanimationrig/thumbnail.jpg">
 <!-- mobile tag -->
 <meta name="viewport" content="width=800">
 <!-- favicon -->
@@ -40,55 +40,88 @@
       
     <section class="row sentenceblock" style="background-color: #9cb800; font-size: 1.2em;">
         <div class="col-lg-6">
-            <h1>Multi track control tool</h1>
-            <div style="color:#000000">
-                You can control multiple <sapn class="strong">spine</sapn>-animation-tracks with timeline.
-                It is Useful for facial expression changes that use many tracks.
+            <h1 style="color:#333333">Control multi-tracks on timeline</h1>
+            <div class="maintext">
+                You can control multiple <sapn class="strong">spine</sapn>-animation with timeline.
+                It is very useful when you want to separate and manage animation for each parts.
                 <br>
-                複数の<sapn class="strong">Spine</sapn>アニメーショントラックをタイムラインでコントロールすることが出来ます。
-                表情変化のようなトラックが多くなるアニメーションでは役立つ筈です。
+                複数の<sapn class="strong">Spine</sapn>アニメーションをタイムラインでコントロールすることが出来ます。
+                パーツごとのアニメーションを分けて管理したい場合にとても便利です。
             </div>
         </div>
         <div class="col-lg-6">
-            <h1>Control value from appside</h1>
-            <div style="color:#000000">
+            <h1 style="color:#333333">Control value from appside</h1>
+            <div class="maintext">
                 You can control the <sapn class="strong">spine</sapn>-animation from the application side using runtime or <sapn class="strong">unity</sapn>-components too easy.
                 <br>
                 ランタイムや<sapn class="strong">unity</sapn>コンポーネントを使って、簡単にアプリケーション側から<sapn class="strong">Spine</sapn>アニメーションをコントロールすることが出来ます。
             </div>
         </div>
     </section>
-      
-    <section class="row">
-        <div class="col-12 block">
-            <img src="images/EditorImage.png" alt="editor image" style="width:100%; height:auto">
-        </div>
-    </section>
     
-    <section class="row">
-        <div class="col-12" style="height:100px">
-            <!-- emoty -->
-        </div>
-        <div class="col-12" style="text-align: center">
-            <img src="images/seekblend01.gif" alt="ahoge" style="width:100%; height:auto"><br>
-            <span style="font-size: 3em">In preparation. just for a moment :-Q </span><br>
-            <span style="font-size: 3em">現在準備中。ちょっとまってね！</span>
-            <br>
-        </div>
-        <div class="col-12" style="height:100px">
-            <!-- emoty -->
-        </div>
-    </section>
-    
-    <section class="row">
-        <div class="col-12" style="text-align: center">
-            <h1 class="inout inout-box"> information </h1>
-            <div style="font-size: 1.6em">
-                editor platform : windows application<br>
-                file format : binary only (little-endian. support big-endian platform.)<br>
-                runtime : c++ c-sharp delphi unity-component (purecode. no dependency.)<br>
-                sample : c++ c-sharp delphi unity<br>
+    <section class="row sentenceblock" style="background-color: #44906B;">
+        <div class="col-12 block" style="text-align: center">
+            <h1 class="inout inout-box">Editor</h1>
+            <img src="images/EditorImage.jpg" alt="editor image" style="width:100%; height:auto">
+            <div class="maintext" style="padding: 20px; color:#ffffff">
+                This editor provides the function to control animation in the timeline.
+                You can not directly manipulate bones and slots, but can control the animation blend ratio and etc.
+                The maked animation can be run on the application using the runtime.
                 <br>
+                エディタはタイムラインでアニメーションを操作するとてもシンプルな物です。
+                ボーンやスロットを直接操作できませんが、アニメーションのブレンド率などを細かく設定できます。
+                作成したアニメーションはランタイムを用いてアプリケーション上で動作させることが出来ます。
+            </div>
+            <div style="text-align: right">
+                <a href="https://sameasm.net/spineanimationrig/readme/readme.html">
+                    <img src="images/EditorManualButton.png" alt="editor manual">
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="row sentenceblock" style="background-color: #4c80a2;">
+        <div class="col-12 block" style="text-align: center">
+            <h1 class="inout inout-box">Runtime</h1>
+            <img src="images/RuntimeImage.jpg" alt="editor image" style="width:100%; height:auto">
+            <div class="maintext" style="padding: 20px; color:white">
+                Embed in the application using the runtime.
+                Animationrig (alone) is a non-dependent library. It can be used in various environments.
+                Provide C++、C-sharp、Unity Component.
+                Please try Unity sample.
+                <br>
+                アプリケーションに組み込むにはランタイムを使用します。
+                Animationrig(単体)は依性が無いライブラリです。環境を選ばず使用できます。
+                C++、C-sharp、Unityコンポーネントをメインに提供しています。
+                まずはUnityサンプルをお試しください。
+                <br>
+            </div>
+            <div style="text-align: right">
+                <a href="https://sameasm.net/spineanimationrig/readme-runtime/runtime.html">
+                    <img src="images/RuntimeManualButton.png" alt="runtime manual">
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="row sentenceblock" style="background-color: #9cb800;">
+        <div class="col-12 block" style="text-align: center">
+            <h1 class="inout inout-box">Download</h1>
+            <div class="maintext" style="padding: 20px;">
+                Version : 0.5 , rev 351<br>
+                Editor-platform : windows<br>
+                Runtime-language : c++ , c-sharp , UnityComponent<br>
+                Spine file version : 3.7 , 3.8
+            </div>
+            <div>
+                <a href="https://sameasm.net/spineanimationrig/binary/animationrig351.7z">
+                    <img src="images/DownloadButton.png" alt="download">
+                </a>
+            </div>
+            <div style="display: none;">
+                <a href="https://sameasm.net/spineanimationrig/">
+                    <img src="images/GitHubButton.png" alt="github">
+                </a>
             </div>
         </div>
     </section>
