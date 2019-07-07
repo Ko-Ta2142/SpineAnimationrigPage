@@ -63,6 +63,21 @@ a.linkhover:hover{
     background-color: rgba(0,255,255,0.20);
 }
 
+img.linkhover{
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+    transform: translate(0px,0px) rotate(0deg) scale(1,1);
+    filter: none;
+}
+
+img.linkhover:focus,
+img.linkhover:hover{
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+    transform: translate(0px,0px) rotate(0deg) scale(1.05,1.05);
+    filter: brightness(1.4);   
+}
+
 /* custom */
 
 h1 {
