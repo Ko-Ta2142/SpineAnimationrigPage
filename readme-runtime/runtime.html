@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>runtime.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="spineanimationrig---runtime">SpineAnimationRig - Runtime</h1>
+<ul>
+<li>Basic
+<ul>
+<li><a href="#license">License</a></li>
+<li><a href="#sprinepatch">Spine runtime patch</a></li>
+<li><a href="#files">Files</a></li>
+</ul>
+</li>
+<li>How to
+<ul>
+<li><a href="#howto">How to implement</a></li>
+<li><a href="#howtophysics">How to setup physics</a></li>
+<li><a href="#howtounity">How to implement in Unity</a></li>
+<li><a href="#runsample">Run unity sample</a></li>
+<li><a href="#values">How to set values from application</a></li>
+<li><a href="#preset">How to use preset file</a></li>
+<li><a href="#serialize">Serialize / Deserialize (state save/load)</a></li>
+<li><a href="#event">Event callback</a></li>
+<li><a href="#usermemo">UserMemo</a></li>
+<li><a href="#howto36">How to use runtime 3.6</a></li>
+</ul>
+</li>
+<li>Class
+<ul>
+<li><a href="#animrig_animationrig">Animationrig</a></li>
+<li><a href="#animrig_animationrigstate">AnimationrigState</a></li>
+<li><a href="#animrig_preset">Prest</a></li>
+<li><a href="#animrig_stateinput">StateInput</a></li>
+<li><a href="#animrig_staterenderer">StateRenderer</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="contact-support-product-homepage">Contact , Support , Product homepage</h1>
+<p>Please access the following <img class="emoji" alt="smiley" src="data:image/png;base64,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" /><br>
+以下よりアクセスしてください。</p>
+<ul>
+<li><a href="https://ko-ta2142.github.io/SpineAnimationrigPage/">https://ko-ta2142.github.io/SpineAnimationrigPage/</a></li>
+<li><a href="https://sameasm.net/spineanimationrig/">https://sameasm.net/spineanimationrig/</a></li>
+</ul>
+<h1 id="license">License</h1>
+<p><a name="license"></a></p>
+<p>The runtime does not use spine-runtime <strong>alone</strong>.<br>
+ランタイムは抽象化されているため、単体ではspine-runtimeを使用しません。</p>
+<p>If you use Spine-runtime, the Spine license also applies.<br>
+Spine-runtimeを使用する場合は、Spineのライセンスも適用されます。</p>
+<h2 id="aimationrig-runtime">Aimationrig runtime</h2>
+<p>Under the <strong>MIT License</strong>.</p>
+<p>This runtime(files) is licensed under the Expat License, sometimes known as the MIT License:
+Copyright Ko-Ta Takeuchi.</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>The Software is provided &quot;as is&quot;, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the Software or the use or other dealings in the Software.</p>
+<h2 id="spine-runtime">Spine runtime</h2>
+<ul>
+<li>Spine License - runtime</li>
+</ul>
+<p><a href="http://esotericsoftware.com/spine-runtimes-license">http://esotericsoftware.com/spine-runtimes-license</a></p>
+<h1 id="spine-runtime-mixadd-patch">Spine runtime mix_add patch</h1>
+<p><a name="spinepatch"></a></p>
+<p>Some Spine-animations may not play(draw) correctly. If the animation display is disturbed, Please use the attached patch files.<br>
+Spineアニメーションによっては正しく再生されない可能性があります。もし表示が壊れる場合は、付属のパッチファイルを使用ください。</p>
+<pre class="hljs"><code><div>spine_runtime_patch/3.7/
+spine_runtime_patch/3.8/
+</div></code></pre>
+<h1 id="files">Files</h1>
+<p><a name="files"></a></p>
+<table>
+<thead>
+<tr>
+<th>Animtionrig</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CommonMS</td>
+<td>Multi platform binary-rw functions.</td>
+</tr>
+<tr>
+<td>AnimationrigMisc</td>
+<td>Types and basic functions. file-IO,easing,math,matrix.unicode...etc.</td>
+</tr>
+<tr>
+<td>Animationrig</td>
+<td>Read animationrig format file. Build data structure.</td>
+</tr>
+<tr>
+<td>AnimationrigState</td>
+<td>Do the animation!</td>
+</tr>
+<tr>
+<td>AnimationrigPreset</td>
+<td>Load and execute from *.animrig.preset.txt file.</td>
+</tr>
+<tr>
+<td>AnimationrigPhysics</td>
+<td>Physics model.</td>
+</tr>
+<tr>
+<td>AnimationrigSpine</td>
+<td>Use spine object.</td>
+</tr>
+<tr>
+<td>AnimationrigNull</td>
+<td>Null object.</td>
+</tr>
+<tr>
+<td>AnimationrigLogger</td>
+<td>Debug logger object. Output spine object state.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>unity</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AnimationrigIUnityStateRenderer</td>
+<td>StateRenderer interface.</td>
+</tr>
+<tr>
+<td>AnimationrigStateComponent</td>
+<td>AnimationrigState component.</td>
+</tr>
+<tr>
+<td>AnimationrigSpineRendererComponent</td>
+<td>StateRenderer-Spine component.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>spine mix-add patch</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.7</td>
+<td>Spine 3.7 latest runtime patch.</td>
+</tr>
+<tr>
+<td>3.8</td>
+<td>Spine 3.8 latest runtime patch.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="how-to-implement">How to implement</h1>
+<p><a name="howto"></a></p>
+<h2 id="need-a-drawing-environmentworkspace-for-spine">Need a drawing environment(workspace) for spine</h2>
+<p>This runtime only has function to control spine. You need to setup an environment(workspace) to load and draw the spine.<br>
+このランタイムはspineを制御するだけの機能しか有していません。spineを読み込んで表示させる環境をご用意ください。</p>
+<p><img src="images/runtime01.png" alt="runtime"></p>
+<h2 id="load-and-create">Load and create</h2>
+<p>First, Read the file. And create <strong>AnimationrigState</strong> from <strong>Animationrig</strong> data class.<br>
+まずファイルを読み込みます。読み込んだ <strong>Animationrig</strong> データから実行用の <strong>AnimationrigState</strong> を生成します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// setup data</span>
+    <span class="hljs-keyword">var</span> anim = <span class="hljs-keyword">new</span> Animrig.Animationrig();
+    <span class="hljs-comment">// load</span>
+    {
+        MemoryStream ms = CommonMS.LoadFromFile(<span class="hljs-string">"data/sample.animrig"</span>);
+        anim.LoadFromBinary(ms);
+    }
+    <span class="hljs-comment">// setup state</span>
+    <span class="hljs-keyword">var</span> state = <span class="hljs-keyword">new</span> Animrig.AnimationrigState(anim);
+    state.OnEvent = EvenetCallback; <span class="hljs-comment">// event callback</span>
+</div></code></pre>
+<h2 id="update">Update</h2>
+<p>Execute by calling <strong>AnimationrigState.Update()</strong>.<br>
+<strong>AnimationrigState.Update()</strong> を呼ぶことで実行します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// deltatime : 1sec = 1.0</span>
+    state.Update(<span class="hljs-number">0.1</span>);
+</div></code></pre>
+<p>Not enough to control spine. You need to define a class for control.<br>
+これだけではspineを制御するには不十分です。コントロール用のクラスを定義する必要があります。</p>
+<h2 id="define-renderer-control-class">Define renderer control class</h2>
+<p>Define <strong>AnimationrigStateRenderer</strong> class for control. The finished thing is <strong>AnimationrigSpine.cs</strong> file.<br>
+コントロール用 <strong>AnimationrigStateRenderer</strong> クラスを定義します。出来上がったものが <strong>AnimationrigSpine.cs</strong> ファイルになります。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// property</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SpineRenderer</span> : <span class="hljs-title">StateRenderer</span>
+    {
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">readonly</span> <span class="hljs-keyword">int</span> SaveVersion = <span class="hljs-number">1</span>; 
+        <span class="hljs-keyword">public</span> Spine.AnimationState state = <span class="hljs-literal">null</span>;   <span class="hljs-comment">// Spine</span>
+        <span class="hljs-keyword">public</span> Spine.Skeleton skeleton = <span class="hljs-literal">null</span>;      <span class="hljs-comment">// Spine</span>
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SpineRenderer</span>(<span class="hljs-params"></span>)</span>;
+        <span class="hljs-comment">// common</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> deltatime</span>)</span>;
+        <span class="hljs-comment">// spine control</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetAnimation</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">string</span> basename, <span class="hljs-keyword">bool</span> loop, <span class="hljs-keyword">bool</span> addanim, MixBlend trackmix, <span class="hljs-keyword">float</span> duration, <span class="hljs-keyword">bool</span> seekmode</span>)</span>;
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackBlendAlpha</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> alpha1, <span class="hljs-keyword">float</span> alpha2, <span class="hljs-keyword">float</span> alpha3, <span class="hljs-keyword">float</span> alpha4, <span class="hljs-keyword">bool</span> exists</span>)</span>;
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackSeekTime</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> time1, <span class="hljs-keyword">float</span> time2, <span class="hljs-keyword">float</span> time3, <span class="hljs-keyword">float</span> time4, <span class="hljs-keyword">bool</span> exists</span>)</span>;
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetMixDuration</span>(<span class="hljs-params"><span class="hljs-keyword">float</span> duration</span>)</span>;
+    }
+</div></code></pre>
+<p>These methods are called back in AnimationrigState.Update(). Relay the instruction to Spine.AnimationState &amp; Skeleton.<br>
+これらメソッドは AnimationrigState.Update() 関数内でコールバックされます。設定された Spine.AnimationState &amp; Skeleton へ命令を中継します。</p>
+<p>Please see <a href="#animrig_staterenderer">RendererObject</a> for details.<br>
+詳しくは <a href="#animrig_staterenderert">RendererObject</a> をご覧ください。</p>
+<h2 id="set-renderer-objects">Set renderer objects</h2>
+<p><strong>AnimationrigState</strong> provides <strong>StateInput</strong> to control with the application.
+Set that class to the <strong>Renderer</strong> property.<br>
+<strong>AnimationrigState</strong> にはアプリケーションとやり取りするための <strong>StateInput</strong> が用意されています。<strong>Renderer</strong> プロパティにセットしてください。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// create state renderer</span>
+    <span class="hljs-keyword">var</span> spinerenderer = <span class="hljs-keyword">new</span> Animrig.SpineRenderer();
+    spinerenderer.state = spineobject01.AnimationState;
+    spinerenderer.skeleton = spineobject01.Skeleton;
+    <span class="hljs-comment">// in sample.animrig file</span>
+    <span class="hljs-comment">// [0] : spine object</span>
+    <span class="hljs-comment">// [1] : null object</span>
+    state.InputObjects[<span class="hljs-number">0</span>].Renderer := spinerenderer;
+</div></code></pre>
+<p>If you set a different object-type in the animation file objects, throw the exception error.<br>
+もしアニメーション中のオブジェクトと異なるタイプ(object-type)を指定した場合、例外が投げられます。</p>
+<h1 id="how-to-setup-physics">How to setup physics</h1>
+<p><a name="howtophysics"></a></p>
+<p>To reflect physics, you need to define a <strong>StateRenderer</strong> that supports physics. This is also provided in <strong>AnimationrigSpine.cs</strong>.<br>
+物理計算を反映させるには、物理計算に対応した <strong>StateRenderer</strong> を定義する必要があります。これも <strong>AnimationrigSpine.cs</strong> に用意されています。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// * support physics renderer</span>
+    <span class="hljs-keyword">var</span> spinerenderer_chara = <span class="hljs-keyword">new</span> Animrig.SpinePhysicsRenderer();
+    <span class="hljs-keyword">var</span> spinerenderer_subchara = <span class="hljs-keyword">new</span> Animrig.SpinePhysicsRenderer();
+    ...
+    state.InputObjects[<span class="hljs-number">0</span>].Renderer := spinerenderer_chara;
+    state.InputObjects[<span class="hljs-number">1</span>].Renderer := spinerenderer_subchara;
+    <span class="hljs-comment">// * setup physics</span>
+    state.SetupPhysics();
+</div></code></pre>
+<p>First, you need to build a physical.<br>
+最初に物理計算の構築が必要になります。</p>
+<h2 id="update-physics">Update physics</h2>
+<p>The physics update is automatically execute with AnimationrigState.Update ().<br>
+物理計算の Update は AnimationrigState.Update() で自動的に実行されます。</p>
+<p>if you want to advance(skip) only the physics time, Call AnimationrigState.UpdatePhysics().<br>
+もし物理計算だけ早く進めたいなら AnimationrigState.UpdatePhysics() を呼んでください。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// skip 10sec</span>
+    state.UpdatePhysics(<span class="hljs-number">10.0</span>);
+</div></code></pre>
+<h2 id="appease-physics">Appease physics</h2>
+<p>If you want to restore to the natural pose, call AnimationrigState.AppeasePhysics ().<br>
+自然状態に即座に戻したい場合は、AnimationrigState.AppeasePhysics() を呼んでください。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// restore natural</span>
+    state.AppeasePhysics();
+</div></code></pre>
+<h1 id="how-to-set-values-from-application">How to set values from application</h1>
+<p><a name="values"></a></p>
+<p>Manipulating values ​​from the application is very easy <img class="emoji" alt="smiley" src="data:image/png;base64,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" />
+Access <strong>InputObjects</strong> to set the value.
+It has a simple easing function.<br>
+アプリケーションからアニメーションへ値を送るのはとても簡単。
+<strong>InputObjects</strong> にアクセスして値を設定します。
+標準でイージング機能を持っています。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// inputvalue[0] = 0.5</span>
+    state.InputObject[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span> , <span class="hljs-number">0.5</span>f);
+    <span class="hljs-comment">// use easing</span>
+    <span class="hljs-comment">// duration : 1.0</span>
+    <span class="hljs-comment">// ease : InOutQuad</span>
+    state.InputObject[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span> , <span class="hljs-number">0.5</span>f , <span class="hljs-number">1.0</span>f , Animrig.Easing.InOutQuad);
+</div></code></pre>
+<h1 id="how-to-use-preset-file">How to use preset file</h1>
+<p><a name="preset"></a></p>
+<p>Adjust the value on the editor, You may want to use it on your application.
+It's very easy to do with the <strong>Preset class</strong>.<br>
+エディタで値を調整し、それをアプリケーションで使いたいと考えることもあるでしょう。
+<strong>Preset</strong> クラスを使えば簡単に実現できます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// load preset</span>
+    preset = <span class="hljs-keyword">new</span> Animrig.Preset();
+    {
+        MemoryStream ms = CommonMS.LoadFromFile(<span class="hljs-string">"data/sample.animrig.preset.txt"</span>);
+        preset.LoadFromStream(ms);
+    }
+</div></code></pre>
+<h2 id="setpreset">SetPreset</h2>
+<p>Set the contents of the preset to a value. It has a simple easing function.<br>
+指定した名前のプリセットを <strong>InputObject</strong> に反映します。
+標準で簡単なイージング機能を持っています。</p>
+<pre class="hljs"><code><div>    preset.SetPreset(
+        state.InputObjects[<span class="hljs-number">0</span>],
+        <span class="hljs-string">"happy"</span>,       <span class="hljs-comment">// preset name</span>
+        <span class="hljs-number">1.0</span>,           <span class="hljs-comment">// duration</span>
+        Animrig.Easing.InOutQuad   <span class="hljs-comment">// ease</span>
+    );
+</div></code></pre>
+<h2 id="setdefault">SetDefault</h2>
+<p>Set values to default on editor.<br>
+もしエディタでデフォルト値を設定していれば、その値を設定します。初期状態では0.0になります。</p>
+<h2 id="setclear">SetClear</h2>
+<p>Set values to 0.0f.<br>
+値を 0.0 で設定します。</p>
+<h1 id="serialize-deserialize-state-saveload">Serialize / Deserialize (state save/load)</h1>
+<p><a name="serialize"></a></p>
+<p>AnimationrigState has the state serialize function.<br>
+AnimationrigStateには状態の保存機能を持っています。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// save</span>
+<span class="hljs-keyword">var</span> ms = <span class="hljs-keyword">new</span> MemoryStream();
+state.SaveToBinary(ms);
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">// load</span>
+ms.position = <span class="hljs-number">0</span>;
+state.LoadFromBinary(ms); <span class="hljs-comment">// return bool</span>
+</div></code></pre>
+<p><strong>Only AnimationrigState</strong> is restored. Objects(such as spine) are not restored.
+If you need a full state restore, you need to define the object SaveLoad function.<br>
+復元されるのは<strong>AnimationrigStateだけ</strong>です。
+spineなどは復元されません。もし完全な状態復元が必要なら、オブジェクトのSaveLoadをあなたが用意する必要があります。</p>
+<p>If the animation data(Animgrig file) has changed, Save data compatibility is lost. but, It will try to restore as much as possible. If fewer changes , may be possible to restore.<br>
+もし、アニメーションデータ(Animgrig file)に変更が入った場合、基本的には互換性は失われます。しかし、出来るだけ頑張って復元しようと試みます。
+少ない変更であれば、復元できる可能性があります。</p>
+<h1 id="event-callback">Event callback</h1>
+<p><a name="event"></a></p>
+<p>Set the function to <strong>AnimationrigState.OnEvent</strong> to receive the event of the event-object on the application side.<br>
+アプリケーション側でイベントオブジェクトのイベントを受け取るには<strong>AnimationrigState.OnEvent</strong>に関数を設定してください。</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnAnimationrigEvent</span>(<span class="hljs-params">Animrig.AnimationrigState state, <span class="hljs-keyword">ref</span> Animrig.StateEventData data</span>)
+</span>{
+    <span class="hljs-comment">// If you want to know the event source object, use InputObject.UserObject property.</span>
+    <span class="hljs-comment">// anim.State.Inputs[0].UserObject = YoureGameObject;           // set</span>
+    <span class="hljs-comment">// var YoureGameObject = data.Input.UserObject as GameObject;   // get</span>
+    <span class="hljs-keyword">if</span> (data.Strings0 != <span class="hljs-string">""</span>) Debug.Log(data.Strings0);
+    <span class="hljs-keyword">if</span> (data.Strings1 != <span class="hljs-string">""</span>) Debug.Log(data.Strings1);
+}
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-comment">// event</span>
+anim.State.OnEvent = OnAnimationrigEvent;
+</div></code></pre>
+<h1 id="usermemo">UserMemo</h1>
+<p><a name="usermemo"></a></p>
+<p>User-Memo is free areas from editor. If you want to keep special settings ​​in the file, please use it.<br>
+エディタのユーザメモは自由に使うことが出来ます。もし特殊な値をファイルに保持させたい場合は、この領域を使うと良いでしょう。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (anim.UserMemo.Length &gt; <span class="hljs-number">0</span>){
+    <span class="hljs-keyword">var</span> settingdata = anim.UserMemo[<span class="hljs-number">0</span>];
+}
+</div></code></pre>
+<h1 id="how-to-implement-in-unity">How to implement in Unity</h1>
+<p><a name="howtounity"></a></p>
+<p>Components are provided for use with Unity.
+You can easily setup spine. At first I think that it is good to test with Unity.<br>
+Unityで使う場合は、コンポーネントが用意されています。
+spineの準備も楽ちんなので、まずはUnityで触って感触を掴むと良いと思います。</p>
+<h2 id="setup-spine">Setup spine</h2>
+<p>Please see the official page or etc.<br>
+ここでは説明しません。オフィシャルページなどをご覧ください。</p>
+<p><a href="http://esotericsoftware.com/spine-unity">http://esotericsoftware.com/spine-unity</a></p>
+<h2 id="include-animationrig-asset">Include Animationrig asset</h2>
+<p>Include the following files (copy to asset folder).<br>
+以下のファイルを組み込んで（assetフォルダにコピーして）ください。</p>
+<pre class="hljs"><code><div>runtime/csharp/lib/*.cs
+runtime/csharp/lib_unity/*.cs
+</div></code></pre>
+<p><strong>Animationrig</strong> appears on <strong>component</strong> menus.<br>
+<strong>component</strong> メニューに <strong>Animationrig</strong> が追加されます。</p>
+<p><img src="images/unity_component01.png" alt="unity component"></p>
+<h2 id="setup-animationrigstate-component">Setup AnimationrigState Component</h2>
+<p>First, setup <strong>AnimationrigState</strong> object.
+Create an empty GameObject and attach the <strong>AnimationrigState</strong> component.<br>
+まず <strong>AnimationrigState</strong> を準備します。
+空のGameObjectを作り、<strong>AnimationrigState</strong> コンポーネントを追加してください。</p>
+<p><img src="images/unity_state01.png" alt="unity component"></p>
+<ul>
+<li>Animrig TextAsset</li>
+</ul>
+<p>Set Animationrig <strong>binary file</strong>. To use binary files in Unity, you need to change the file-extension to <strong>.bytes</strong>.<br>
+Animationrig<strong>バイナリファイル</strong>を指定します。Unityでバイナリファイルを扱うには <strong>.bytes</strong> に拡張子を変更する必要があります。</p>
+<ul>
+<li>Preset TextAsset</li>
+</ul>
+<p>Set the Preset text file. This file is used in text format <strong>.txt</strong>.<br>
+Presetテキストファイルを指定します。これはテキスト形式 <strong>.txt</strong> で取り扱います。</p>
+<ul>
+<li>AutoUpdate (def : true)</li>
+</ul>
+<p>Automatically update time using Unity's <strong>Update()</strong>. If you want to control manually, please disable.<br>
+Unityの <strong>Update()</strong> を使用して自動で時間更新を行います。手動でコントロールする場合は無効にしてください。</p>
+<ul>
+<li>UpdateOnce (def : true)</li>
+</ul>
+<p>Call object update only once.<br>
+一回のUpdateでオブジェクトのUpdateを一回だけ呼び出します。60フレームで動作するなら問題ありません。</p>
+<ul>
+<li>Renderer Objects</li>
+</ul>
+<p>Set the GameObject to link with the animation. It will be explained in the next section.<br>
+リンクさせるGameObjectを指定します。次のセクションで説明します。</p>
+<h2 id="setup-spinerenderer-component">Setup SpineRenderer Component</h2>
+<p>Attach <strong>Animationrig-SpineRenderer</strong> component to the spine game object.<br>
+spineのゲームオブジェクトに <strong>Animationrig - SpineRenderer</strong> コンポーネントを追加します。</p>
+<p><img src="images/unity_spinerenderer01.png" alt="unity component"></p>
+<p><strong>SpineRenderer</strong> relays the operation of <strong>AnimationrigState</strong>.<br>
+<strong>SpineRenderer</strong> は <strong>AnimationrigState</strong> の操作を中継する役割を持ちます。
+このコンポーネントを追加しないかぎり影響を受けません。</p>
+<ul>
+<li>Override Update (def : false)</li>
+</ul>
+<p>In Unity, spine components update time. If AnimationrigState does it, please enable.<br>
+Unityではspineのコンポーネントが時間更新を行います。AnimationrigStateに委ねる場合は有効にしてください。</p>
+<ul>
+<li>Override Enable</li>
+</ul>
+<p>Synchronize with GameObject.selfActive.<br>
+GameObject.selfActiveと連動させます。</p>
+<ul>
+<li>Override Transform</li>
+</ul>
+<p>Synchronize with GameObject.Transform. Set the Local coordinates. Create a <strong>RootTransformObject</strong> like the image.<br>
+GameObject.Transformと連動させます。ローカル座標が設定されるので、画像の <strong>RootTransformObject</strong> のようにルートを設けてください。</p>
+<ul>
+<li>Override Color</li>
+</ul>
+<p>Synchronize with the Spine.Skeleton-color.<br>
+Spine.Skeletonの色と連動させます。</p>
+<ul>
+<li>Override Default Mix</li>
+</ul>
+<p>Overwrite spine-DefaultMix. If you want to set it manually, please disable it.<br>
+SpineのDefaultMixの値を上書きします。手動で設定する場合は無効にしてください。</p>
+<ul>
+<li>Pixel per Unit (def : 100)</li>
+</ul>
+<p>Set the spine(GameObject) scale. There is a factor of 100 between editor and unity.<br>
+spine(GameObject)の倍率を指定します。エディタとunityでは100倍の差があります。</p>
+<ul>
+<li>Transform Scale (def : 1.0)</li>
+</ul>
+<p>Set the overall scale.<br>
+全体の倍率を設定します。大きさ、位置全てに影響を与えます。</p>
+<h2 id="attach-spine-gameobject">Attach Spine GameObject</h2>
+<p>Back to the <strong>AnimationrigState</strong> component.
+Set <strong>RendererObjects</strong> to <strong>GameObject</strong>.<br>
+<strong>AnimationrigState</strong> コンポーネントに戻ります。
+<strong>RendererObjects</strong>にアニメーションと対応する<strong>GameObject</strong>を設定していきます。</p>
+<p><img src="images/unity_renderer01.png" alt="unity component"></p>
+<p>If the RendererObjects name is none, please update it with the reload button.<br>
+もしRendererObjectsの名前などがnoneの場合は、reloadボタンで更新してください。</p>
+<h1 id="run-unity-sample-program">Run unity sample program</h1>
+<p><a name="runsample"></a></p>
+<video controls mute>
+    <source src="images/unitysample.mp4" type="video/mp4">
+</video>
+<p>The sample program demonstrates the following features:<br>
+サンプルプログラムは以下の機能のデモンストレーションになっています。</p>
+<ul>
+<li>Switch animation to a good feeling (fade)<br>
+良い感じにアニメーションを切り替える機能（フェード）</li>
+<li>Composite animation to a good feeling (track)<br>
+良い感じにアニメーションを合成する機能（トラック）</li>
+<li>Manage and set values ​​collectively to a good feeling (preset)<br>
+良い感じに値を管理、設定する機能（プリセット）</li>
+<li>Ccontrol values ​​from an application to a good feeling (direct input)<br>
+良い感じにアプリケーションから値を操作する機能（ダイレクトインプット）</li>
+</ul>
+<h2 id="animation-fade">Animation fade</h2>
+<p>Interpolate switching of animation to a good feeling.<br>
+アニメーションを切り替える際の繋ぎを良い感じに補間します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">if</span> (name == <span class="hljs-string">"empty"</span>)
+    {
+        <span class="hljs-comment">// 1 sec fade , clear animation</span>
+        anim.State.ClearTrackFade(<span class="hljs-number">2</span>, <span class="hljs-number">1.0</span>f);
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-comment">// 1sec fade , next animation</span>
+        anim.State.EntryTrackFade(<span class="hljs-number">2</span>, name, <span class="hljs-number">1.0</span>f, Animrig.Easing.InOutQuad);
+    }
+</div></code></pre>
+<p>You can also check the fade feature on the editor.<br>
+エディタ上でも動作確認することが出来ます。</p>
+<p><img src="images/autofade01.gif" alt="image">
+<img src="images/autofade02.gif" alt="image"></p>
+<h2 id="animation-tracks">Animation tracks</h2>
+<p>Animationrig also has a track function. It is possible to combine multiple animations. The sample can overlap breathing motion and various movements.<br>
+Animationrigでもトラックの概念があります。複数のアニメーションを合成することが可能です。サンプルでは呼吸モーション（breath body noise)に様々な動きを重ねることが出来ます。</p>
+<pre class="hljs"><code><div>    anim.State.EntryTrack(<span class="hljs-number">0</span>, <span class="hljs-string">"setup"</span>);
+    anim.State.EntryTrack(<span class="hljs-number">1</span>, <span class="hljs-string">"lol"</span>);
+    anim.State.EntryTrack(<span class="hljs-number">2</span>, <span class="hljs-string">"testmotion"</span>);
+</div></code></pre>
+<h2 id="preset">Preset</h2>
+<p>Even if you control the animation from the application side, you may use values ​​designed on the editor.
+You can register a preset in the editor and use it.<br>
+アニメーションをアプリケーション側からコントロールする場合であっても、エディタ上でデザインされた値を使用するケースは少なくありません。
+エディタでプリセットに登録し、それを用いることが出来ます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">if</span> (name == <span class="hljs-string">"default"</span>)
+    {
+        <span class="hljs-comment">// 1 sec fade , set default</span>
+        anim.Preset.SetDefault(anim.State.Inputs[<span class="hljs-number">0</span>], <span class="hljs-number">1.0</span>f);
+    }
+    <span class="hljs-keyword">else</span>
+    {
+        <span class="hljs-comment">// 1 sec fade , set preset</span>
+        anim.Preset.SetPreset(anim.State.Inputs[<span class="hljs-number">0</span>], name, <span class="hljs-number">1.0</span>f);
+    }
+</div></code></pre>
+<h2 id="direct-input">Direct input</h2>
+<p>If you want to control the eyes from camera image processing and the mouth from microphone voice input, change the value directly.<br>
+もしカメラの画像処理やマイク音声入力から、口や目をコントロールしたいなら直接値を変更しましょう。</p>
+<pre class="hljs"><code><div>    anim.State.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span>, a1, <span class="hljs-number">0.0</span>f);
+    anim.State.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">1</span>, a2, <span class="hljs-number">0.0</span>f);
+</div></code></pre>
+<h1 id="how-to-use-runtime-36">How to use runtime 3.6</h1>
+<p><a name="howto36"></a></p>
+<p>The editor does not support 3.6, but you can run 3.6 Spine by changing the program a little.<br>
+エディタは3.6に対応していませんが、プログラムをちょっと変更することで、3.6のSpineを実行することが出来ます。</p>
+<p>However, You  can not be used MixAdd function.<br>
+ただし、MixAddの機能は使用できません。</p>
+<h2 id="editor-side">Editor side</h2>
+<p>The editor uses output in the format 3.7 or higher. These are for editor only , and not use it for programs.<br>
+エディタは3.7以上の形式で出力した物を使用します。これらはエディタ専用で、プログラムでは使用しません。</p>
+<h2 id="program-side">Program side</h2>
+<p>This time <strong>Animrig.SpineRenderer</strong> corresponds to 3.6.<br>
+今回はこの <strong>Animrig.SpineRenderer</strong> を3.6に対応させます。</p>
+<p>This work is easy. Change Spine-runtime version to 3.6 and compile. Then you will get errors.<br>
+作業は簡単です。まずSpine-runtimeを3.6に変更し、コンパイルします。すると数カ所でエラーが出ます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// mix blend</span>
+    <span class="hljs-comment">/* comment out
+    if ((track.MixBlend == Spine.MixBlend.Replace)||(track.MixBlend == Spine.MixBlend.Add))     // safe code
+    {
+        switch (trackmix)
+        {
+            case MixBlend.Add:
+                track.MixBlend = Spine.MixBlend.Add;
+                break;
+            case MixBlend.Replace:
+                track.MixBlend = Spine.MixBlend.Replace;
+                break;
+        }
+    }
+    */</span>
+</div></code></pre>
+<p>Please comment out all of MixBlend code.<br>
+MixBlendの箇所をすべてコメントアウトしてください。</p>
+<h1 id="classes">Classes</h1>
+<h1 id="animationrig">Animationrig</h1>
+<p><a name="animrig_animationrig"></a>
+Animationrig file data class.</p>
+<h2 id="constructor">Constructor()</h2>
+<p>Create Animationrig class.</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">var</span> anim = <span class="hljs-keyword">new</span> Animrig.Animationrig()
+</div></code></pre>
+<h2 id="loadfrombinary">LoadFromBinary()</h2>
+<p>Load Animationrig binary file. Read from <strong>MemoryStream</strong> class.<br>
+Animtionrigバイナリファイルを読み込みます。MemoryStream クラスから読み込みます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// file load helper</span>
+    MemoryStream ms = CommonMS.LoadFromFile(<span class="hljs-string">"data/sample.animrig"</span>);
+    <span class="hljs-keyword">if</span> (!anim.LoadFromBinary(ms)){
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;   <span class="hljs-comment">// error</span>
+    }
+</div></code></pre>
+<h2 id="search">Search()</h2>
+<p>Serch animation by name.<br>
+アニメーションを名前から検索します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">int</span> index = anim.Search(<span class="hljs-string">"setup"</span>);
+    <span class="hljs-keyword">if</span> (index == <span class="hljs-number">-1</span>){
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;    <span class="hljs-comment">// nothing</span>
+    } esle{
+        <span class="hljs-keyword">return</span> anim.Animations[index];
+    }
+</div></code></pre>
+<h2 id="usermemo">UserMemo</h2>
+<p>User memo can be used freely string list.<br>
+ユーザーが自由に書き込めるテキスト領域。</p>
+<pre class="hljs"><code><div>    staring text = anim.UserMemo[<span class="hljs-number">0</span>];
+</div></code></pre>
+<h2 id="animations-animationcount">Animations[] , AnimationCount</h2>
+<p>Animation data list.<br>
+アニメーションデータのリスト。</p>
+<pre class="hljs"><code><div>    Animrig.Animation a = anim.Animations[<span class="hljs-number">0</span>];
+</div></code></pre>
+<h2 id="objects-objectcount">Objects[] , ObjectCount</h2>
+<p>Object data list. Has object settings.<br>
+オブジェクトデータのリスト。オブジェクト設定が入っています。</p>
+<pre class="hljs"><code><div>    Animrig.AnimObject o = anim.Objects[<span class="hljs-number">0</span>];
+</div></code></pre>
+<h2 id="offset-size">Offset , Size;</h2>
+<p>Canvas size and offset.<br>
+キャンバス設定。</p>
+<pre class="hljs"><code><div>    Animrig.Misc.Vector3 v = anim.Offset;
+    Animrig.Misc.Vector3 s = anim.Size;
+    <span class="hljs-keyword">var</span> centerx = v.x + s.x / <span class="hljs-number">2.0</span>f;
+    <span class="hljs-keyword">var</span> centerx = v.y + s.y / <span class="hljs-number">2.0</span>f;
+</div></code></pre>
+<h2 id="framerate">Framerate</h2>
+<p>Timeline(Editor) base framerate.<br>
+タイムラインの基礎フレームレート。</p>
+<h2 id="loadversion-lasterror">LoadVersion , LastError</h2>
+<p>Load file state. Reflected after LoadFromBinary().<br>
+ロードしたファイルの情報、またはエラーの詳細を返します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">if</span> (!anim.LoadFromBinary(ms)){
+        console.WriteLine(<span class="hljs-string">"error : {anim.LastError}"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    console.WriteLine(<span class="hljs-string">"finished : ver {anim.LoadVersion}"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+</div></code></pre>
+<h1 id="animationrigstate">AnimationrigState</h1>
+<p><a name="animrig_animationrigstate"></a>
+Run, hold state class.</p>
+<h2 id="constructor">Constructor()</h2>
+<p>Create state class.<br>
+実行、またはその状態を保持するクラス。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// data</span>
+    MemoryStream ms = CommonMS.LoadFromFile(<span class="hljs-string">"data/sample.animrig"</span>);
+    anim.LoadFromBinary(ms);
+    <span class="hljs-comment">// state</span>
+    Animrig.AnimationrigState state = <span class="hljs-keyword">new</span> Animrig.AnimationrigState(anim);
+</div></code></pre>
+<h2 id="update-updatephysics">Update() , UpdatePhysics()</h2>
+<p>Advance timeline time. timeline and physics.
+タイムライン時間、物理計算時間を進めます。<br></p>
+<pre class="hljs"><code><div>    state.Update(<span class="hljs-number">1.0</span> / <span class="hljs-number">60</span>);
+</div></code></pre>
+<p>物理計算時間だけ進める場合。<br>
+Advance physics time only.</p>
+<pre class="hljs"><code><div>    state.UpdatePhysics(<span class="hljs-number">10.0</span>);  <span class="hljs-comment">// skip 10sec</span>
+</div></code></pre>
+<h2 id="setupphysics">SetupPhysics()</h2>
+<p>Setup all state-renderer physiscs. The physics will not start unless you call this function.<br>
+物理計算を構築します。実行しない限り物理計算は反映されません。</p>
+<pre class="hljs"><code><div>    state.SetupPhysiscs(anim.Objects[<span class="hljs-number">0</span>].SettingField);
+</div></code></pre>
+<p>Set the string-list where the settings are written. This is stored in the object of Animtionrig data.<br>
+設定が書き込まれたStringListを指定します。これはAnimtionrigデータのオブジェクトが保持しています。</p>
+<h2 id="appeasephysics">AppeasePhysics()</h2>
+<p>When exists phisics, Restore natural pose.<br>
+物理計算を自然姿勢に戻します。</p>
+<pre class="hljs"><code><div>    state.AppeasePhysics();
+</div></code></pre>
+<h2 id="entrytrack-cleartrack-cleartracks">EntryTrack() , ClearTrack() , ClearTracks()</h2>
+<p>Set and play animations.<br>
+アニメーションを設定します。</p>
+<pre class="hljs"><code><div>    state.EntryTrack(<span class="hljs-number">0</span>,<span class="hljs-string">"setup"</span>);
+    state.EntryTrack(<span class="hljs-number">2</span>,<span class="hljs-string">"pose:test"</span>);
+</div></code></pre>
+<p>Remove animations.<br>
+アニメーションを削除する場合。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// track</span>
+    state.ClearTrack(<span class="hljs-number">2</span>);
+    <span class="hljs-comment">// all</span>
+    state.ClearTracks();
+</div></code></pre>
+<h2 id="entrytrackfade-cleartrackfade">EntryTrackFade() , ClearTrackFade()</h2>
+<p>Transition animation with fade.<br>
+アニメーションをフェードで遷移させます。</p>
+<pre class="hljs"><code><div>    state.EntryTrack(<span class="hljs-number">2</span>,<span class="hljs-string">"facial:boo"</span>,<span class="hljs-number">0.5</span>f,Easing.InOutQuad);  <span class="hljs-comment">// duration 0.5</span>
+    <span class="hljs-comment">// wait</span>
+    state.EntryTrack(<span class="hljs-number">2</span>,<span class="hljs-string">"facial:lookdown"</span>,<span class="hljs-number">0.5</span>);
+</div></code></pre>
+<p>Remove animations with fade.<br>
+フェードで削除する場合。</p>
+<pre class="hljs"><code><div>    state.ClearTrackFade(<span class="hljs-number">2</span>,<span class="hljs-number">0.5</span>);
+</div></code></pre>
+<h2 id="tracks-trackssafe-trackcount-usagetrackcount">Tracks[] , TracksSafe[] , TrackCount , UsageTrackCount</h2>
+<p>Playing animation tracks data.<br>
+再生中のアニメーショントラック情報。</p>
+<pre class="hljs"><code><div>    Animrig.StateTrack t = state.Tracks[<span class="hljs-number">0</span>];
+</div></code></pre>
+<p>TracksSafe() gives you access without worrying about the range.<br>
+TracksSafe() を使うと範囲外かどうかを気にせずアクセスできます。変動することが多いので便利です。</p>
+<pre class="hljs"><code><div>    Animrig.StateTrack t = state.TracksSafe(<span class="hljs-number">4096</span>);
+    <span class="hljs-keyword">if</span> (t != <span class="hljs-literal">null</span>){
+        <span class="hljs-comment">// exists</span>
+    }
+</div></code></pre>
+<p>Trackcount returns the cached length. UsageTrackCount returns the length of the actual usage track.<br>
+TrackCount はキャッシュが利いた値を返します。実際の使用トラック数は得るには UsageTrackCountを使用してください。</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">int</span> n = state.UsageTrackCount;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i=<span class="hljs-number">0</span>;i&lt;n;i++){
+        <span class="hljs-comment">//</span>
+    }
+</div></code></pre>
+<h2 id="onevent">OnEvent</h2>
+<p>Receive EventLayer callbacks.<br>
+イベントレイヤのイベントをコールバックで受け取ります。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EventCallback</span>(<span class="hljs-params">Animrig.AnimationrigState state, <span class="hljs-keyword">ref</span> Animrig.StateEventData data</span>)</span>{
+        <span class="hljs-keyword">string</span> s0 = data.Strings0;
+        <span class="hljs-keyword">string</span> s1 = data.Strings1;
+        ...
+    }
+</div></code></pre>
+<pre class="hljs"><code><div>    state.OnEvent = EventCallback;
+</div></code></pre>
+<h2 id="inputobjects-objectcount">InputObjects[] ObjectCount</h2>
+<p><a href="#animrig_stateinput">StateInputs</a> object list.<br>
+StateInputオブジェクトリスト。</p>
+<pre class="hljs"><code><div>    Animrig.InputObject o = state.InputObject[<span class="hljs-number">0</span>];
+</div></code></pre>
+<h1 id="stateinput">StateInput</h1>
+<p><a name="animrig_stateinput"></a>
+StateInput stores the calculation result of Animationrig timeline.<br>
+StateInoutは Animationrig タイムラインの計算結果を保持します。</p>
+<h2 id="objecttype">ObjectType</h2>
+<p>Return object type.</p>
+<pre class="hljs"><code><div>    Animrig.ObjectType t = state.Input[<span class="hljs-number">0</span>].ObjectType;
+</div></code></pre>
+<h2 id="renderer">Renderer</h2>
+<p>Set <strong>StateRenderer</strong> class.<br>
+StateRenderer クラスを設定します。</p>
+<pre class="hljs"><code><div>    state.Inputs[<span class="hljs-number">0</span>].Renderer = spinerenderer;
+</div></code></pre>
+<p>Remove or default is null.<br>
+初期状態、解除するには null を設定してください。</p>
+<pre class="hljs"><code><div>    state.Inputs[<span class="hljs-number">0</span>].Renderer = <span class="hljs-literal">null</span>;
+</div></code></pre>
+<h2 id="userobject">UserObject</h2>
+<p>You can use it freely. (c++ : void*)<br>
+自由に使える object型 です。（c++ならvoid*）<br></p>
+<pre class="hljs"><code><div>    state.Inputs[<span class="hljs-number">0</span>].UserObject = unityspineobject;
+</div></code></pre>
+<h2 id="setvalue-getvalue-valuecount-setdefaults">SetValue() , GetValue() , ValueCount , SetDefaults()</h2>
+<p>Embedding values ​​in the Animationrig timeline from the application side.
+Used when control directly. Usually, use <a href="#animrig.preset">preset</a> function.<br>
+Animtionrigタイムラインに値を組み込みます。直接操作する際に使用し、普段は <a href="#animrig.preset">preset</a> を使用することになると思います。</p>
+<pre class="hljs"><code><div>    state.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span>, <span class="hljs-number">0.5</span>f, <span class="hljs-number">1.0</span>f, Animrig.Easing.InOutQuad);  <span class="hljs-comment">// duration 1sec</span>
+    state.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>f, <span class="hljs-number">1.0</span>f, Animrig.Easing.InOutQuad);  <span class="hljs-comment">// duration 1sec</span>
+</div></code></pre>
+<p>Get now value.</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">var</span> v1 = state.Input[<span class="hljs-number">0</span>].GetValue(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">var</span> v2 = state.Input[<span class="hljs-number">0</span>].GetValue(<span class="hljs-number">1</span>);
+</div></code></pre>
+<p>Restore default values.</p>
+<pre class="hljs"><code><div>    state.SetDefaults();
+</div></code></pre>
+<h2 id="values-defaultvalues-defaultrange-valuenames">Values , DefaultValues , DefaultRange , ValueNames</h2>
+<p>Editor settings, or more control using Values[].<br>
+エディタの設定値、またはより詳細な制御をする場合は Values[] を使ってください。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> EasingData[] Values;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span>[] DefaultValues;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span>[] DefaultRange;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span>[] ValueNames;
+</div></code></pre>
+<h1 id="preset">Preset</h1>
+<p><a name="animrig_preset"></a>
+Manage PresetFile class.<br>
+プリセットファイルを扱うクラスです。</p>
+<h2 id="constructor">Constructor()</h2>
+<p>Create preset class.</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">var</span> preset = <span class="hljs-keyword">new</span> Animrig.Preset();
+</div></code></pre>
+<h2 id="loadfromstream">LoadFromStream</h2>
+<p>Load preset data from MemoryStream.<br>
+プリセットファイルを MemoryStream から読み込みます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">var</span> preset = <span class="hljs-keyword">new</span> Animrig.Preset();
+    <span class="hljs-keyword">var</span> ms = CommonMS.LoadFromFile(<span class="hljs-string">"data/sample.animrig"</span>);
+    <span class="hljs-keyword">if</span> (!preset.LoadFromStream(ms)){
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;   <span class="hljs-comment">// error</span>
+    }
+</div></code></pre>
+<h2 id="setpreset-setdefault-setclear">SetPreset SetDefault SetClear</h2>
+<p>Apply preset values data.<br>
+プリセットを適用します。</p>
+<pre class="hljs"><code><div>    Animrig.StateInput o = state.Inputs[<span class="hljs-number">0</span>];
+    preset.SetPreset(o , <span class="hljs-string">"happy"</span> , <span class="hljs-number">1.0</span>f , Animrig.Easing.InOutQuad);    <span class="hljs-comment">// duration 1sec</span>
+</div></code></pre>
+<p>Restore default values. Same as StateInput.SetDefaults().<br>
+デフォルト値に戻します。</p>
+<pre class="hljs"><code><div>    Animrig.StateInput o = state.Inputs[<span class="hljs-number">0</span>];
+    preset.SetDefault(o , <span class="hljs-number">1.0</span>f , Animrig.Easing.InOutQuad);
+</div></code></pre>
+<p>Restore zero(0.0) values.<br>
+0.0にセットします。</p>
+<pre class="hljs"><code><div>    Animrig.StateInput o = state.Inputs[<span class="hljs-number">0</span>];
+    preset.SetClear(o , <span class="hljs-number">1.0</span>f , Animrig.Easing.InOutQuad);
+</div></code></pre>
+<h1 id="staterenderer">StateRenderer</h1>
+<p><a name="animrig_staterenderer"></a>
+This class reflects the calculation result of the timeline to the object.
+You can define it freely!<br>
+タイムラインの計算結果を実際のオブジェクトに反映するクラスです。対象、または方法は自由に設計可能です。</p>
+<p>For example, you can replace the Spine-object(timeline) with something other than Spine.
+You can also replace physics calculations with other libraries.<br>
+例えば、SpineObject(timeline) をSpine以外のものとすり替えたり出来ます。物理計算も好みの物に差し替えも可能です。</p>
+<p>First, it is recommended to assemble with referring to the <strong>SpineRenderer</strong> class in AnimtionrigSpine.cs.<br>
+まずは、 AnimationrigSpine.cs にある <strong>SpineRenderer</strong> を参考にするのが良いでしょう。</p>
+<h2 id="constructor-objecttype">Constructor , ObjectType</h2>
+<p>Return object type. Must be set at constructor.<br>
+ObjectType は Constructor で必ず決定してください。</p>
+<pre class="hljs"><code><div>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SpineRenderer</span>(<span class="hljs-params"></span>)
+            : <span class="hljs-title">base</span>(<span class="hljs-params"></span>)
+        </span>{
+            ObjectType = ObjectType.Spine;
+            Clear();
+        }
+</div></code></pre>
+<h2 id="rendererenable-renderervisible-rendererinheritedenable-rendererinheritedvisible">RendererEnable , RendererVisible , RendererInheritedEnable , RendererInheritedVisible</h2>
+<p>Return object state. <strong>Inherited</strong> is returns the inherited value.<br>
+オブジェクトの状態を返します。<strong>Inherited</strong> は親からの継承値を返します。</p>
+<pre class="hljs"><code><div>    parent : visible = false
+    child : visible = true
+
+    parent : InheritedVisible = false
+    child : InheritedVisible = false
+</div></code></pre>
+<h2 id="drawpriorityz-drawprioritydesign">DrawPriorityZ , DrawPriorityDesign</h2>
+<p>Draw priority value.<br>
+<strong>PriorityZ</strong> is the 3D Z coordinate.<br>
+<strong>PriorityDesign</strong> is the priority value set in the editor.<br>
+描画優先度。<strong>PriorityZ</strong> はZ座標。 <strong>PriorityDesign</strong> はエディタ上で設定された優先度値です。</p>
+<p>In the editor, it is sorted by the following formula.<br>
+エディタでは以下の式を元にソートされます。</p>
+<pre class="hljs"><code><div>    sortvalue = PriorityZ + PriorityDesign * 0x10000;
+</div></code></pre>
+<h2 id="transmatrix-transposition-transcolor">TransMatrix , TransPosition , TransColor</h2>
+<p>Returns the base position and matrix of the object.<br>
+オブジェクトの位置、行列を返します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-comment">// get object position (same as TransPosition)</span>
+    Animrig.Vector3 v;
+    v.x = <span class="hljs-number">0.0</span>;
+    v.y = <span class="hljs-number">0.0</span>;
+    v.z = <span class="hljs-number">0.0</span>;
+    Animrig.Misc.m4Transform(<span class="hljs-keyword">ref</span> v , <span class="hljs-keyword">ref</span> renderer.TransMatrix);
+</div></code></pre>
+<p>Return object modulate color.<br>
+乗算色を返します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">float</span> a = renderer.TransColor[<span class="hljs-number">0</span>];
+    <span class="hljs-keyword">float</span> r = renderer.TransColor[<span class="hljs-number">1</span>];
+    <span class="hljs-keyword">float</span> g = renderer.TransColor[<span class="hljs-number">2</span>];
+    <span class="hljs-keyword">float</span> b = renderer.TransColor[<span class="hljs-number">3</span>];
+</div></code></pre>
+<h2 id="clear">Clear()</h2>
+<p>Add initialization code.<br>
+初期化コードを追加してください。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Clear</span>(<span class="hljs-params"></span>)
+    </span>{
+        <span class="hljs-keyword">base</span>.Clear();
+        ...
+    }
+</div></code></pre>
+<h2 id="update">Update()</h2>
+<p>Add update code. deltatime may be set to 0.0.<br>
+アップデート。deltatime は 0.0 で呼ばれることがあります。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> deltatime</span>)
+    </span>{
+        <span class="hljs-comment">// example : spine update</span>
+        state.Update((<span class="hljs-keyword">float</span>)deltatime);
+        state.Apply(skeleton);
+        skeleton.UpdateWorldTransform();
+
+        <span class="hljs-comment">// support physics</span>
+        AddForcePhysics();
+        UpdatePhysics(deltatime);
+        ApplyPhysics();
+    }
+</div></code></pre>
+<h2 id="setanimation">SetAnimation()</h2>
+<p>Called when changing designed-animation and empty-animation.<br>
+アニメーション、またはemptyアニメーションの切り替え時に呼ばれます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetAnimation</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">string</span> basename, <span class="hljs-keyword">bool</span> loop, <span class="hljs-keyword">bool</span> addanim, MixBlend trackmix, <span class="hljs-keyword">float</span> duration, <span class="hljs-keyword">bool</span> seekmode</span>)
+    </span>{
+        <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">1</span>)
+        {
+            <span class="hljs-comment">// single animation</span>
+        }
+        <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">4</span>){
+            <span class="hljs-comment">// blend 4track animations</span>
+        }
+    }
+</div></code></pre>
+<p>There are 1-track and 4-track composition modes in the editor. Please determine by the number of UserTrack.<br>
+エディタにはシングルトラック、４マルチトラックの２モードが存在します。UserTrack の値で判別してください。</p>
+<h2 id="settrackblendalpha">SetTrackBlendAlpha()</h2>
+<p>Set the animation blend alpha. Called every frame.<br>
+アニメーションの合成値を設定します。毎フレーム呼ばれます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackBlendAlpha</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> alpha1, <span class="hljs-keyword">float</span> alpha2, <span class="hljs-keyword">float</span> alpha3, <span class="hljs-keyword">float</span> alpha4, <span class="hljs-keyword">bool</span> exists</span>)
+    </span>{
+        <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">1</span>)
+        {
+            <span class="hljs-comment">// single animation</span>
+        }
+        <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">4</span>){
+            <span class="hljs-comment">// blend 4track animations</span>
+        }
+    }
+</div></code></pre>
+<p><strong>exists</strong> returns whether the key data exists.</p>
+<h2 id="settrackseektime">SetTrackSeekTime()</h2>
+<p>Set the animation play time. Called every frame.<br>
+アニメーションの再生時間を設定します。毎フレーム呼ばれます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackSeekTime</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> time1, <span class="hljs-keyword">float</span> time2, <span class="hljs-keyword">float</span> time3, <span class="hljs-keyword">float</span> time4, <span class="hljs-keyword">bool</span> exists</span>)
+    </span>{
+        <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">1</span>)
+        {
+            <span class="hljs-comment">// single animation</span>
+        }
+        <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">4</span>){
+            <span class="hljs-comment">// blend 4track animations</span>
+        }
+    }
+</div></code></pre>
+<h2 id="setmixduration">SetMixDuration()</h2>
+<p>Set the default time for animation switching.<br>
+アニメーションの切り替えのデフォルト値を設定します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetMixDuration</span>(<span class="hljs-params"><span class="hljs-keyword">float</span> duration</span>)
+    </span>{
+        <span class="hljs-comment">// example : spine default mix duration</span>
+        state.Data.DefaultMix = duration;
+    }
+</div></code></pre>
+<h2 id="setskin">SetSkin()</h2>
+<p>Set the skin by name.<br>
+スキンを名前から変更します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetSkin</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> skinname</span>)
+    </span>{
+        <span class="hljs-comment">//</span>
+    }
+</div></code></pre>
+<h2 id="setupphysics">SetupPhysics()</h2>
+<p>Build and create phisics.<br>
+If you want to use custom physics, please create it by inheriting PhysicsGroup.<br>
+物理計算を構築します。もし物理計算をカスタマイズしたい場合は、PhysicsGroup を派生して作ってください。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetupPhysics</span>(<span class="hljs-params">List&lt;<span class="hljs-keyword">string</span>&gt; setting</span>)
+    </span>{
+        Animrig.PhysicsGroup g = BuildYourCustomPhysics(setting);
+        PhysicsGroups.Add(g);
+    }
+</div></code></pre>
+<h2 id="addforcephysics">AddForcePhysics()</h2>
+<p>Add force to physics.<br>
+物理計算に力を加えます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddForcePhysics</span>(<span class="hljs-params"></span>)
+    </span>{
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
+        {
+            <span class="hljs-comment">//</span>
+        }
+    }
+</div></code></pre>
+<h2 id="applyphysics">ApplyPhysics()</h2>
+<p>Reflect the result of physics to the object.<br>
+物理計算の結果をオブジェクトに反映させます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ApplyPhysics</span>(<span class="hljs-params"></span>)
+    </span>{
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
+        {
+            <span class="hljs-comment">//</span>
+        }
+    }
+</div></code></pre>
+<h2 id="appeasephysics">AppeasePhysics()</h2>
+<p>Restore to natural pose. <br>
+物理計算を自然姿勢に戻します。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AppeasePhysics</span>(<span class="hljs-params"></span>)
+    </span>{
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
+        {
+            g.Appease();
+        }
+    }
+</div></code></pre>
+
+</body>
+</html>

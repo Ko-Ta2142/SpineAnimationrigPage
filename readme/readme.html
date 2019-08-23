@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>readme.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="spineanimationrig-manual">SpineAnimationRig manual</h1>
+<p><img src="images/main.jpg" alt="main"></p>
+<p>This software is <strong>free-software</strong>.<br>
+このソフトウェアは<strong>フリーソフトウェア</strong>です。</p>
+<p>Control Spine animation by timeline. This editor-application has functions such as switching animations, building tracks, and assigning values ​​from application side.<br>
+タイムラインによるSpineアニメーションのコントロールを行います。アニメーションの切り替え、トラックの構築、アプリケーションからの値の代入などの機能を持ちます。</p>
+<p>This Editor was created for &quot;facial control&quot; where more animations (tracks) are composited. If you want to control a animation that needs a lot of tracks, please try it <img class="emoji" alt="smiley" src="data:image/png;base64,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" /><br>
+このエディタは合成するアニメーション（トラック）が多く必要となる”表情制御”用に作られました。もし多くのトラックを必要とするアニメーションを制御したいなら、一度お試しください。</p>
+<h1 id="caution">Caution</h1>
+<p>This editor(SpineAnimationrig.exe) is provided for each version of Spine. 3.8 was officially released, we are developing mainly 3.8.<br>
+エディタ（SpineAnimationrig.exe)はSpineのバージョンごとに用意されています。3.8が正式リリースされたので、3.8をメインに開発しています。</p>
+<p>Please refer to <a href="#fileversion">File-Version</a>.<br>
+詳しくはファイルバージョンを参照ください。</p>
+<h1 id="contact-support-product-homepage">Contact , Support , Product homepage</h1>
+<p>Please access the following <img class="emoji" alt="smiley" src="data:image/png;base64,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" /><br>
+以下よりアクセスしてください。</p>
+<ul>
+<li><a href="https://ko-ta2142.github.io/SpineAnimationrigPage/">https://ko-ta2142.github.io/SpineAnimationrigPage/</a></li>
+<li><a href="https://sameasm.net/spineanimationrig/">https://sameasm.net/spineanimationrig/</a></li>
+</ul>
+<h1 id="contents">Contents</h1>
+<ul>
+<li>Basic
+<ul>
+<li><a href="#license">Spine License</a></li>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#data">Data structure</a></li>
+<li><a href="#fileversion">File version compatibility</a></li>
+</ul>
+</li>
+<li>GUI
+<ul>
+<li><a href="#previewform">Preview area</a></li>
+<li><a href="#timelineform">Timeline area</a></li>
+<li><a href="#propertyform">Property area</a></li>
+<li><a href="#inputform">Input value form</a></li>
+<li><a href="#animationtest">AnimationTest mode</a></li>
+<li><a href="#exportimages">Export images , Snapshot</a></li>
+<li><a href="#physics">Physics</a></li>
+</ul>
+</li>
+<li>Spine
+<ul>
+<li><a href="#spine_empty">Empty animation</a></li>
+<li><a href="#spine_skin">Skin</a></li>
+</ul>
+</li>
+<li>Object
+<ul>
+<li><a href="#commonobject">Common object</a></li>
+<li><a href="#nullobject">Null object</a></li>
+<li><a href="#spineobject">Spine object</a></li>
+</ul>
+</li>
+<li>Layer
+<ul>
+<li><a href="#previouskey">PreviousKey</a></li>
+<li><a href="#commonlayer">Common layer</a></li>
+<li><a href="#animblend4layer">animation blend layer</a></li>
+<li><a href="#seekblend4layer">animation seek time layer</a></li>
+<li><a href="#transformlayer">Transform layer</a></li>
+<li><a href="#eventlayer">Event layer</a></li>
+<li><a href="#prioritylayer">Priority layer</a></li>
+<li><a href="#statelayer">State (enable visible) layer</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="license">License</h1>
+<p><a name="license"></a></p>
+<h2 id="spine">Spine</h2>
+<p>Even if you do not have a Spine-License, you are allowed to use Spine in the editor.<br>
+Spineライセンスを持っていなくても、エディタ上でSpineを自由に使用することが許されています。</p>
+<p>To edit Spine files, you need to purchase Spine-Editor and a license. This editor mainly uses pro-version features.<br>
+Spineファイルを編集する場合はSpine-Editorとライセンスを購入する必要があります。このエディタでは主にプロバージョンの機能が使用されます。</p>
+<ul>
+<li>Spine</li>
+</ul>
+<p><a href="http://esotericsoftware.com/">http://esotericsoftware.com/</a></p>
+<h1 id="overview">Overview</h1>
+<p><a name="overview"></a></p>
+<p><strong>SpineAnimationrig</strong> is not a video output application. It is for easy control of Spine on the application<br>
+この<strong>SpineAnimationrig</strong>は動画を出力するアプリケーションではありません。アプリケーション上でSpineの操作を簡略化するための物です。</p>
+<p><img src="images/runtime01.png" alt="runtime"></p>
+<p>Please refer to the &quot;runtime readme&quot;.<br>
+詳しくはランタイムのreadmeを参照ください。</p>
+<p>This editor does not support some features of Spine. If you get an accurate display(output image), you need to create an application using Unity etc.<br>
+このエディタはSpineの一部機能をサポートしていません。ちゃんとした出力（表示）を得たい場合は、Unityなどでアプリケーションを作る必要があります。</p>
+<h1 id="features">Features</h1>
+<p><a name="features"></a></p>
+<ul>
+<li>4 Directions animation blend.</li>
+</ul>
+<p>Assign four animations up, down, left and right, and combine them. It is often used in facial expression.<br>
+4つのアニメーションを上下左右に割り当てて合成します。表情操作ではおなじみの機能です。</p>
+<ul>
+<li>Time-stretch(seek) animation blend.</li>
+</ul>
+<p>Control playback time(time stretch). It is often used in movie-editor.<br>
+再生時間を制御してタイムストレッチを行います。動画編集ではおなじみの機能です。</p>
+<ul>
+<li>Multi track Animationrig-animation.</li>
+</ul>
+<p>Animationrig also has a track feature. Multiple animations can be combined.<br>
+このAnimationrigファイルにもトラックがあり、複数のアニメーションを合成できます。</p>
+<ul>
+<li>Control animation-values from application. (input values)</li>
+</ul>
+<p>The object has variables (input-value), It can be embedded in property values ​​on the timeline. you can design easing and timing, It is safer and easier to handle than overwriting the value directly.<br>
+オブジェクトは自由に使える変数(input-value)を持っており、この変数をタイムライン上のプロパティ値として使用することが出来ます。イージングやタイミングをデザインすることが出来、直接値を上書きするよりも安全かつ簡単に扱うことが出来ます。</p>
+<ul>
+<li>Physics</li>
+</ul>
+<p>Animationrig has a simple spring physics model. You can give spine physical behavior without using Unity.<br>
+簡単なバネ物理モデルが使用可能です。Unityを使わずに物理的な挙動を与えることが出来ます。</p>
+<h1 id="data-structure">Data structure</h1>
+<p><a name="data"></a></p>
+<pre class="hljs"><code><div>AAA animation
+    * spine object
+        + transform layer
+        + spine layer
+        + spine layer
+    * null object
+        + transform layer
+BBB animation
+    * spine object
+        + transform layer
+        + spine layer
+        + spine layer
+    * null object
+        + transform layer
+</div></code></pre>
+<p>Objects and Layers structure is shared between animations.
+If delete a layer, Affects all animations.<br>
+アニメーション、オブジェクト、Layer、その下にKeyのデータを持ちます。
+オブジェクトとLayerの構成は、アニメーション間で共有され、常に同じ構成を取ります。
+もしLayerを削除すれば、全アニメーションに反映されます。</p>
+<h1 id="file-verion-compatibility">File verion compatibility</h1>
+<p><a name="fileversion"></a></p>
+<h2 id="animationrig-file-compatibility">Animationrig file compatibility</h2>
+<p>The editor or runtime can read all old version files (<strong>backward compatible</strong>).<br>
+基本的に、エディタやランタイムは古いバージョンのファイルをすべて読み込むことができます（<strong>後方互換性</strong>）。</p>
+<p>The version of the Animtionrig file and Spine-loader are displayed in the form caption.<br>
+Animtionrigファイルのバージョン、Spineローダーのバージョンはフォームキャプションに表示されます。</p>
+<p><img src="images/version01.png" alt="version"></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rev</td>
+<td>Editor build revision</td>
+</tr>
+<tr>
+<td>latest</td>
+<td>Animationrig file version</td>
+</tr>
+<tr>
+<td>Spine</td>
+<td>Spine file loader version</td>
+</tr>
+</tbody>
+</table>
+<h2 id="spine-loderruntime-compatibility">Spine loder(runtime) compatibility</h2>
+<p>Spine-runtime-loader has not backward compatible. Please output the file in a near version.<br>
+Spine-runtimeのローダーは後方互換性を持ちません。近いバージョンでファイル出力してください。</p>
+<p>In principle, Editor is Used the latest runtime(loder) for each major version.<br>
+原則として、エディタは大きなバージョンごとに最新のランタイムを使用しています。</p>
+<h2 id="spine-runtime-36">Spine runtime 3.6</h2>
+<p>Spine-runtime needs ver 3.7 or more to use MixAdd. So the editor does not support 3.6.<br>
+MixAddを使用するには3.7以上が必要です。なので、エディタは3.6に対応しません。</p>
+<p>But, can be run at runtime level using 3.6. Please refer to the runtime readme.<br>
+が、ランタイムレベルでは3.6を使って実行が可能です。ランタイムのreadmeを参照ください。</p>
+<h1 id="preview-area">Preview area</h1>
+<p><a name="previewform"></a></p>
+<p><img src="images/preview01.jpg" alt="preview"></p>
+<p>Display a preview of the current state.<br>
+現在の状態のプレビューを表示します。</p>
+<h2 id="shortcut">Shortcut</h2>
+<table>
+<thead>
+<tr>
+<th>keys</th>
+<th>function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>space</td>
+<td>play.</td>
+</tr>
+<tr>
+<td>shift + space</td>
+<td>play at top.</td>
+</tr>
+<tr>
+<td>mouse right</td>
+<td>move view position.</td>
+</tr>
+<tr>
+<td>mouse wheel</td>
+<td>zoom.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="option">Option</h2>
+<table>
+<thead>
+<tr>
+<th>button</th>
+<th>function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inspect</td>
+<td>show inspect of current object<br>現在オブジェクトの内容を表示</td>
+</tr>
+<tr>
+<td>stop animation</td>
+<td>stop animation in edit mode<br>編集中のアニメーションを停止</td>
+</tr>
+<tr>
+<td>fps</td>
+<td>preview frame rate</td>
+</tr>
+</tbody>
+</table>
+<h2 id="edit-handle">Edit handle</h2>
+<p>Edit-handle-mode can be used when selected <strong>Transform layer</strong>.</p>
+<p>この機能は<strong>トランスフォームLayer</strong>を選択中の場合のみ使用出来ます。</p>
+<table>
+<thead>
+<tr>
+<th>handle</th>
+<th>function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>select</td>
+<td>object select</td>
+</tr>
+<tr>
+<td>move</td>
+<td>edit position</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>edit scale</td>
+</tr>
+<tr>
+<td>rotate</td>
+<td>edit rotate</td>
+</tr>
+</tbody>
+</table>
+<h1 id="timeline-area">Timeline area</h1>
+<p><a name="timelineform"></a>
+<img src="images/timeline01.jpg" alt="timeline"></p>
+<p>Show the animation timeline. Edit layers and keys.<br>
+選択中オブジェクトのLayer構造を表示します。</p>
+<h2 id="shortcut">Shortcut</h2>
+<table>
+<thead>
+<tr>
+<th>keys</th>
+<th>function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>space</td>
+<td>play.</td>
+</tr>
+<tr>
+<td>shift + space</td>
+<td>play at top.</td>
+</tr>
+<tr>
+<td>mouse left</td>
+<td>select key.</td>
+</tr>
+<tr>
+<td>shift + mouse left</td>
+<td>grid time.</td>
+</tr>
+<tr>
+<td>mouse right</td>
+<td>move view time position.</td>
+</tr>
+<tr>
+<td>mouse wheel</td>
+<td>time zoom.</td>
+</tr>
+<tr>
+<td>ctrl + mouse left</td>
+<td>multi select.</td>
+</tr>
+<tr>
+<td>ctrl + a</td>
+<td>select all keys in layer.</td>
+</tr>
+<tr>
+<td>ctrl + i</td>
+<td>add key.</td>
+</tr>
+<tr>
+<td>ctrl + r</td>
+<td>clear key.</td>
+</tr>
+<tr>
+<td>ctrl + d</td>
+<td>delete key.</td>
+</tr>
+<tr>
+<td>ctrl + shift + i</td>
+<td>add layer.</td>
+</tr>
+<tr>
+<td>ctrl + shift + r</td>
+<td>clear layer.</td>
+</tr>
+<tr>
+<td>shift + ctrl + d</td>
+<td>delete layer.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="layer">Layer</h2>
+<p><a name="layer"></a>
+Can be edit layers in object. Layer names are shared between animations.
+Execute order by up to down.<br>
+オブジェクトが持つLayerを編集出来ます。名前はアニメーション間で共有されます。実行は上から下へ順に行われます。</p>
+<h2 id="key-previouskey">Key , PreviousKey</h2>
+<p><a name="key"></a></p>
+<p>Layer has normal-key and <strong>PreviousKey</strong>. PreviousKey Holds the previous (changed)animation values.
+This key is used to control transition of animation switching.<br>
+Layerには通常Keyと<strong>PreviousKey</strong>が存在します。
+PreviousKeyは変更前のアニメーションの状態を保持します。このKeyはアニメーション切り替えの遷移を制御する時に使用します。</p>
+<p>However, there are <strong><a href="#animationtest">AutoFade</a></strong> for animation switching control. It is a function to automatically crossfade to feel good. leave it to you.<br>
+しかし、アニメーションの切り替え制御には <strong><a href="#animationtest">AutoFade</a></strong> があります。良い感じに自動でクロスフェードする機能です。どちらを使うかはお任せします。</p>
+<h2 id="overlap-key">Overlap key</h2>
+<p><img src="images/overlapkey01.gif" alt="overlap key"></p>
+<p>Allow overlapping keys on Animationrig. It is useful for jumping position. It becomes pink color.<br>
+AnimationrigではKeyの重複を許容します。これは座標をジャンプさせる場合に役立ちます。重複するとピンク色になります。</p>
+<h1 id="property-area">Property area</h1>
+<p><a name="propertyform"></a></p>
+<p><img src="images/property01.jpg" alt="property"></p>
+<p>View and edit information of objects, animations, and keys.<br>
+オブジェクト、アニメーション、Keyなどの情報を表示、編集します。</p>
+<h2 id="mouse-edit-edit-form">Mouse edit , Edit form</h2>
+<p><img src="images/propertyedit01.gif" alt="edit"><br>
+<img src="images/propertyedit02.gif" alt="edit"></p>
+<p>Some properties can be edited with the mouse. You can also show the input form by double click.<br>
+一部のプロパティはマウスによる編集が可能です。またダブルクリックで入力フォームを表示することが出来ます。</p>
+<h2 id="global">Global</h2>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frame</td>
+<td>Timeline framerate<br>タイムラインのフレームレート</td>
+</tr>
+<tr>
+<td>Memo</td>
+<td>User memo. Please use it freely!<br>ユーザー用メモ領域。ご自由に。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="object">Object</h2>
+<p>Please referrence <strong><a href="#objecttype">ObjectType</a></strong> page.<br>
+オブジェクト項目を参照ください。</p>
+<h2 id="animation">Animation</h2>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>animation name.</td>
+</tr>
+<tr>
+<td>Preview base animation</td>
+<td>Preview only. Setup and run base animation.<br>プレビュー専用。下地となるアニメーションの再生。</td>
+</tr>
+<tr>
+<td>loop ennable<br>loop disable</td>
+<td>Loop active.</td>
+</tr>
+<tr>
+<td>beginframe</td>
+<td>Loop begin frame.</td>
+</tr>
+<tr>
+<td>endframe</td>
+<td>Loop end frame.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="key">Key</h2>
+<p>Please referrence <strong><a href="#layertype">LayerType</a></strong> page.<br>
+Key項目を参照ください。</p>
+<h1 id="animationtest-mode">AnimationTest mode</h1>
+<p><a name="animationtest"></a></p>
+<p><img src="images/animationtest01.gif" alt="animationtest"></p>
+<p>This application also supports animation track blending. You can check and preview in <strong>AnimationTest mode</strong>.<br>
+このツールにもアニメーションを重ねる機能があります。
+重ねた際の動きをプレビューしたい場合はモードを<strong>AnimationTest</strong>に切り替えます。</p>
+<h2 id="shortcut">Shortcut</h2>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F6</td>
+<td>switch mode.</td>
+</tr>
+<tr>
+<td>space</td>
+<td>play.</td>
+</tr>
+<tr>
+<td>shift + space</td>
+<td>play at top.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="auto-fade">Auto fade</h2>
+<p>It is a function that can be used at runtime.<br>
+ランタイムの機能です。</p>
+<p>It is a function to crossfade the switching of animation to a good feeling.
+It was born because the fade setting with PreviousKey is very difficult.
+It is a rough control, but a very powerful(useful) feature.<br>
+アニメーションの切り替えを良い感じにクロスフェードさせる機能です。PreviousKeyによるフェード設定が大変なため生まれました。大雑把ですが強力な機能です。</p>
+<ul>
+<li>disable</li>
+</ul>
+<p><img src="images/autofade01.gif" alt="autofade disable"></p>
+<ul>
+<li>enable</li>
+</ul>
+<p><img src="images/autofade02.gif" alt="autofade enable"></p>
+<h1 id="export-images-snapshot">Export images , Snapshot</h1>
+<p><a name="exportimages"></a></p>
+<p>You can output the rendered result as an image.<br>
+レンダリング結果を画像出力することが出来ます。</p>
+<p>The following settings are required to output.<br>
+出力するには以下の設定が必要になります。</p>
+<ul>
+<li><strong>Canvas Size</strong> is set in the Global panel.<br>グローバルパネルのキャンバスサイズが設定されていること</li>
+<li>The track-animation is set in the <strong>AnimationTest-mode</strong>.<br>アニメーションテストモードのトラックが設定されていること</li>
+</ul>
+<p><img src="images/exportimages01.png" alt="export image"></p>
+<h2 id="setting">Setting</h2>
+<p><img src="images/exportimages02.png" alt="export image"></p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Framerate</td>
+<td>Output rendering framerate.</td>
+</tr>
+<tr>
+<td>Start frame , End frame</td>
+<td>Time area.</td>
+</tr>
+<tr>
+<td>BGColor</td>
+<td>Background color. Used only on <strong>RGB</strong> format.</td>
+</tr>
+<tr>
+<td>Preset rendering</td>
+<td>Output for each preset. Set a target object to apply Preset.<br>プリセットごとに動画を出力します。プリセットを適用するオブジェクトを設定してください。</td>
+</tr>
+</tbody>
+</table>
+<p><img src="images/exportimages03.png" alt="export image"></p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Format</td>
+<td>Output image format.<br>RGB : color<br>ARGB : color + alpha<br> A : alpha grayscale</td>
+</tr>
+<tr>
+<td>Bleed,PreMultiplyAlpha</td>
+<td>Color blend calculation. Used only on <strong>ARGB</strong> format.</td>
+</tr>
+<tr>
+<td>Base filename</td>
+<td>Sets the output file name format. File-exe is unnecessary.<br>出力ファイル名のフォーマットを設定します。拡張子は不要です。</td>
+</tr>
+<tr>
+<td>Output directory</td>
+<td>Set by relative or absolute output directory path.<br>出力パスを相対、または絶対パスで指定します。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="preset-output">Preset output</h2>
+<p>When Preset rendering is enabled, batch output for each preset.<br>
+Preset renderingを有効にすると、プリセットごとに一括出力します。</p>
+<pre class="hljs"><code><div>filename format : images_{preset}_{frame}
+</div></code></pre>
+<p><img src="images/exportimages05.png" alt="export image"></p>
+<h2 id="snapshot">Snapshot</h2>
+<p>Outputs the current editing status as a still image. It is useful when you want only an image easily.<br>
+現在の編集状態を静止画で出力します。簡単に画像だけ欲しい場合に便利でしょう。</p>
+<p>You do not need to set ExportImages. Output with ARGB(Bleed) 32 bit PNG.<br>
+ExportImagesの設定は必要ありません。ARGB32bit(Bleed)のPNGで出力します。</p>
+<h1 id="input-value-form">Input value form</h1>
+<p><a name="inputform"></a></p>
+<p><img src="images/inputvalue01.gif" alt="inputvalue"></p>
+<p>In this application, it can be use values ​​input from the external program(embedded application) into the timeline.<br>
+このアプリケーションでは外部（組み込みアプリケーション）から入力された数値をタイムラインで使用することが出来ます。</p>
+<h2 id="how-to-set-input-value">How to set input-value</h2>
+<p><img src="images/inputvalue02.jpg" alt="inputvalue"></p>
+<p>If you use value from external, Set a special value to Key propertys.
+Please select a value from the <strong>right click menu</strong>.<br>
+外部からの変数を使用する場合は、Keyのプロパティに特殊な値を設定します。
+右クリックメニューから変数を選んでください。</p>
+<h2 id="preset">Preset</h2>
+<p><img src="images/preset01.gif" alt="preset"></p>
+<p>You can store(save) the state of values.
+It is saved as <strong>preset.txt</strong> in the same location as the file.<br>
+値の状態を記憶しておくことが出来ます。
+この情報はファイルと同じ場所に<strong>preset.txt</strong>で保存されます。</p>
+<h2 id="export-to-clipboard">Export to clipboard</h2>
+<p>Export the state of all values to clipboard.
+You can edit the output text format with <strong>export-menu</strong>.<br>
+値の情報をクリップボードにコピーします。
+出力テキストのフォーマットは<strong>exportメニュー</strong>より設定が可能です。</p>
+<table>
+<thead>
+<tr>
+<th>replace word</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{value0}</td>
+<td>write value by index.<br>インデックス番号の値を出力。</td>
+</tr>
+<tr>
+<td>{set0.x}<br>{set0.y}</td>
+<td>By XY index.<br>XYセット番号で指定。</td>
+</tr>
+<tr>
+<td>{name.x}<br>{name.y}</td>
+<td>By XY name.<br>XYセット名で指定。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>format</li>
+</ul>
+<pre class="hljs"><code><div>eye:{ position:[{eyepos.x},{eyepos.y}] , size:[{eyesize.x},{eyesize.y}] }
+</div></code></pre>
+<ul>
+<li>output</li>
+</ul>
+<pre class="hljs"><code><div>eye:{ position:[0.400,0.200] , size:[0.100,0.000] }
+</div></code></pre>
+<h1 id="physics">Physics</h1>
+<p><a name="physics"></a></p>
+<video width="auto" height="500" controls>
+<source src="images/physics_sample.mp4" type="video/mp4">
+</video>
+<p>Animationrig supports simple physics model (spring model). You can easily apply physics expressions that are difficult <strong>without Unity</strong> to <strong>Spine</strong>. Accuracy and behavior are never perfect, But I think it can be used enough to express swaying hair.<br>
+簡単な物理計算（バネモデル）を搭載しています。Unityを使わないと難しい物理計算を、簡単にSpineに適用できます。精度も機能も決して良い物ではありませんが、髪の毛を揺らしたりする分には十分使えると思います。</p>
+<p>Runtime support is not yet available. We will work after solving some problems.<br>
+ランタイムでのサポートはまだできておりません。もう少し仕様が固まってから反映します。</p>
+<h2 id="how-to-set-physics">How to set physics</h2>
+<p>In the Spine editor, add <strong>@spring</strong> to the end of the bone name. Apply physics to that bones and children bones.<br>
+Spineエディタで、bone名に <strong>@spring</strong> を語尾に付け加えてください。そのボーンを含む子に対して物理計算を適用します。</p>
+<p><img src="images/physics_how01.png" alt="physics_how"></p>
+<p>In this image, <strong>boneL2</strong> and <strong>boneR2</strong>, two physics groups are created.<br>
+画像では <strong>boneL2</strong> と <strong>boneR2</strong> 、２つの物理計算グループが作られます。</p>
+<h2 id="alias-name">Alias name</h2>
+<p>If you want to use the same settings for multiple groups, set an alias name.<br>
+複数のグループに同じ設定を使用したい場合は、エイリアス名を設定します。</p>
+<pre class="hljs"><code><div>bone01@spring,{alias name}
+</div></code></pre>
+<pre class="hljs"><code><div>sidehair_l1@spring,hair
+  sidehair_l2
+    sidehair_l3
+sodehair_r1@spring,hair
+  sidehair_r2
+    sidehair_r3
+</div></code></pre>
+<p>These two groups use a setting with the <strong>hair</strong> name.<br>
+この２つのグループは、名前が <strong>hair</strong> の設定を使用するようになります。</p>
+<pre class="hljs"><code><div>hair.mode=bone
+hair.k=100
+</div></code></pre>
+<h2 id="physics-terminator">Physics terminator</h2>
+<p>To set the end of the group, use <strong>@end</strong>.<br>
+グループの終端を指定する場合は <strong>@end</strong> を使用します。</p>
+<pre class="hljs"><code><div>boneL2@spring
+  boneL3
+    boneL4
+      boneL5@end
+        boneL Accessory01
+        boneL Accessory02
+        boneL Accessory03
+  boneSubL3@end
+    boneSubL4
+      boneSubL
+</div></code></pre>
+<p>In the case, Affects the boleL3-angle and boneL4-position from boneL2. <strong>boneSub</strong> branch is excluded.<br>
+この場合、boneL3の角度、boneL4の位置まで影響を与えます。枝分かれしている <strong>boneSub</strong> はグループから除外されます。</p>
+<h2 id="bone-setting">Bone setting</h2>
+<p>Only default settings are supported for physics bone setting. Cannot disable rotation from parent.<br>
+また物理計算が対象となるボーンの設定は、現在デフォルト設定のみの対応となります。親からの回転を無効化したりは出来ません。</p>
+<p><img src="images/physics_how02.png" alt="physics_how"></p>
+<p>Also, animation cannot be set it. The bone posture is overwritten and not displayed correctly.<br>
+また、アニメーションを設定することもできません。姿勢が上書きされてしまい、正しく表示されません。</p>
+<p><img src="images/physics_how04.png" alt="physics_how"></p>
+<h2 id="spring-setting">Spring setting</h2>
+<p>Physical settings are edited on the Animationrig editor. Edit with <strong>setting memo</strong>.<br>
+物理計算の設定はAnimationrigエディタ上で行います。オブジェクトの <strong>setting memo</strong> で編集します。</p>
+<p>At first there is nothing(use default setting). Please push the <strong>Refresh setting text</strong> button. The settings are written to text area.<br>
+最初はなにも無い状態（デフォルト設定が適用）なので <strong>Refresh setting text</strong> ボタンを押してください。設定が書き込まれます。</p>
+<p><img src="images/physics_setting01.png" alt="physics_setting"></p>
+<pre class="hljs"><code><div>{physics group name / alias name}.{property name}=value
+
+boneL2.k=100
+</div></code></pre>
+<p>Property is below. Use lowercase , Space is not allowed.<br>
+指定できるプロパティは以下の通りです。小文字で表記、スペースなどは入れないでください。</p>
+<p>The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
+物理計算フレームレートは100fps(dt=0.01)固定です。</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>basic</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>enable (def:true)</td>
+<td>Used for disabling.<br>主に無効化する際に使用します。<br>example : aaa.enable=false</td>
+</tr>
+<tr>
+<td>mode (def:bone)</td>
+<td>Spring mode. Choose from <strong>bone,strbone,point,strpoint</strong>. reference below.<br>バネのモードを設定します。詳しくは以下参照。</td>
+</tr>
+<tr>
+<td>k (def:100)</td>
+<td>Spring constant. Larger , more amplitude(swing).<br>バネ定数。値が大きいほど振幅します。</td>
+</tr>
+<tr>
+<td>damping (def:10)</td>
+<td>Velocity damping value.<br>速度減衰値。</td>
+</tr>
+<tr>
+<td>mass (def:1.0)</td>
+<td>Mass, weight. Larger , move slowly.<br>質量、重さ。大きいほどゆっくり動きます。</td>
+</tr>
+<tr>
+<td><strong>gravity</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>gravity (def:0.0)</td>
+<td>Unsupported. Gravity power. I think ,not used it often.<br>現在未対応。重力。バネではあまり使わないと思います。</td>
+</tr>
+<tr>
+<td>gravityvector (def:0,-1,0)</td>
+<td>Unsupported. Gravity direction.<br>現在未対応。重力方向。<br>example : aaa.gravityvector=0,-1,0</td>
+</tr>
+<tr>
+<td><strong>limitter</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>limitvelocity (def:1000)</td>
+<td>Limit the velocity.<br>速度制限値。</td>
+</tr>
+<tr>
+<td>limitangle (def:-1.0,+1.0)</td>
+<td>Limit the angle. Set the relative value from the natural angle.<br>角度(360=1.0)を制限します。自然角度からの相対値で指定します。<br>example : aaa.limitangle=-0.12,0.12</td>
+</tr>
+<tr>
+<td>limitmove (def:65535.0)</td>
+<td>Limit the moving range. Set the distance from the natural position. The value set the ratio of spring length.<br>移動範囲を制限します。自然位置からの距離で設定、値はバネの長さの比率を使います。<br>example : aaa.limitmove=0.5</td>
+</tr>
+<tr>
+<td></td>
+<td><img src="images/physics_limitangle.png" alt="physics_limitangle"> <img src="images/physics_limitmove.png" alt="physics_limitmove"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="spring-mode">Spring mode</h2>
+<p><img src="images/physics_springmode01.gif" alt="physics_springmode"></p>
+<p>There are four types of springs : <strong>bone,strbone,point,strpoint</strong>. Each mode has the characteristics of returning to original shape.<br>
+バネには <strong>bone,strbone,point,strpoint</strong> の４種類があります。ケースにより使い分けましょう。どれも元の形状に戻ろうとする性質を持ちます。</p>
+<ul>
+<li>bone</li>
+</ul>
+<p>The length is a fixed. Affects bone angle(rotate). Used for accessory and ahoge-hair(anime hair).<br>
+長さが固定のバネで、ボーンの角度に影響を与えます。アクセサリやアホ毛に最適です。</p>
+<ul>
+<li>strbone</li>
+</ul>
+<p>This mode can stretch in bone length. Not used often.<br>
+伸び縮みする <strong>bone</strong> です。あまり出番はありません。</p>
+<ul>
+<li>point</li>
+</ul>
+<p>The length is a fixed. Affects bone position. Used for hair and cloth.<br>
+長さが固定のバネで、ボーンの位置に影響を与えます。髪の毛や布に最適です。</p>
+<ul>
+<li>strpoint</li>
+</ul>
+<p>Basic spring. Swiiiiing! Affects bone position. Used for breast and body sagging.<br>
+基本的な伸び縮みするビヨンビヨンするバネです。ボーンの位置に影響を与えます。胸や体のたるみに最適です。</p>
+<h2 id="attention-of-bone-angle">Attention of bone angle</h2>
+<p>The spring is a model that controls the position. So, there is a limit to the bone structure in the <strong>bone,strbone</strong> mode that controls the angle.<br>
+バネは位置をコントロールするモデルです。そのため角度を制御する <strong>bone,strbone</strong> モードではボーン構造に制限があります。</p>
+<p>Basically, <strong>bone,strbone</strong> should be constructed with <strong>straight structure</strong> where the bones <strong>do not branch</strong>.<br>
+基本的に <strong>bone,strbone</strong> ではボーンが枝分かれしない <strong>直線構造</strong> で組んでください。</p>
+<p>If the bone branches off, The bone positions must be the same.<br>
+もしボーンが枝分かれする場合、ボーンの位置を同じにする必要があります。</p>
+<p><img src="images/physics_note01.png" alt="physics_note"></p>
+<p>If the position is different, Does not display correctly.<br>
+もし位置が離れている場合は、正しく表示されません。</p>
+<h2 id="how-to-give-better-force">How to give better force</h2>
+<p>When rotating, it seems that force does not apply well. In that case, it is recommended to disable rotation from the parent.<br>
+位置の移動に対しては良い動きをしますが、回転に関してはうまく力が伝播しにくいようです。その場合、親からの回転を切るのがお勧めです。</p>
+<p><img src="images/physics_note02.png" alt="physics_note"></p>
+<p>It cannot be set for physics bones. It ’s a good idea to add a bone in front.<br>
+物理計算ボーンには設定できないので、手前にボーンを追加してやるといいでしょう。</p>
+<p>This technique is very useful for hair.<br>
+髪の毛などでとても使えるテクニックです。</p>
+<h1 id="empty-animation">Empty animation</h1>
+<p><a name="spine_empty"></a></p>
+<p><img src="images/spine_empty01.png" alt="empty animation"></p>
+<p>Spine's <strong>empty-animation</strong>(SetEmptyAnimation) is a function that restores the default pose (setup). However, be careful when using it because it behaves a bit specially.<br>
+はSpineの <strong>empty-animation</strong>(SetEmptyAnimation)はデフォルトポーズ(setup)に戻す機能です。が、少し特殊な動きをするので、使用には注意を払ってください。</p>
+<h2 id="remove-animation">Remove animation</h2>
+<p>There is no problem when erasing the animation. Fade to default pose at trasition time.<br>
+アニメーションを消す場合は問題ありません。遷移時間でデフォルトポーズにフェードします。</p>
+<p><strong>track</strong> is then initialized to <strong>null</strong>.<br>
+その後、<strong>track</strong> は <strong>null</strong> に初期化されます。</p>
+<h2 id="entry-animation-on-null-track">Entry animation on null track</h2>
+<p>Spine will not fade animation if <strong>track</strong> is <strong>null</strong>. This behavior may cause the animation to be skipped.<br>
+Spineは <strong>track</strong> が <strong>null</strong> の場合、アニメーションがフェードしません。この挙動はしばしばアニメーションが飛ぶような挙動を生み出します。</p>
+<h2 id="best-practice">Best practice</h2>
+<p><img src="images/spine_empty02.png" alt="empty animation"></p>
+<p>Best practice is not to use <strong>empty</strong>. Make an animation with Spine that does nothing (no key) in advance. Use this animation instead of <strong>empty</strong>.<br>
+最善策は、<strong>empty</strong> を使用しないことです。あらかじめ何もしない（keyが１つも存在しない）アニメーションをSpineで作っておきましょう。このアニメーションを <strong>empty</strong> の代わりに使用しましょう。</p>
+<h1 id="skin">Skin</h1>
+<p>The default treatment for skins depends on the spine-runtime version. In 3.7, restor the setup state skin. But, In 3.8, selected nothing (not visible).<br>
+スキンはデフォルトの扱いがspine-runtimeのバージョンによって異なります。3.7ではsetupの状態を復元しますが、3.8では何も選択されていない状態を復元します（表示されない）。</p>
+<p><img src="images/spine_skin01.png" alt="empty animation"></p>
+<p>There is DefaultSkin in the setting of the Spine object. Select a skin to display in the default state.<br>
+Spineオブジェクトの設定に DefaultSkin があります。デフォルト状態で表示するスキンを選択してください。</p>
+<h1 id="object-type">Object type</h1>
+<p><a name="objecttype"></a></p>
+<h1 id="common-object">Common Object</h1>
+<p><a name="commonobject"></a>
+Shared property of all Objects.<br>
+全Objectタイプで使用される共通プロパティです。</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>common</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>Object name. Allow duplicate names.</td>
+</tr>
+<tr>
+<td>enable</td>
+<td>Update &amp; show object.</td>
+</tr>
+<tr>
+<td>visible</td>
+<td>Show object.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Offset position.</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>Base scale.</td>
+</tr>
+<tr>
+<td>Group (parent object)</td>
+<td>Inherit(link) the position, scale and etc from parent object.<br>親objectの位置などを継承します。</td>
+</tr>
+<tr>
+<td>Draw Priority</td>
+<td>Design draw priority order.</td>
+</tr>
+<tr>
+<td><strong>setting</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>setting</td>
+<td>Setting text field. Used mainly for physics setting.<br>設定用テキスト。主に物理計算設定などに使用されます。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="null-object">Null Object</h1>
+<p><a name="nullobject"></a></p>
+<p>Null object. Not displayed by default.<br>
+空オブジェクト。デフォルト状態では表示されません。ユーザが拡張して意味を持つオブジェクトです。</p>
+<p>You can display the temporary image.<br>
+仮画像を表示することが出来ます。</p>
+<h1 id="spine-object">Spine Object</h1>
+<p><a name="spineobject"></a></p>
+<p>This object controls the <strong>spine</strong> file.<br>
+<strong>spine</strong>をコントロールするためのオブジェクトです。</p>
+<p>Spine file-path is recorded with relative path.
+Please be careful not to include personal information such as desktop pass.<br>
+spineファイルは相対パスで記録されます。<strong>パスに個人情報が入らないようにご注意ください。</strong></p>
+<h3 id="preview-support-function">preview support function</h3>
+<p>Editor support status.<br>
+エディタ上での表示対応状況です。</p>
+<table>
+<thead>
+<tr>
+<th>function</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>blend</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>tintcolor</td>
+<td>no (diffuse * modulatecolor + tintcolor)</td>
+</tr>
+<tr>
+<td>mask</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<h3 id="property">property</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filename</td>
+<td>spine exported file. Please use <strong>JSON</strong> format that is as compatible as possible<br>spineのexportファイルを指定します。出来るだけ互換性の高い <strong>json</strong> 形式を使用しましょう。</td>
+</tr>
+<tr>
+<td>mix duration</td>
+<td>default mix duration time.</td>
+</tr>
+<tr>
+<td>PreMultiplyAlpha</td>
+<td>Change the blending method to PreMultiplyAlpha.<br>ブレンドをPreMultiplyAlpha方式に切り替えます。</td>
+</tr>
+<tr>
+<td>Default skin (def:default)</td>
+<td>Set starting skin name. <br>開始時のスキン名を指定します。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="layer-type-key-property">Layer type , key property</h1>
+<p><a name="layertype"></a></p>
+<h1 id="previouskey">PreviousKey</h1>
+<p><a name="previouskey"></a></p>
+<p><img src="images/previouskey01.jpg" alt="previouskey"></p>
+<p><strong><a href="#key">PreviousKey</a></strong> is displayed in blue color。You can not edit the value or time.
+Only easing can be set.<br>
+<strong><a href="#key">PreviousKey</a></strong> は青色で表示されます。値や時間は編集できません。イージングのみ設定することが出来ます。</p>
+<h1 id="common-layer">Common layer</h1>
+<p><a name="commonlayer"></a></p>
+<p>Shared property of all layers.<br>
+全Layerタイプで使用される共通プロパティです。</p>
+<h2 id="track-blend">track blend</h2>
+<p>Set the blend-weight when mixing animation.
+The blend calculation is below.<br>
+アニメーションを重ねた場合の値の比重を設定します。
+計算は以下になります。</p>
+<pre class="hljs"><code><div>track0 ... previous track
+track1 ... current track
+
+out = (track0.AlphaX * previous) + (track1.AlphaX * current)
+</div></code></pre>
+<ul>
+<li>Add (default)</li>
+</ul>
+<p>Default is 1.0. Add blend.<br>
+デフォルトは 1.0 で加算です。</p>
+<pre class="hljs"><code><div>previous : 1.0
+current : 1.0
+
+out = track0.AlphaX * 1.0 + track1.AlphaX * 1.0
+    = track0.AlphaX + track1.AlphaX
+</div></code></pre>
+<ul>
+<li>replace</li>
+</ul>
+<p>In the case of replace.<br>
+上書きする場合。</p>
+<pre class="hljs"><code><div>previous : 0.0
+current : 1.0
+
+out = track0.AlphaX * 0.0 + track1.AlphaX * 1.0
+    = track1.AlphaX
+</div></code></pre>
+<h1 id="transform-layer">Transform layer</h1>
+<p><a name="transformlayer"></a></p>
+<h2 id="move-scale-rotate">move , scale , rotate</h2>
+<p>Control move, scale, and rotate.</p>
+<h2 id="easing">easing</h2>
+<p>value transaction.<br>
+値の遷移を選択します。</p>
+<h2 id="spline">spline</h2>
+<p>Performs curve interpolation using the values ​​of the 4 keys.<br>
+前後4Keyの値を使って曲線補間を行います。</p>
+<h2 id="rotate-order">rotate order</h2>
+<p>Select X,Y,Z rotation order.
+<strong>pass</strong> will use the previous settings when mixing animations.<br>
+回転の順序を指定します。
+複数のアニメーションを重ね合わせた場合、<strong>pass</strong>は前の値を引き継ぎ、使用します。</p>
+<h2 id="multi-transform-layer-composite">Multi transform-layer composite</h2>
+<p>If you set multi-layers, values ​​will be composite from top to bottom.<br>
+もし複数のLayerを設置した場合、値は上から下へ合成（行列合成）されていきます。</p>
+<h1 id="animation-blend-layer">Animation blend layer</h1>
+<p><a name="animblend4layer"></a></p>
+<p><img src="images/animblend01.gif" alt="image"></p>
+<p>Composite animations with using 4(or 1) tracks on spine.<br>
+<strong>spine</strong>の4(または1)トラックを使用して、アニメーションを合成します。</p>
+<h2 id="animation-name-format-spine-side">Animation name format (spine side)</h2>
+<p>Spine-animations are assigned in 4 directions (up, down, left, right) by name.<br>
+Spineアニメーションは名前規則にそって4方向（上下左右）に割り当てられます。</p>
+<p><img src="images/animblend02.png" alt="image"></p>
+<table>
+<thead>
+<tr>
+<th>name format</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name<br>name@up</td>
+<td>up (+Y)</td>
+</tr>
+<tr>
+<td>name@right</td>
+<td>right (+X)</td>
+</tr>
+<tr>
+<td>name@down</td>
+<td>down (-Y)</td>
+</tr>
+<tr>
+<td>name@left</td>
+<td>left (-X)</td>
+</tr>
+</tbody>
+</table>
+<p>If not exists animation, <strong>empty</strong> will be set.<br>
+空アニメーションには<strong>empty</strong>が設定されます。</p>
+<h2 id="name">name</h2>
+<p>Set Spine-animation name.<br>
+Spineアニメーション名指定します。@以降は不要です。</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>none</td>
+<td>pass set animtion.<br>パスします。<br></td>
+</tr>
+<tr>
+<td>empty</td>
+<td>set empty animation.<br>emptyアニメーションを設定します。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="allow">allow</h2>
+<p>Execution allow from animation name.<br>
+アニメーション名を比較、実行を許可、禁止します。</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>allow diffrent</td>
+<td>Only if dirrent name.<br>名前が異なる場合のみ</td>
+</tr>
+<tr>
+<td>allow always</td>
+<td>Always execute.<br>常に許可。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="setanimation-addanimation">setAnimation , addAnimation</h2>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setAnimation</td>
+<td>Change now!<br>今すぐアニメーションを変更する。</td>
+</tr>
+<tr>
+<td>addAnimation</td>
+<td>Change at end point.<br>終端でアニメーションを切り替える。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="play">play</h2>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>play one</td>
+<td>One shot.</td>
+</tr>
+<tr>
+<td>play loop</td>
+<td>Loop.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mix-blend">mix blend</h2>
+<p>Sets the animation blending method between tracks.<br>
+spineのトラック間の合成方法を設定します。</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mixReplace</td>
+<td>Replace mode.<br>置き換えモード。</td>
+</tr>
+<tr>
+<td>mixAdd</td>
+<td>Add mode. Combine multi animations.<br>加算モード。複数のアニメーションを合成します。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mix-duration-time">mix duration time</h2>
+<p>Over write the animation mix blend duration-time.<br>
+アニメーション繊維時間を上書きします。</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-1.0</td>
+<td>Use default mix duration.<br>spineに設定に委ねます。</td>
+</tr>
+<tr>
+<td>0.0</td>
+<td>disable mix animation.<br>アニメーションミックスを行いません。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="animation-seek-time-layer">Animation seek time layer</h1>
+<p><a name="seekblend4layer"></a></p>
+<p><img src="images/seekblend01.gif" alt="image"></p>
+<p>Composite <strong>time-stretched</strong> animations with using 4(or 1) tracks on spine.<br>
+再生時間をコントロール（タイムストレッチ）されたアニメーションを合成します。</p>
+<p>When used 4 animation, Composed with alpha 1.0. The 0 frame should be in the same pose.<br>
+アニメーションを４つ使用する場合は、alpha1.0で合成されます。0フレームは同じポーズである必要があります。</p>
+<h2 id="animation-properties">animation properties</h2>
+<p>Please refer to <a href="#animblend4layer">animations blend layer</a>.<br>
+<a href="#animblend4layer">animations blend layer</a>を参照ください。</p>
+<h2 id="seek-time">seek time</h2>
+<p>Set playback-time. if enabled <strong>loop</strong> in animation properties, Will loop-play over terminate(animation end) time.<br>
+合成値の代わりに再生時間を設定します。アニメーションに <strong>loop</strong> が設定されている場合は、終端時間以上でループするようになります。</p>
+<h1 id="event-layer">Event layer</h1>
+<p><a name="eventlayer"></a></p>
+<p><img src="images/event01.gif" alt="image"></p>
+<p>Execute the event on the application side.<br>
+組み込みアプリケーションに対してイベント（コールバック）を実行します。</p>
+<h2 id="id">ID</h2>
+<p>event name. In the case of <strong>none</strong>, it passes.<br>
+イベント名。自由な名前を設定出来ます。
+<strong>none</strong>の場合は無視されます。</p>
+<h2 id="allow">allow</h2>
+<p>Execution allow from event-ID.<br>
+IDを比較、実行を許可、禁止します。</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>allow diffrent</td>
+<td>Only if dirrent name.<br>名前が異なる場合のみ</td>
+</tr>
+<tr>
+<td>allow always</td>
+<td>Always execute.<br>常に許可。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="strings-floats">strings , floats</h2>
+<p>Send value to application side.
+Line return code <strong>0x0D,0x0A</strong> is used.<br>
+アプリケーションに値を渡します。
+改行は<strong>crlf</strong>(0x0D,0x0A)を使用します。</p>
+<h1 id="draw-priority-layer">Draw priority layer</h1>
+<p><a name="prioritylayer"></a></p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>priority</td>
+<td>Display(draw) order. Relative.</td>
+</tr>
+</tbody>
+</table>
+<p>Set the display order. The higher the value, it will be displayed on the front.<br>
+表示順序を操作します。値が大きいほど手前に表示されます。</p>
+<h1 id="state-enable-visible-layer">State (enable visible) layer</h1>
+<p><a name="statelayer"></a></p>
+<p>Toggles enable / visible of the object.<br>
+オブジェクトの enable,visible を切り替えます。</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enable</td>
+<td>Object enable.</td>
+</tr>
+<tr>
+<td>visible</td>
+<td>Object visible.</td>
+</tr>
+</tbody>
+</table>
+<p>If enable is false, object update will not be called. But The timeline advances.<br>
+enableをfalseにすると、objectのupdateを呼ばなくなります。が、タイムラインは進みます。</p>
+
+</body>
+</html>
