@@ -425,12 +425,13 @@ blockquote {
 <li><a href="#animationtest">AnimationTest mode</a></li>
 <li><a href="#exportimages">Export images , Snapshot</a></li>
 <li><a href="#physics">Physics</a></li>
+<li><a href="#parent">Group(Parent)</a></li>
 </ul>
 </li>
 <li>Spine
 <ul>
-<li><a href="#spine_empty">Empty animation</a></li>
-<li><a href="#spine_skin">Skin</a></li>
+<li><a href="#empty">Empty animation</a></li>
+<li><a href="#skin">Skin</a></li>
 </ul>
 </li>
 <li>Object
@@ -450,6 +451,7 @@ blockquote {
 <li><a href="#eventlayer">Event layer</a></li>
 <li><a href="#prioritylayer">Priority layer</a></li>
 <li><a href="#statelayer">State (enable visible) layer</a></li>
+<li><a href="#physicsforcelayer">Physics force layer</a></li>
 </ul>
 </li>
 </ul>
@@ -1154,7 +1156,7 @@ boneL2.k=100
 <p>This technique is very useful for hair.<br>
 髪の毛などでとても使えるテクニックです。</p>
 <h1 id="empty-animation">Empty animation</h1>
-<p><a name="spine_empty"></a></p>
+<p><a name="empty"></a></p>
 <p><img src="images/spine_empty01.png" alt="empty animation"></p>
 <p>Spine's <strong>empty-animation</strong>(SetEmptyAnimation) is a function that restores the default pose (setup). However, be careful when using it because it behaves a bit specially.<br>
 はSpineの <strong>empty-animation</strong>(SetEmptyAnimation)はデフォルトポーズ(setup)に戻す機能です。が、少し特殊な動きをするので、使用には注意を払ってください。</p>
@@ -1171,11 +1173,20 @@ Spineは <strong>track</strong> が <strong>null</strong> の場合、アニメ�
 <p>Best practice is not to use <strong>empty</strong>. Make an animation with Spine that does nothing (no key) in advance. Use this animation instead of <strong>empty</strong>.<br>
 最善策は、<strong>empty</strong> を使用しないことです。あらかじめ何もしない（keyが１つも存在しない）アニメーションをSpineで作っておきましょう。このアニメーションを <strong>empty</strong> の代わりに使用しましょう。</p>
 <h1 id="skin">Skin</h1>
+<p><a name="skin"></a></p>
 <p>The default treatment for skins depends on the spine-runtime version. In 3.7, restor the setup state skin. But, In 3.8, selected nothing (not visible).<br>
 スキンはデフォルトの扱いがspine-runtimeのバージョンによって異なります。3.7ではsetupの状態を復元しますが、3.8では何も選択されていない状態を復元します（表示されない）。</p>
 <p><img src="images/spine_skin01.png" alt="empty animation"></p>
 <p>There is DefaultSkin in the setting of the Spine object. Select a skin to display in the default state.<br>
 Spineオブジェクトの設定に DefaultSkin があります。デフォルト状態で表示するスキンを選択してください。</p>
+<h1 id="groupparent">Group(Parent)</h1>
+<p><a name="parent"></a></p>
+<p><img src="images/parentbone01.png" alt="ParentBone"></p>
+<p>You can inherit the transformation(move,rotate,scale) of the parent.<br>
+親の変形を継承する事が出来ます。</p>
+<p><img src="images/parentobject01.png" alt="ParentBone"></p>
+<p>Set the parent object with <strong>Group(Parent)</strong> in the Object panel. For Spine objects, you can set bones. In that case, the bone transformation is also inherited.<br>
+オブジェクトパネルの <strong>Group(Parent)</strong> で親オブジェクトを設定してください。Spineオブジェクトの場合は、ボーンを設定することも出来ます。その場合は、ボーンの変形も継承します。</p>
 <h1 id="object-type">Object type</h1>
 <p><a name="objecttype"></a></p>
 <h1 id="common-object">Common Object</h1>
@@ -1608,6 +1619,40 @@ Line return code <strong>0x0D,0x0A</strong> is used.<br>
 </table>
 <p>If enable is false, object update will not be called. But The timeline advances.<br>
 enableをfalseにすると、objectのupdateを呼ばなくなります。が、タイムラインは進みます。</p>
+<h1 id="physics-force-layer">Physics force layer</h1>
+<p><a name="@hysicsforcelayer"></a></p>
+<p><img src="images/physicsforce01.gif" alt="physics force"></p>
+<p>Give power to physics.<br>
+物理計算に力を加えます。</p>
+<h2 id="target-physics-group">Target physics group</h2>
+<p>Set the target physical calculation group.<br>
+対象となる物理計算グループを指定します。</p>
+<p><strong>&quot;all&quot;</strong> can target everything.<br>
+<strong>&quot;all&quot;</strong> で全てを対象にすることができます。</p>
+<h2 id="direction-vector">Direction vector</h2>
+<p>Set the direction and strength of the force.<br>
+力の向き、強さを指定します。</p>
+<h2 id="wiggle">Wiggle</h2>
+<p>Give wiggle to force.<br>
+力にゆらぎを与えます。</p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ratio</td>
+<td>Ratio of wiggle to give to DirectionVector.<br>DirectionVectorに与えるwiggleの比率。</td>
+</tr>
+<tr>
+<td>cycle</td>
+<td>Rundom cycle. per 1sec.<br>1秒間の乱数サイクル。</td>
+</tr>
+</tbody>
+</table>
 
 </body>
 </html>

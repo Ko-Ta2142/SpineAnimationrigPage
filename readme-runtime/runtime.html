@@ -485,6 +485,10 @@ spine_runtime_patch/3.8/
 <td>Physics model.</td>
 </tr>
 <tr>
+<td>AnimationrigWiggle</td>
+<td>Wiggler.</td>
+</tr>
+<tr>
 <td>AnimationrigSpine</td>
 <td>Use spine object.</td>
 </tr>
@@ -584,6 +588,7 @@ spine_runtime_patch/3.8/
         <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackBlendAlpha</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> alpha1, <span class="hljs-keyword">float</span> alpha2, <span class="hljs-keyword">float</span> alpha3, <span class="hljs-keyword">float</span> alpha4, <span class="hljs-keyword">bool</span> exists</span>)</span>;
         <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackSeekTime</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> time1, <span class="hljs-keyword">float</span> time2, <span class="hljs-keyword">float</span> time3, <span class="hljs-keyword">float</span> time4, <span class="hljs-keyword">bool</span> exists</span>)</span>;
         <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetMixDuration</span>(<span class="hljs-params"><span class="hljs-keyword">float</span> duration</span>)</span>;
+        ...
     }
 </div></code></pre>
 <p>These methods are called back in AnimationrigState.Update(). Relay the instruction to Spine.AnimationState &amp; Skeleton.<br>
@@ -601,7 +606,7 @@ Set that class to the <strong>Renderer</strong> property.<br>
     <span class="hljs-comment">// in sample.animrig file</span>
     <span class="hljs-comment">// [0] : spine object</span>
     <span class="hljs-comment">// [1] : null object</span>
-    state.InputObjects[<span class="hljs-number">0</span>].Renderer := spinerenderer;
+    state.InputObjects[<span class="hljs-number">0</span>].Renderer = spinerenderer;
 </div></code></pre>
 <p>If you set a different object-type in the animation file objects, throw the exception error.<br>
 もしアニメーション中のオブジェクトと異なるタイプ(object-type)を指定した場合、例外が投げられます。</p>
@@ -610,15 +615,13 @@ Set that class to the <strong>Renderer</strong> property.<br>
 <p>To reflect physics, you need to define a <strong>StateRenderer</strong> that supports physics. This is also provided in <strong>AnimationrigSpine.cs</strong>.<br>
 物理計算を反映させるには、物理計算に対応した <strong>StateRenderer</strong> を定義する必要があります。これも <strong>AnimationrigSpine.cs</strong> に用意されています。</p>
 <pre class="hljs"><code><div>    <span class="hljs-comment">// * support physics renderer</span>
-    <span class="hljs-keyword">var</span> spinerenderer_chara = <span class="hljs-keyword">new</span> Animrig.SpinePhysicsRenderer();
-    <span class="hljs-keyword">var</span> spinerenderer_subchara = <span class="hljs-keyword">new</span> Animrig.SpinePhysicsRenderer();
+    <span class="hljs-keyword">var</span> spinerenderer = <span class="hljs-keyword">new</span> Animrig.SpinePhysicsRenderer();
     ...
-    state.InputObjects[<span class="hljs-number">0</span>].Renderer := spinerenderer_chara;
-    state.InputObjects[<span class="hljs-number">1</span>].Renderer := spinerenderer_subchara;
+    state.InputObjects[<span class="hljs-number">0</span>].Renderer = spinerenderer_chara;
     <span class="hljs-comment">// * setup physics</span>
     state.SetupPhysics();
 </div></code></pre>
-<p>First, you need to build a physical.<br>
+<p>First, you need to build(setup) a physics.<br>
 最初に物理計算の構築が必要になります。</p>
 <h2 id="update-physics">Update physics</h2>
 <p>The physics update is automatically execute with AnimationrigState.Update ().<br>
@@ -1302,14 +1305,27 @@ If you want to use custom physics, please create it by inheriting PhysicsGroup.<
         PhysicsGroups.Add(g);
     }
 </div></code></pre>
-<h2 id="addforcephysics">AddForcePhysics()</h2>
-<p>Add force to physics.<br>
-物理計算に力を加えます。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddForcePhysics</span>(<span class="hljs-params"></span>)
+<h2 id="addphysicstransform">AddPhysicsTransform()</h2>
+<p>Apply force by moving objects to physics<br>
+物理計算にオブジェクト移動による力を加えます。</p>
+<p>If you want to apply power to physics from outside Animrig, set transfrom to extrnalmatrix.<br>
+もしAnimrigの外から物理計算に力を与えたい場合、externalmatrixに変形行列をセットしてください。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddPhysicsTransform</span>(<span class="hljs-params"><span class="hljs-keyword">ref</span> Misc.Matrix4 externalmatrix</span>)
     </span>{
         <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
         {
-            <span class="hljs-comment">//</span>
+            <span class="hljs-comment">// custom</span>
+        }
+    }
+</div></code></pre>
+<h2 id="addphysicsforce">AddPhysicsForce()</h2>
+<p>Apply force to physics<br>
+物理計算に力を加えます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddPhysicsForce</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> target, <span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y, <span class="hljs-keyword">double</span> z</span>)
+    </span>{
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
+        {
+            g.AddForce(d);
         }
     }
 </div></code></pre>
@@ -1320,7 +1336,7 @@ If you want to use custom physics, please create it by inheriting PhysicsGroup.<
     </span>{
         <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
         {
-            <span class="hljs-comment">//</span>
+            <span class="hljs-comment">// custom</span>
         }
     }
 </div></code></pre>

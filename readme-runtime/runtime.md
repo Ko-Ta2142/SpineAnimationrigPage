@@ -82,6 +82,7 @@ spine_runtime_patch/3.8/
 |AnimationrigState|Do the animation!|
 |AnimationrigPreset|Load and execute from *.animrig.preset.txt file.|
 |AnimationrigPhysics|Physics model.|
+|AnimationrigWiggle|Wiggler.|
 |AnimationrigSpine|Use spine object.|
 |AnimationrigNull|Null object.|
 |AnimationrigLogger|Debug logger object. Output spine object state.|
@@ -158,6 +159,7 @@ Define **AnimationrigStateRenderer** class for control. The finished thing is **
         public override void SetTrackBlendAlpha(int trackindex, int usetrack, float alpha1, float alpha2, float alpha3, float alpha4, bool exists);
         public override void SetTrackSeekTime(int trackindex, int usetrack, float time1, float time2, float time3, float time4, bool exists);
         public override void SetMixDuration(float duration);
+        ...
     }
 ```
 
@@ -181,7 +183,7 @@ Set that class to the **Renderer** property.<br>
     // in sample.animrig file
     // [0] : spine object
     // [1] : null object
-    state.InputObjects[0].Renderer := spinerenderer;
+    state.InputObjects[0].Renderer = spinerenderer;
 ```
 
 If you set a different object-type in the animation file objects, throw the exception error.<br>
@@ -196,16 +198,14 @@ To reflect physics, you need to define a **StateRenderer** that supports physics
 
 ```csharp
     // * support physics renderer
-    var spinerenderer_chara = new Animrig.SpinePhysicsRenderer();
-    var spinerenderer_subchara = new Animrig.SpinePhysicsRenderer();
+    var spinerenderer = new Animrig.SpinePhysicsRenderer();
     ...
-    state.InputObjects[0].Renderer := spinerenderer_chara;
-    state.InputObjects[1].Renderer := spinerenderer_subchara;
+    state.InputObjects[0].Renderer = spinerenderer_chara;
     // * setup physics
     state.SetupPhysics();
 ```
 
-First, you need to build a physical.<br>
+First, you need to build(setup) a physics.<br>
 最初に物理計算の構築が必要になります。
 
 ## Update physics
@@ -1088,15 +1088,31 @@ If you want to use custom physics, please create it by inheriting PhysicsGroup.<
     }
 ```
 
-## AddForcePhysics()
-Add force to physics.<br>
-物理計算に力を加えます。
+## AddPhysicsTransform()
+Apply force by moving objects to physics<br>
+物理計算にオブジェクト移動による力を加えます。
+
+If you want to apply power to physics from outside Animrig, set transfrom to extrnalmatrix.<br>
+もしAnimrigの外から物理計算に力を与えたい場合、externalmatrixに変形行列をセットしてください。
 ```csharp
-    public override void AddForcePhysics()
+    public override void AddPhysicsTransform(ref Misc.Matrix4 externalmatrix)
     {
         foreach (var g in PhysicsGroups)
         {
-            //
+            // custom
+        }
+    }
+```
+
+## AddPhysicsForce()
+Apply force to physics<br>
+物理計算に力を加えます。
+```csharp
+    public override void AddPhysicsForce(string target, double x, double y, double z)
+    {
+        foreach (var g in PhysicsGroups)
+        {
+            g.AddForce(d);
         }
     }
 ```
@@ -1109,7 +1125,7 @@ Reflect the result of physics to the object.<br>
     {
         foreach (var g in PhysicsGroups)
         {
-            //
+            // custom
         }
     }
 ```

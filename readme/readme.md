@@ -45,9 +45,10 @@ Please access the following :)<br>
     * [AnimationTest mode](#animationtest)
     * [Export images , Snapshot](#exportimages)
     * [Physics](#physics)
+    * [Group(Parent)](#parent)
 * Spine
-    * [Empty animation](#spine_empty)
-    * [Skin](#spine_skin)
+    * [Empty animation](#empty)
+    * [Skin](#skin)
 * Object
     * [Common object](#commonobject)
     * [Null object](#nullobject)
@@ -61,6 +62,7 @@ Please access the following :)<br>
     * [Event layer](#eventlayer)
     * [Priority layer](#prioritylayer)
     * [State (enable visible) layer](#statelayer)
+    * [Physics force layer](#physicsforcelayer)
 
 # License
 <a name="license"></a>
@@ -624,7 +626,7 @@ This technique is very useful for hair.<br>
 
 
 # Empty animation
-<a name="spine_empty"></a>
+<a name="empty"></a>
 
 ![empty animation](images/spine_empty01.png)
 
@@ -652,6 +654,7 @@ Best practice is not to use **empty**. Make an animation with Spine that does no
 最善策は、**empty** を使用しないことです。あらかじめ何もしない（keyが１つも存在しない）アニメーションをSpineで作っておきましょう。このアニメーションを **empty** の代わりに使用しましょう。
 
 # Skin
+<a name="skin"></a>
 
 The default treatment for skins depends on the spine-runtime version. In 3.7, restor the setup state skin. But, In 3.8, selected nothing (not visible).<br>
 スキンはデフォルトの扱いがspine-runtimeのバージョンによって異なります。3.7ではsetupの状態を復元しますが、3.8では何も選択されていない状態を復元します（表示されない）。
@@ -661,6 +664,18 @@ The default treatment for skins depends on the spine-runtime version. In 3.7, re
 There is DefaultSkin in the setting of the Spine object. Select a skin to display in the default state.<br>
 Spineオブジェクトの設定に DefaultSkin があります。デフォルト状態で表示するスキンを選択してください。
 
+# Group(Parent)
+<a name="parent"></a>
+
+![ParentBone](images/parentbone01.png)
+
+You can inherit the transformation(move,rotate,scale) of the parent.<br>
+親の変形を継承する事が出来ます。
+
+![ParentBone](images/parentobject01.png)
+
+Set the parent object with **Group(Parent)** in the Object panel. For Spine objects, you can set bones. In that case, the bone transformation is also inherited.<br>
+オブジェクトパネルの **Group(Parent)** で親オブジェクトを設定してください。Spineオブジェクトの場合は、ボーンを設定することも出来ます。その場合は、ボーンの変形も継承します。
 
 # Object type
 <a name="objecttype"></a>
@@ -966,3 +981,35 @@ Toggles enable / visible of the object.<br>
 
 If enable is false, object update will not be called. But The timeline advances.<br>
 enableをfalseにすると、objectのupdateを呼ばなくなります。が、タイムラインは進みます。
+
+# Physics force layer
+<a name="@hysicsforcelayer"></a>
+
+![physics force](images/physicsforce01.gif)
+
+Give power to physics.<br>
+物理計算に力を加えます。
+
+## Target physics group
+
+Set the target physical calculation group.<br>
+対象となる物理計算グループを指定します。
+
+**"all"** can target everything.<br>
+**"all"** で全てを対象にすることができます。
+
+## Direction vector
+
+Set the direction and strength of the force.<br>
+力の向き、強さを指定します。
+
+## Wiggle
+
+Give wiggle to force.<br>
+力にゆらぎを与えます。
+
+|property||
+|---|---|
+|ratio|Ratio of wiggle to give to DirectionVector.<br>DirectionVectorに与えるwiggleの比率。|
+|cycle|Rundom cycle. per 1sec.<br>1秒間の乱数サイクル。|
+
