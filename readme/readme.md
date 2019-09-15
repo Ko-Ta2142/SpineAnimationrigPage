@@ -43,7 +43,7 @@ Please access the following :)<br>
     * [Property area](#propertyform)
     * [Input value form](#inputform)
     * [AnimationTest mode](#animationtest)
-    * [Export images , Snapshot](#exportimages)
+    * [Export images , Snapshot , movie](#exportimages)
     * [Physics](#physics)
     * [Group(Parent)](#parent)
 * Spine
@@ -348,7 +348,7 @@ It is a rough control, but a very powerful(useful) feature.<br>
 
 ![autofade enable](images/autofade02.gif)
 
-# Export images , Snapshot
+# Export images , Snapshot , movie
 <a name="exportimages"></a>
 
 You can output the rendered result as an image.<br>
@@ -392,6 +392,40 @@ filename format : images_{preset}_{frame}
 ```
 
 ![export image](images/exportimages05.png)
+
+## Movie (FFmpeg)
+
+If FFmpeg is installed (environment path is set), movie formats(mp4 and more) can be output.<br>
+FFmpegをインストール（環境パスを設定）していれば、mp4などのムービー形式を出力することが可能です。
+
+- FFmpeg
+
+  https://ffmpeg.org/
+
+- FFmpeg binary
+
+  https://ffmpeg.zeranoe.com/builds/
+
+Select **FFmpeg: RGB** from Format.<br>
+Format から **FFmpeg : RGB**を選んでください。
+
+![ffmpeg01](images/exportimage_movie01.png)
+
+Set the command line to send the FFmpeg.<br>
+FFmpegに送るコマンドラインの設定を行います。**Preset** からテンプレートを選ぶことが出来ます。
+
+![ffmpeg01](images/exportimage_movie02.png)
+
+
+|property||
+|---|---|
+|Margin frame|Some formats (mp4) need to be sent more than the total frame.<br>一部の形式(mp4)は想定フレームより多めに送る必要があります。|
+|TCP port|Send images via TCP / IP. Set the listening port.<br>TCP/IPで画像を送ります。待機ポートを指定します。|
+|Preset|You can select the format template.<br>出力形式のテンプレートを選択できます。|
+
+
+FFmpeg command is very difficult so please refer to the official<br>
+FFmpegのコマンドは非常に難しいので説明は省略します。
 
 ## Snapshot
 

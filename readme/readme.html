@@ -423,7 +423,7 @@ blockquote {
 <li><a href="#propertyform">Property area</a></li>
 <li><a href="#inputform">Input value form</a></li>
 <li><a href="#animationtest">AnimationTest mode</a></li>
-<li><a href="#exportimages">Export images , Snapshot</a></li>
+<li><a href="#exportimages">Export images , Snapshot , movie</a></li>
 <li><a href="#physics">Physics</a></li>
 <li><a href="#parent">Group(Parent)</a></li>
 </ul>
@@ -847,7 +847,7 @@ It is a rough control, but a very powerful(useful) feature.<br>
 <li>enable</li>
 </ul>
 <p><img src="images/autofade02.gif" alt="autofade enable"></p>
-<h1 id="export-images-snapshot">Export images , Snapshot</h1>
+<h1 id="export-images-snapshot-movie">Export images , Snapshot , movie</h1>
 <p><a name="exportimages"></a></p>
 <p>You can output the rendered result as an image.<br>
 レンダリング結果を画像出力することが出来ます。</p>
@@ -919,6 +919,49 @@ Preset renderingを有効にすると、プリセットごとに一括出力し�
 <pre class="hljs"><code><div>filename format : images_{preset}_{frame}
 </div></code></pre>
 <p><img src="images/exportimages05.png" alt="export image"></p>
+<h2 id="movie-ffmpeg">Movie (FFmpeg)</h2>
+<p>If FFmpeg is installed (environment path is set), movie formats(mp4 and more) can be output.<br>
+FFmpegをインストール（環境パスを設定）していれば、mp4などのムービー形式を出力することが可能です。</p>
+<ul>
+<li>
+<p>FFmpeg</p>
+<p>https://ffmpeg.org/</p>
+</li>
+<li>
+<p>FFmpeg binary</p>
+<p>https://ffmpeg.zeranoe.com/builds/</p>
+</li>
+</ul>
+<p>Select <strong>FFmpeg: RGB</strong> from Format.<br>
+Format から <strong>FFmpeg : RGB</strong>を選んでください。</p>
+<p><img src="images/exportimage_movie01.png" alt="ffmpeg01"></p>
+<p>Set the command line to send the FFmpeg.<br>
+FFmpegに送るコマンドラインの設定を行います。<strong>Preset</strong> からテンプレートを選ぶことが出来ます。</p>
+<p><img src="images/exportimage_movie02.png" alt="ffmpeg01"></p>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Margin frame</td>
+<td>Some formats (mp4) need to be sent more than the total frame.<br>一部の形式(mp4)は想定フレームより多めに送る必要があります。</td>
+</tr>
+<tr>
+<td>TCP port</td>
+<td>Send images via TCP / IP. Set the listening port.<br>TCP/IPで画像を送ります。待機ポートを指定します。</td>
+</tr>
+<tr>
+<td>Preset</td>
+<td>You can select the format template.<br>出力形式のテンプレートを選択できます。</td>
+</tr>
+</tbody>
+</table>
+<p>FFmpeg command is very difficult so please refer to the official<br>
+FFmpegのコマンドは非常に難しいので説明は省略します。</p>
 <h2 id="snapshot">Snapshot</h2>
 <p>Outputs the current editing status as a still image. It is useful when you want only an image easily.<br>
 現在の編集状態を静止画で出力します。簡単に画像だけ欲しい場合に便利でしょう。</p>
