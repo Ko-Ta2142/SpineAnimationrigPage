@@ -12,7 +12,7 @@ body {
 
 .sentenceblock {
     padding-top: 1em;
-    padding-bottom: 1em;
+    padding-bottom: 2em;
     color : rgba(41,41,41,1.00);
     font-size: 1.2em;
     text-align: center;
@@ -21,8 +21,15 @@ body {
     box-shadow: inset 0px 10px 10px rgba(0,0,0,0.23);
 }
 
+.featureblock {
+    padding-bottom: 1em;
+}
 
-.blockcenter{
+.featureheadder {
+    color: #740036;
+}
+
+.blockcenter {
     display: flex;
     justify-content: center;
     align-items: center;

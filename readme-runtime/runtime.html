@@ -385,6 +385,7 @@ blockquote {
 
 </head>
 <body>
+<link href="style.css" rel="stylesheet" type="text/css">
 <h1 id="spineanimationrig---runtime">SpineAnimationRig - Runtime</h1>
 <ul>
 <li>Basic
@@ -646,11 +647,11 @@ It has a simple easing function.<br>
 <strong>InputObjects</strong> にアクセスして値を設定します。
 標準でイージング機能を持っています。</p>
 <pre class="hljs"><code><div>    <span class="hljs-comment">// inputvalue[0] = 0.5</span>
-    state.InputObject[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span> , <span class="hljs-number">0.5</span>f);
+    state.InputObject[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span> , <span class="hljs-number">0.5f</span>);
     <span class="hljs-comment">// use easing</span>
     <span class="hljs-comment">// duration : 1.0</span>
     <span class="hljs-comment">// ease : InOutQuad</span>
-    state.InputObject[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span> , <span class="hljs-number">0.5</span>f , <span class="hljs-number">1.0</span>f , Animrig.Easing.InOutQuad);
+    state.InputObject[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span> , <span class="hljs-number">0.5f</span> , <span class="hljs-number">1.0f</span> , Animrig.Easing.InOutQuad);
 </div></code></pre>
 <h1 id="how-to-use-preset-file">How to use preset file</h1>
 <p><a name="preset"></a></p>
@@ -697,7 +698,7 @@ state.LoadFromBinary(ms); <span class="hljs-comment">// return bool</span>
 <p><strong>Only AnimationrigState</strong> is restored. Objects(such as spine) are not restored.
 If you need a full state restore, you need to define the object SaveLoad function.<br>
 復元されるのは<strong>AnimationrigStateだけ</strong>です。
-spineなどは復元されません。もし完全な状態復元が必要なら、オブジェクトのSaveLoadをあなたが用意する必要があります。</p>
+spineなどのオブジェクトは復元されません。もし完全な状態復元が必要なら、オブジェクトのSaveLoadをあなたが用意する必要があります。</p>
 <p>If the animation data(Animgrig file) has changed, Save data compatibility is lost. but, It will try to restore as much as possible. If fewer changes , may be possible to restore.<br>
 もし、アニメーションデータ(Animgrig file)に変更が入った場合、基本的には互換性は失われます。しかし、出来るだけ頑張って復元しようと試みます。
 少ない変更であれば、復元できる可能性があります。</p>
@@ -705,8 +706,8 @@ spineなどは復元されません。もし完全な状態復元が必要なら
 <p><a name="event"></a></p>
 <p>Set the function to <strong>AnimationrigState.OnEvent</strong> to receive the event of the event-object on the application side.<br>
 アプリケーション側でイベントオブジェクトのイベントを受け取るには<strong>AnimationrigState.OnEvent</strong>に関数を設定してください。</p>
-<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnAnimationrigEvent</span>(<span class="hljs-params">Animrig.AnimationrigState state, <span class="hljs-keyword">ref</span> Animrig.StateEventData data</span>)
-</span>{
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">OnAnimationrigEvent</span>(<span class="hljs-params">Animrig.AnimationrigState state, <span class="hljs-keyword">ref</span> Animrig.StateEventData data</span>)</span>
+{
     <span class="hljs-comment">// If you want to know the event source object, use InputObject.UserObject property.</span>
     <span class="hljs-comment">// anim.State.Inputs[0].UserObject = YoureGameObject;           // set</span>
     <span class="hljs-comment">// var YoureGameObject = data.Input.UserObject as GameObject;   // get</span>
@@ -848,12 +849,12 @@ Set <strong>RendererObjects</strong> to <strong>GameObject</strong>.<br>
 <pre class="hljs"><code><div>    <span class="hljs-keyword">if</span> (name == <span class="hljs-string">"empty"</span>)
     {
         <span class="hljs-comment">// 1 sec fade , clear animation</span>
-        anim.State.ClearTrackFade(<span class="hljs-number">2</span>, <span class="hljs-number">1.0</span>f);
+        anim.State.ClearTrackFade(<span class="hljs-number">2</span>, <span class="hljs-number">1.0f</span>);
     }
     <span class="hljs-keyword">else</span>
     {
         <span class="hljs-comment">// 1sec fade , next animation</span>
-        anim.State.EntryTrackFade(<span class="hljs-number">2</span>, name, <span class="hljs-number">1.0</span>f, Animrig.Easing.InOutQuad);
+        anim.State.EntryTrackFade(<span class="hljs-number">2</span>, name, <span class="hljs-number">1.0f</span>, Animrig.Easing.InOutQuad);
     }
 </div></code></pre>
 <p>You can also check the fade feature on the editor.<br>
@@ -875,19 +876,19 @@ You can register a preset in the editor and use it.<br>
 <pre class="hljs"><code><div>    <span class="hljs-keyword">if</span> (name == <span class="hljs-string">"default"</span>)
     {
         <span class="hljs-comment">// 1 sec fade , set default</span>
-        anim.Preset.SetDefault(anim.State.Inputs[<span class="hljs-number">0</span>], <span class="hljs-number">1.0</span>f);
+        anim.Preset.SetDefault(anim.State.Inputs[<span class="hljs-number">0</span>], <span class="hljs-number">1.0f</span>);
     }
     <span class="hljs-keyword">else</span>
     {
         <span class="hljs-comment">// 1 sec fade , set preset</span>
-        anim.Preset.SetPreset(anim.State.Inputs[<span class="hljs-number">0</span>], name, <span class="hljs-number">1.0</span>f);
+        anim.Preset.SetPreset(anim.State.Inputs[<span class="hljs-number">0</span>], name, <span class="hljs-number">1.0f</span>);
     }
 </div></code></pre>
 <h2 id="direct-input">Direct input</h2>
 <p>If you want to control the eyes from camera image processing and the mouth from microphone voice input, change the value directly.<br>
 もしカメラの画像処理やマイク音声入力から、口や目をコントロールしたいなら直接値を変更しましょう。</p>
-<pre class="hljs"><code><div>    anim.State.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span>, a1, <span class="hljs-number">0.0</span>f);
-    anim.State.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">1</span>, a2, <span class="hljs-number">0.0</span>f);
+<pre class="hljs"><code><div>    anim.State.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span>, a1, <span class="hljs-number">0.0f</span>);
+    anim.State.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">1</span>, a2, <span class="hljs-number">0.0f</span>);
 </div></code></pre>
 <h1 id="how-to-use-runtime-36">How to use runtime 3.6</h1>
 <p><a name="howto36"></a></p>
@@ -968,8 +969,8 @@ Animtionrigバイナリファイルを読み込みます。MemoryStream クラ�
 キャンバス設定。</p>
 <pre class="hljs"><code><div>    Animrig.Misc.Vector3 v = anim.Offset;
     Animrig.Misc.Vector3 s = anim.Size;
-    <span class="hljs-keyword">var</span> centerx = v.x + s.x / <span class="hljs-number">2.0</span>f;
-    <span class="hljs-keyword">var</span> centerx = v.y + s.y / <span class="hljs-number">2.0</span>f;
+    <span class="hljs-keyword">var</span> centerx = v.x + s.x / <span class="hljs-number">2.0f</span>;
+    <span class="hljs-keyword">var</span> centerx = v.y + s.y / <span class="hljs-number">2.0f</span>;
 </div></code></pre>
 <h2 id="framerate">Framerate</h2>
 <p>Timeline(Editor) base framerate.<br>
@@ -1033,7 +1034,7 @@ Advance physics time only.</p>
 <h2 id="entrytrackfade-cleartrackfade">EntryTrackFade() , ClearTrackFade()</h2>
 <p>Transition animation with fade.<br>
 アニメーションをフェードで遷移させます。</p>
-<pre class="hljs"><code><div>    state.EntryTrack(<span class="hljs-number">2</span>,<span class="hljs-string">"facial:boo"</span>,<span class="hljs-number">0.5</span>f,Easing.InOutQuad);  <span class="hljs-comment">// duration 0.5</span>
+<pre class="hljs"><code><div>    state.EntryTrack(<span class="hljs-number">2</span>,<span class="hljs-string">"facial:boo"</span>,<span class="hljs-number">0.5f</span>,Easing.InOutQuad);  <span class="hljs-comment">// duration 0.5</span>
     <span class="hljs-comment">// wait</span>
     state.EntryTrack(<span class="hljs-number">2</span>,<span class="hljs-string">"facial:lookdown"</span>,<span class="hljs-number">0.5</span>);
 </div></code></pre>
@@ -1102,8 +1103,8 @@ StateRenderer クラスを設定します。</p>
 <p>Embedding values ​​in the Animationrig timeline from the application side.
 Used when control directly. Usually, use <a href="#animrig.preset">preset</a> function.<br>
 Animtionrigタイムラインに値を組み込みます。直接操作する際に使用し、普段は <a href="#animrig.preset">preset</a> を使用することになると思います。</p>
-<pre class="hljs"><code><div>    state.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span>, <span class="hljs-number">0.5</span>f, <span class="hljs-number">1.0</span>f, Animrig.Easing.InOutQuad);  <span class="hljs-comment">// duration 1sec</span>
-    state.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">1</span>, <span class="hljs-number">0.9</span>f, <span class="hljs-number">1.0</span>f, Animrig.Easing.InOutQuad);  <span class="hljs-comment">// duration 1sec</span>
+<pre class="hljs"><code><div>    state.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">0</span>, <span class="hljs-number">0.5f</span>, <span class="hljs-number">1.0f</span>, Animrig.Easing.InOutQuad);  <span class="hljs-comment">// duration 1sec</span>
+    state.Inputs[<span class="hljs-number">0</span>].SetValue(<span class="hljs-number">1</span>, <span class="hljs-number">0.9f</span>, <span class="hljs-number">1.0f</span>, Animrig.Easing.InOutQuad);  <span class="hljs-comment">// duration 1sec</span>
 </div></code></pre>
 <p>Get now value.</p>
 <pre class="hljs"><code><div>    <span class="hljs-keyword">var</span> v1 = state.Input[<span class="hljs-number">0</span>].GetValue(<span class="hljs-number">0</span>);
@@ -1141,17 +1142,17 @@ Manage PresetFile class.<br>
 <p>Apply preset values data.<br>
 プリセットを適用します。</p>
 <pre class="hljs"><code><div>    Animrig.StateInput o = state.Inputs[<span class="hljs-number">0</span>];
-    preset.SetPreset(o , <span class="hljs-string">"happy"</span> , <span class="hljs-number">1.0</span>f , Animrig.Easing.InOutQuad);    <span class="hljs-comment">// duration 1sec</span>
+    preset.SetPreset(o , <span class="hljs-string">"happy"</span> , <span class="hljs-number">1.0f</span> , Animrig.Easing.InOutQuad);    <span class="hljs-comment">// duration 1sec</span>
 </div></code></pre>
 <p>Restore default values. Same as StateInput.SetDefaults().<br>
 デフォルト値に戻します。</p>
 <pre class="hljs"><code><div>    Animrig.StateInput o = state.Inputs[<span class="hljs-number">0</span>];
-    preset.SetDefault(o , <span class="hljs-number">1.0</span>f , Animrig.Easing.InOutQuad);
+    preset.SetDefault(o , <span class="hljs-number">1.0f</span> , Animrig.Easing.InOutQuad);
 </div></code></pre>
 <p>Restore zero(0.0) values.<br>
 0.0にセットします。</p>
 <pre class="hljs"><code><div>    Animrig.StateInput o = state.Inputs[<span class="hljs-number">0</span>];
-    preset.SetClear(o , <span class="hljs-number">1.0</span>f , Animrig.Easing.InOutQuad);
+    preset.SetClear(o , <span class="hljs-number">1.0f</span> , Animrig.Easing.InOutQuad);
 </div></code></pre>
 <h1 id="staterenderer">StateRenderer</h1>
 <p><a name="animrig_staterenderer"></a>
@@ -1167,8 +1168,8 @@ You can also replace physics calculations with other libraries.<br>
 <p>Return object type. Must be set at constructor.<br>
 ObjectType は Constructor で必ず決定してください。</p>
 <pre class="hljs"><code><div>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SpineRenderer</span>(<span class="hljs-params"></span>)
-            : <span class="hljs-title">base</span>(<span class="hljs-params"></span>)
-        </span>{
+            : <span class="hljs-title">base</span>(<span class="hljs-params"></span>)</span>
+        {
             ObjectType = ObjectType.Spine;
             Clear();
         }
@@ -1211,8 +1212,8 @@ ObjectType は Constructor で必ず決定してください。</p>
 <h2 id="clear">Clear()</h2>
 <p>Add initialization code.<br>
 初期化コードを追加してください。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Clear</span>(<span class="hljs-params"></span>)
-    </span>{
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Clear</span>(<span class="hljs-params"></span>)</span>
+    {
         <span class="hljs-keyword">base</span>.Clear();
         ...
     }
@@ -1220,8 +1221,8 @@ ObjectType は Constructor で必ず決定してください。</p>
 <h2 id="update">Update()</h2>
 <p>Add update code. deltatime may be set to 0.0.<br>
 アップデート。deltatime は 0.0 で呼ばれることがあります。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> deltatime</span>)
-    </span>{
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> deltatime</span>)</span>
+    {
         <span class="hljs-comment">// example : spine update</span>
         state.Update((<span class="hljs-keyword">float</span>)deltatime);
         state.Apply(skeleton);
@@ -1236,30 +1237,80 @@ ObjectType は Constructor で必ず決定してください。</p>
 <h2 id="setanimation">SetAnimation()</h2>
 <p>Called when changing designed-animation and empty-animation.<br>
 アニメーション、またはemptyアニメーションの切り替え時に呼ばれます。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetAnimation</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">string</span> basename, <span class="hljs-keyword">bool</span> loop, <span class="hljs-keyword">bool</span> addanim, MixBlend trackmix, <span class="hljs-keyword">float</span> duration, <span class="hljs-keyword">bool</span> seekmode</span>)
-    </span>{
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetAnimation</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">string</span> basename, <span class="hljs-keyword">bool</span> loop, <span class="hljs-keyword">bool</span> addanim, MixBlend trackmix, <span class="hljs-keyword">float</span> duration, <span class="hljs-keyword">bool</span> seekmode, <span class="hljs-keyword">float</span> loopbegin, <span class="hljs-keyword">float</span> loopend</span>)</span>
+    {
         <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">1</span>)
         {
             <span class="hljs-comment">// single animation</span>
         }
         <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">4</span>){
             <span class="hljs-comment">// blend 4track animations</span>
+        }
+        <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">2</span>){
+            <span class="hljs-comment">// blend 2track animations (minus : invert animation)</span>
         }
     }
 </div></code></pre>
-<p>There are 1-track and 4-track composition modes in the editor. Please determine by the number of UserTrack.<br>
-エディタにはシングルトラック、４マルチトラックの２モードが存在します。UserTrack の値で判別してください。</p>
+<table>
+<thead>
+<tr>
+<th>param</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>trackindex</td>
+<td>spine track index.</td>
+</tr>
+<tr>
+<td>usagetrack</td>
+<td>layer type. 4,2,1 mode exists.</td>
+</tr>
+<tr>
+<td>basename</td>
+<td>animation name. Omit opration code.(@up,@left...)</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>loop.</td>
+</tr>
+<tr>
+<td>addanim</td>
+<td>setAnimation() or addAnimation()</td>
+</tr>
+<tr>
+<td>trackmix</td>
+<td>MixBlend.Replace or MixBlend.Add</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>Mix animaiton duration</td>
+</tr>
+<tr>
+<td>seekmode</td>
+<td>if use SeekLayer, true.</td>
+</tr>
+<tr>
+<td>loopbegin,loopend</td>
+<td>Loop area setting. disable is 0,0.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="settrackblendalpha">SetTrackBlendAlpha()</h2>
 <p>Set the animation blend alpha. Called every frame.<br>
 アニメーションの合成値を設定します。毎フレーム呼ばれます。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackBlendAlpha</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> alpha1, <span class="hljs-keyword">float</span> alpha2, <span class="hljs-keyword">float</span> alpha3, <span class="hljs-keyword">float</span> alpha4, <span class="hljs-keyword">bool</span> exists</span>)
-    </span>{
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackBlendAlpha</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> alpha1, <span class="hljs-keyword">float</span> alpha2, <span class="hljs-keyword">float</span> alpha3, <span class="hljs-keyword">float</span> alpha4, <span class="hljs-keyword">bool</span> exists</span>)</span>
+    {
         <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">1</span>)
         {
             <span class="hljs-comment">// single animation</span>
         }
         <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">4</span>){
             <span class="hljs-comment">// blend 4track animations</span>
+        }
+        <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">2</span>){
+            <span class="hljs-comment">// blend 2track animations</span>
         }
     }
 </div></code></pre>
@@ -1267,8 +1318,8 @@ ObjectType は Constructor で必ず決定してください。</p>
 <h2 id="settrackseektime">SetTrackSeekTime()</h2>
 <p>Set the animation play time. Called every frame.<br>
 アニメーションの再生時間を設定します。毎フレーム呼ばれます。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackSeekTime</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> time1, <span class="hljs-keyword">float</span> time2, <span class="hljs-keyword">float</span> time3, <span class="hljs-keyword">float</span> time4, <span class="hljs-keyword">bool</span> exists</span>)
-    </span>{
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetTrackSeekTime</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> trackindex, <span class="hljs-keyword">int</span> usetrack, <span class="hljs-keyword">float</span> time1, <span class="hljs-keyword">float</span> time2, <span class="hljs-keyword">float</span> time3, <span class="hljs-keyword">float</span> time4, <span class="hljs-keyword">bool</span> exists</span>)</span>
+    {
         <span class="hljs-keyword">if</span> (usetrack == <span class="hljs-number">1</span>)
         {
             <span class="hljs-comment">// single animation</span>
@@ -1281,8 +1332,8 @@ ObjectType は Constructor で必ず決定してください。</p>
 <h2 id="setmixduration">SetMixDuration()</h2>
 <p>Set the default time for animation switching.<br>
 アニメーションの切り替えのデフォルト値を設定します。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetMixDuration</span>(<span class="hljs-params"><span class="hljs-keyword">float</span> duration</span>)
-    </span>{
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetMixDuration</span>(<span class="hljs-params"><span class="hljs-keyword">float</span> duration</span>)</span>
+    {
         <span class="hljs-comment">// example : spine default mix duration</span>
         state.Data.DefaultMix = duration;
     }
@@ -1290,8 +1341,8 @@ ObjectType は Constructor で必ず決定してください。</p>
 <h2 id="setskin">SetSkin()</h2>
 <p>Set the skin by name.<br>
 スキンを名前から変更します。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetSkin</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> skinname</span>)
-    </span>{
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetSkin</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> skinname</span>)</span>
+    {
         <span class="hljs-comment">//</span>
     }
 </div></code></pre>
@@ -1299,8 +1350,10 @@ ObjectType は Constructor で必ず決定してください。</p>
 <p>Build and create phisics.<br>
 If you want to use custom physics, please create it by inheriting PhysicsGroup.<br>
 物理計算を構築します。もし物理計算をカスタマイズしたい場合は、PhysicsGroup を派生して作ってください。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetupPhysics</span>(<span class="hljs-params">List&lt;<span class="hljs-keyword">string</span>&gt; setting</span>)
-    </span>{
+<p>Called when rebuilding after loading.<br>
+読み込み後、リビルド時に呼ばれます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetupPhysics</span>(<span class="hljs-params">List&lt;<span class="hljs-keyword">string</span>&gt; setting</span>)</span>
+    {
         Animrig.PhysicsGroup g = BuildYourCustomPhysics(setting);
         PhysicsGroups.Add(g);
     }
@@ -1308,10 +1361,13 @@ If you want to use custom physics, please create it by inheriting PhysicsGroup.<
 <h2 id="addphysicstransform">AddPhysicsTransform()</h2>
 <p>Apply force by moving objects to physics<br>
 物理計算にオブジェクト移動による力を加えます。</p>
-<p>If you want to apply power to physics from outside Animrig, set transfrom to extrnalmatrix.<br>
-もしAnimrigの外から物理計算に力を与えたい場合、externalmatrixに変形行列をセットしてください。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddPhysicsTransform</span>(<span class="hljs-params"><span class="hljs-keyword">ref</span> Misc.Matrix4 externalmatrix</span>)
-    </span>{
+<p>If you want to apply power to physics from outside Animrig, set transfrom to extrnalmatrix.
+Usually gives the identity matrix.<br>
+もしAnimrigの外から物理計算に力を与えたい場合、externalmatrixに変形行列をセットしてください。通常は単位行列を与えます。</p>
+<p>Called every frame.<BR>
+毎フレーム呼ばれます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddPhysicsTransform</span>(<span class="hljs-params"><span class="hljs-keyword">ref</span> Misc.Matrix4 externalmatrix</span>)</span>
+    {
         <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
         {
             <span class="hljs-comment">// custom</span>
@@ -1319,21 +1375,47 @@ If you want to use custom physics, please create it by inheriting PhysicsGroup.<
     }
 </div></code></pre>
 <h2 id="addphysicsforce">AddPhysicsForce()</h2>
-<p>Apply force to physics<br>
-物理計算に力を加えます。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddPhysicsForce</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> target, <span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y, <span class="hljs-keyword">double</span> z</span>)
-    </span>{
+<p>Apply force to physics. Called it from Physics force layer.<br>
+物理計算に力を加えます。PhysicsForceLayerが使用します。</p>
+<p>Called every frame.<BR>
+毎フレーム呼ばれます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddPhysicsForce</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> target, <span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y, <span class="hljs-keyword">double</span> z</span>)</span>
+    {
         <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
         {
             g.AddForce(d);
         }
     }
 </div></code></pre>
+<h2 id="preparephysics">PreparePhysics()</h2>
+<p>Collect information necessary for physics and prepare.<br>
+物理計算のために必要な情報を取得したり、下準備を行います。</p>
+<p>Called every frame.<BR>
+毎フレーム呼ばれます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">PreparePhysics</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
+        {
+            <span class="hljs-comment">// custom</span>
+        }
+    }
+</div></code></pre>
+<h2 id="updatephysics">UpdatePhysics()</h2>
+<p>Advance physics time. It moves at 100fps , It is called by dividing into 0.01 seconds.<br>
+物理計算時間を進めます。100fpsで動いており、0.01秒に分割して呼ばれます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">UpdatePhysics</span>(<span class="hljs-params"><span class="hljs-keyword">double</span> deltatime</span>)</span>{
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
+        {
+            g.Update(deltatime);
+        }
+    }
+</div></code></pre>
 <h2 id="applyphysics">ApplyPhysics()</h2>
 <p>Reflect the result of physics to the object.<br>
 物理計算の結果をオブジェクトに反映させます。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ApplyPhysics</span>(<span class="hljs-params"></span>)
-    </span>{
+<p>Called every frame.<BR>
+毎フレーム呼ばれます。</p>
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ApplyPhysics</span>(<span class="hljs-params"></span>)</span>
+    {
         <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
         {
             <span class="hljs-comment">// custom</span>
@@ -1343,8 +1425,8 @@ If you want to use custom physics, please create it by inheriting PhysicsGroup.<
 <h2 id="appeasephysics">AppeasePhysics()</h2>
 <p>Restore to natural pose. <br>
 物理計算を自然姿勢に戻します。</p>
-<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AppeasePhysics</span>(<span class="hljs-params"></span>)
-    </span>{
+<pre class="hljs"><code><div>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AppeasePhysics</span>(<span class="hljs-params"></span>)</span>
+    {
         <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> g <span class="hljs-keyword">in</span> PhysicsGroups)
         {
             g.Appease();

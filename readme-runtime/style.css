@@ -1,0 +1,142 @@
+/* CSS Document */
+
+body {
+    padding: 0 12px;
+    font-size: 110%;
+    line-height: 150%;
+    word-wrap: break-word;
+    background-color: #444444;
+    color: #D8D8D8;
+}
+body strong {
+    color: #FF68A5;
+    font-weight: normal;
+}
+
+pre {
+    background-color: #333333;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    color: #B7B7B7;
+}
+
+.emoji {
+    height: 1.4em;
+    border-radius: 0px;
+    border-width: 0px;
+}
+
+img {
+    max-width: 100%;
+    border-radius: 8px;
+    max-height: 100%;
+    border: 2px solid #C0C0C0;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+    color: #D4BA64;
+}
+
+a {
+    color: #75D4E4;
+    text-decoration: underline;
+}
+
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table > tbody > tr + tr > td {
+    border-top: 1px solid #777777;
+}
+body video {
+    border: 2px solid #C4C4C4;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+
+
+
+
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #91a77b;
+}
+
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #d46c6c;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #d1a174;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #c7b160;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #acc547;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #5c8ccc;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #ab71d1;
+}
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    color: #C3C3C3;
+    padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}

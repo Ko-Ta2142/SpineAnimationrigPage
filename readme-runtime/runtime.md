@@ -1,4 +1,5 @@
-﻿
+﻿<link href="style.css" rel="stylesheet" type="text/css">
+
 # SpineAnimationRig - Runtime
 
 + Basic
@@ -314,7 +315,7 @@ state.LoadFromBinary(ms); // return bool
 **Only AnimationrigState** is restored. Objects(such as spine) are not restored.
 If you need a full state restore, you need to define the object SaveLoad function.<br>
 復元されるのは**AnimationrigStateだけ**です。
-spineなどは復元されません。もし完全な状態復元が必要なら、オブジェクトのSaveLoadをあなたが用意する必要があります。
+spineなどのオブジェクトは復元されません。もし完全な状態復元が必要なら、オブジェクトのSaveLoadをあなたが用意する必要があります。
 
 If the animation data(Animgrig file) has changed, Save data compatibility is lost. but, It will try to restore as much as possible. If fewer changes , may be possible to restore.<br>
 もし、アニメーションデータ(Animgrig file)に変更が入った場合、基本的には互換性は失われます。しかし、出来るだけ頑張って復元しようと試みます。
@@ -1008,7 +1009,7 @@ Add update code. deltatime may be set to 0.0.<br>
 Called when changing designed-animation and empty-animation.<br>
 アニメーション、またはemptyアニメーションの切り替え時に呼ばれます。
 ```csharp
-    public override void SetAnimation(int trackindex, int usetrack, string basename, bool loop, bool addanim, MixBlend trackmix, float duration, bool seekmode)
+    public override void SetAnimation(int trackindex, int usetrack, string basename, bool loop, bool addanim, MixBlend trackmix, float duration, bool seekmode, float loopbegin, float loopend)
     {
         if (usetrack == 1)
         {
@@ -1017,10 +1018,22 @@ Called when changing designed-animation and empty-animation.<br>
         if (usetrack == 4){
             // blend 4track animations
         }
+        if (usetrack == 2){
+            // blend 2track animations (minus : invert animation)
+        }
     }
 ```
-There are 1-track and 4-track composition modes in the editor. Please determine by the number of UserTrack.<br>
-エディタにはシングルトラック、４マルチトラックの２モードが存在します。UserTrack の値で判別してください。
+|param||
+|---|---|
+|trackindex|spine track index.|
+|usagetrack|layer type. 4,2,1 mode exists.|
+|basename|animation name. Omit opration code.(@up,@left...)|
+|loop|loop.|
+|addanim|setAnimation() or addAnimation()|
+|trackmix|MixBlend.Replace or MixBlend.Add|
+|duration|Mix animaiton duration|
+|seekmode|if use SeekLayer, true.|
+|loopbegin,loopend|Loop area setting. disable is 0,0.|
 
 ## SetTrackBlendAlpha()
 Set the animation blend alpha. Called every frame.<br>
@@ -1034,6 +1047,9 @@ Set the animation blend alpha. Called every frame.<br>
         }
         if (usetrack == 4){
             // blend 4track animations
+        }
+        if (usetrack == 2){
+            // blend 2track animations
         }
     }
 ```
@@ -1080,6 +1096,10 @@ Set the skin by name.<br>
 Build and create phisics.<br>
 If you want to use custom physics, please create it by inheriting PhysicsGroup.<br>
 物理計算を構築します。もし物理計算をカスタマイズしたい場合は、PhysicsGroup を派生して作ってください。
+
+Called when rebuilding after loading.<br>
+読み込み後、リビルド時に呼ばれます。
+
 ```csharp
     public override void SetupPhysics(List<string> setting)
     {
@@ -1092,8 +1112,13 @@ If you want to use custom physics, please create it by inheriting PhysicsGroup.<
 Apply force by moving objects to physics<br>
 物理計算にオブジェクト移動による力を加えます。
 
-If you want to apply power to physics from outside Animrig, set transfrom to extrnalmatrix.<br>
-もしAnimrigの外から物理計算に力を与えたい場合、externalmatrixに変形行列をセットしてください。
+If you want to apply power to physics from outside Animrig, set transfrom to extrnalmatrix. 
+Usually gives the identity matrix.<br>
+もしAnimrigの外から物理計算に力を与えたい場合、externalmatrixに変形行列をセットしてください。通常は単位行列を与えます。
+
+Called every frame.<BR>
+毎フレーム呼ばれます。
+
 ```csharp
     public override void AddPhysicsTransform(ref Misc.Matrix4 externalmatrix)
     {
@@ -1105,8 +1130,12 @@ If you want to apply power to physics from outside Animrig, set transfrom to ext
 ```
 
 ## AddPhysicsForce()
-Apply force to physics<br>
-物理計算に力を加えます。
+Apply force to physics. Called it from Physics force layer.<br>
+物理計算に力を加えます。PhysicsForceLayerが使用します。
+
+Called every frame.<BR>
+毎フレーム呼ばれます。
+
 ```csharp
     public override void AddPhysicsForce(string target, double x, double y, double z)
     {
@@ -1116,10 +1145,42 @@ Apply force to physics<br>
         }
     }
 ```
+## PreparePhysics()
+Collect information necessary for physics and prepare.<br>
+物理計算のために必要な情報を取得したり、下準備を行います。
+
+Called every frame.<BR>
+毎フレーム呼ばれます。
+
+```csharp
+    public override void PreparePhysics(){
+        foreach (var g in PhysicsGroups)
+        {
+            // custom
+        }
+    }
+```
+
+## UpdatePhysics()
+Advance physics time. It moves at 100fps , It is called by dividing into 0.01 seconds.<br>
+物理計算時間を進めます。100fpsで動いており、0.01秒に分割して呼ばれます。
+
+```csharp
+    public override void UpdatePhysics(double deltatime){
+        foreach (var g in PhysicsGroups)
+        {
+            g.Update(deltatime);
+        }
+    }
+```
 
 ## ApplyPhysics()
 Reflect the result of physics to the object.<br>
 物理計算の結果をオブジェクトに反映させます。
+
+Called every frame.<BR>
+毎フレーム呼ばれます。
+
 ```csharp
     public override void ApplyPhysics()
     {

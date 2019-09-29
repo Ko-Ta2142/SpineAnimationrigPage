@@ -47,39 +47,109 @@
         </div>
     </section>
       
-    <section class="row sentenceblock" style="background-color: #9cb800; font-size: 1.2em;">
-        <div class="col-lg-6">
-            <h1 style="color:#333333">Control multi-tracks on timeline</h1>
+    <section class="row sentenceblock" style="background-color: #9CB800; font-size: 1.2em;">
+        <div class="col-12">
+            <h1 class="inout inout-box">Overview</h1>
             <div class="maintext">
-                You can control multiple <sapn class="strong">spine</sapn>-animation with timeline.
-                It is very useful when you want to separate and manage animation for each parts.
+                SpineAnimationrig is a tool for controlling <sapn class = "strong">Spine</sapn>.
+                Provides advanced operations using <sapn class = "strong">Spine-runtime</sapn> functions.
+                Runtime operation requires a program, but it is not necessary with this tool.
                 <br>
-                複数の<sapn class="strong">Spine</sapn>アニメーションをタイムラインでコントロールすることが出来ます。
-                パーツごとのアニメーションを分けて管理したい場合にとても便利です。
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <h1 style="color:#333333">Control value from appside</h1>
+                SpineAnimationrigは<sapn class="strong">Spine</sapn>を制御するためのツールです。
+                エディタより先にあたる<sapn class="strong">Spineランタイム</sapn>の機能を使った高度な操作が可能です。
+                本来ランタイム操作はプログラムが必要になりますが、このツールを使えば不要です。
+            </div><br>
             <div class="maintext">
-                You can control the <sapn class="strong">spine</sapn>-animation from the application side using runtime or <sapn class="strong">unity</sapn>-components too easy.
+                This tool is <sapn class = "strong">free software</sapn>. Free to use forever.
                 <br>
-                ランタイムや<sapn class="strong">unity</sapn>コンポーネントを使って、簡単にアプリケーション側から<sapn class="strong">Spine</sapn>アニメーションをコントロールすることが出来ます。
+                このツールは<sapn class = "strong">フリーソフト</sapn>です。ずっと無料で使えます。
             </div>
         </div>
     </section>
     
-    <section class="row sentenceblock" style="background-color: #44906B;">
+    <section class="row sentenceblock" style="background-color: #4D9AB1; font-size: 1.2em;">
+        <div class="col-12">
+            <h1 class="inout inout-box">Feature</h1>
+        </div>
+        <div class="col-lg-6 featureblock">
+            <h1 class="featureheadder">Multi track animations</h1>
+            <img style="width:100%" src="images/feature_multitrack.png" alt="multi track">
+            <div class="maintext">
+                An important feature at runtime is the <sapn class = "strong">multi track animation</sapn>.
+                Do you want to use the <sapn class = "strong">timeline</sapn> to switch animations or combine them at the same time?
+                <br>
+                ランタイムで重要な機能がマルチトラックアニメーションです。
+                タイムラインを使ってタイミングを合わせてアニメーションを切り替えたり、合成したりしたいですよね？
+            </div>
+        </div>
+        <div class="col-lg-6 featureblock">
+            <h1 class="featureheadder">Control animation from appside</h1>
+            <img style="width:100%" src="images/feature_controlvalue.gif" alt="control value">
+            <div class="maintext">
+                You can easily control animation values from the <sapn class = "strong">built-in-application</sapn>.
+                For example, if you set the mouth open / close value, you will have a character that speaks with a microphone.
+                <br>
+                組み込みアプリケーションからアニメーションの値を簡単に操作することが出来ます。例えば口の開閉値に紐付けしておけば、マイク入力で喋るキャラの完成です。
+            </div>
+        </div>
+        <div class="col-lg-6 featureblock">
+            <h1 class="featureheadder">Physics</h1>
+            <img style="width:100%" src="images/feature_physics.gif" alt="physics">
+            <div class="maintext">
+                With this tool you can easily use <sapn class = "strong">physics</sapn>!!! You don't need unity.
+                It's not perfect, but it can be used enough if it is about <sapn class = "strong">hair wiggle motion</sapn>.
+                <br>
+                このツールでは物理計算を使うことが出来ます！unityは必要ありません。完璧なものではありませんが、髪を揺らすぐらいなら十分使えると思いますよ。
+            </div>
+        </div>
+        <div class="col-lg-6 featureblock">
+            <h1 class="featureheadder">2D directionaly blend</h1>
+            <img style="width:100%" src="images/feature_4blend.gif" alt="directionary blend">
+            <div class="maintext">
+                Directional blending of animation is possible.
+                xy alpha ratio can be set, <sapn class = "strong">Combining 4 animations</sapn> each.
+                <br>
+                アニメーションの指向性合成が可能です。xyの合成率を設定出来、それぞれ4アニメーションを合成します。
+            </div>
+        </div>
+        <div class="col-lg-6 featureblock">
+            <h1 class="featureheadder">Export images and movie</h1>
+            <img style="width:100%" src="images/feature_export.png" alt="export">
+            <div class="maintext">
+                Has a function to <sapn class = "strong">export rendered images</sapn>. 
+                Useful when importing into <sapn class = "strong">AfterEffects</sapn>.
+                Video output is possible by installing FFmpeg.
+                <br>
+                レンダリングされた画像を出力する機能があります。
+                AfterEffectsへインポートする際に役立つでしょう。
+                FFmpegをインストールすれば動画の出力が可能です。
+            </div>
+        </div>
+        <div class="col-lg-6 featureblock">
+            <h1 class="featureheadder">Unity component</h1>
+            <img style="width:100%" src="images/feature_unity.png" alt="unity component">
+            <div class="maintext">
+                <sapn class = "strong">Unity components</sapn> are provided.
+                It can be easily run into Unity.
+                Please refer to the sample program.
+                <br>
+                Unityコンポーネントが付属されます。簡単にUnityに持ち込むことが出来ます。詳しくはサンプルをご覧ください。
+            </div>
+        </div>
+    </section>
+
+    <section class="row sentenceblock" style="background-color: #55AF83;">
         <div class="col-12 block" style="text-align: center">
             <h1 class="inout inout-box">Editor</h1>
             <img src="images/EditorImage.jpg" alt="editor image" style="width:100%; height:auto">
-            <div class="maintext" style="padding: 20px; color:#ffffff">
-                This editor provides the function to control animation in the timeline.
+            <div class="maintext" style="padding: 20px;">
+                <sapn class = "strong">Animationrig editor</sapn> provides the function to control animation in the timeline.
                 You can not directly manipulate bones and slots, but can control the animation blend ratio and etc.
-                The maked animation can be run on the application using the runtime.
+                The maked animation can be output as a video or run on the application using the runtime.
                 <br>
-                エディタはタイムラインでアニメーションを操作するとてもシンプルな物です。
+                <sapn class = "strong">Animationrigエディタ</sapn>はタイムラインでアニメーションを操作するとてもシンプルな物です。
                 ボーンやスロットを直接操作できませんが、アニメーションのブレンド率などを細かく設定できます。
-                作成したアニメーションはランタイムを用いてアプリケーション上で動作させることが出来ます。
+                作成したアニメーションは動画で出力したり、ランタイムを用いてアプリケーション上で動作させることが出来ます。
             </div>
             <div style="text-align: right; overflow:hidden">
                 <a href="readme/readme.html">
@@ -89,17 +159,17 @@
         </div>
     </section>
     
-    <section class="row sentenceblock" style="background-color: #4c80a2;">
+    <section class="row sentenceblock" style="background-color: #889AC9;">
         <div class="col-12 block" style="text-align: center">
             <h1 class="inout inout-box">Runtime</h1>
             <img src="images/RuntimeImage.jpg" alt="editor image" style="width:100%; height:auto">
-            <div class="maintext" style="padding: 20px; color:white">
-                Embed in the application using the runtime.
+            <div class="maintext" style="padding: 20px;">
+                Embed in the application using the <sapn class = "strong">runtime</sapn>.
                 Animationrig (alone) is a non-dependent library. It can be used in various environments.
                 Provide C++、C-sharp、Unity Component.
                 Please try Unity sample.
                 <br>
-                アプリケーションに組み込むにはランタイムを使用します。
+                アプリケーションに組み込むには<sapn class = "strong">ランタイム</sapn>を使用します。
                 Animationrig(単体)は依性が無いライブラリです。環境を選ばず使用できます。
                 C++、C-sharp、Unityコンポーネントをメインに提供しています。
                 まずはUnityサンプルをお試しください。
@@ -113,41 +183,58 @@
         </div>
     </section>
     
+    <section class="row sentenceblock" style="background-color: #9cb800; font-size: 1.2em;">
+        <div class="col-12">
+            <h1 class="featureheadder">Spine is required</h1>
+            <div class="maintext">
+                <div style="display: inline-block">
+                    <sapn class = "strong">Spine</sapn> is required. Please buy it.
+                    <br>
+                    <sapn class = "strong">Spine</sapn>が必要になります。買ってね。
+                </div>
+                <div style="display: inline-block">
+                    <a href="http://esotericsoftware.com/">
+                        <img class="linkhover" src="images/boy.png" style="width: 30%" alt="spine boy. copyright esotericsoftware co ltd."><br>
+                        esotericsoftware
+                    </a>
+                </div>
+            </div>
+            <div>
+                
+            </div>
+        </div>
+    </section>
+    
     <section class="row sentenceblock" style="background-color: #ADBC57;">
         <div class="col-12 block" style="text-align: center">
             <h1 class="inout inout-box">Release notes</h1>
             
             <div class="maintext" style="padding: 20px">
-                <img src="releasenote/exportimage_movie02.png" style="width:50%">
+                <img src="releasenote/physics_animationblend.gif" style="width:30%" alt="physics blend">
                 <br>
-                2019/09/16<br>
-                Some fixes, and support for movie output by FFmpeg.<br>
-                細かな修正、FFmpegによる動画出力に対応しました。
-                
+                2019/09/28<br>
+                You can combine  animations and physics. <br>
+                Physics values are added to the designed animation.<br>
+                物理計算にアニメーションを合成できるようになりました。<br>
+                デザインされたアニメーションに物理計算の値が加算されます。
             </div>
             
             <div class="maintext" style="padding: 20px">
-                <img src="releasenote/physicsforce01.gif" style="width:30%">
-                <img src="releasenote/parentbone01.png" style="width:30%">
+                2019/09/16<br>
+                Support for movie output by FFmpeg.<br>
+                FFmpegによる動画出力に対応しました。
+            </div>
+            
+            <div class="maintext" style="padding: 20px">
+                <img src="releasenote/physicsforce01.gif" style="width:30%" alt="physics force">
+                <img src="releasenote/parentbone01.png" style="width:30%" alt="parent bone">
                 <br>
                 2019/09/11<br>
-                Implements the layer that gives power to physics. and Bones can be set for group(parent) targets.<br>
-                物理計算に力を与えるレイヤを実装。グループ(Parent)対象にボーンが設定可能になりました。
-                
+                You can give Power (wind)  to physics.<br>
+                and you can link the object position to the parent object bone.<br>
+                物理計算に力（風）を与えられるようになりました。<br>
+                オブジェクト位置を親オブジェクトのボーンにリンク出来るようになりました。
             </div>
-            <div class="maintext" style="padding: 20px">
-                <video src="releasenote/physics_sample.mp4" loop muted controls style="width:30%; height:auto"></video><br>
-                2019/08/21<br>
-                Physics is now available and fixed!!! Physics can be used at runtime.<br>
-                物理計算（バネ）を組み込み＆修正しました！！！ランタイムでも使用できます。<br>
-                <a href="readme/readme.html#physics">
-                    readme - physics
-                </a>
-                <br><br>
-                Spine 3.8 has been officially released. The sample has also been upgraded to 3.8.<br>
-                Spine3.8が正式リリースされました。サンプルも3.8にアップグレードしました。
-            </div>
-            
         </div>
     </section>
     
@@ -156,7 +243,7 @@
             <h1 class="inout inout-box">Download</h1>
             <div class="maintext" style="padding: 20px;">
                 FreeSoftware<br>
-                Version : 0.6 , rev 400 , latest 32<br>
+                Version : 0.6 , rev 412 , latest 35<br>
                 Editor-platform : windows<br>
                 Runtime-language : c++ , c-sharp , UnityComponent<br>
                 Spine file version : 3.7 , 3.8.71
@@ -173,6 +260,7 @@
             </div>
             <div class="maintext">
                 old files<br>
+                <a href="https://sameasm.net/spineanimationrig/binary/animationrig400_32.7z" style="color: #002C60">rev400 latest32 spine3.8.71</a><br>
                 <a href="https://sameasm.net/spineanimationrig/binary/animationrig395_32.7z" style="color: #002C60">rev395 latest32 spine3.8.71</a><br>
                 <a href="https://sameasm.net/spineanimationrig/binary/animationrig389_30.7z" style="color: #002C60">rev389 latest30 spine3.8.32</a><br>
                 <a href="https://sameasm.net/spineanimationrig/binary/animationrig386_30.7z" style="color: #002C60">rev386 latest30 spine3.8.32</a><br>
@@ -199,7 +287,7 @@
                     <span style="color:#ffffff">twitter</span>
                 </div>
                 <div style="display:inline-block; margin: 10px">
-                    <a href="mailto::k_o_t_a_2142-work@yahoo.co.jp?subject=SpineAnimationrig support">
+                    <a href="mailto:k_o_t_a_2142-work@yahoo.co.jp?subject=SpineAnimationrig support">
                         <img class="linkhover" src="images/mail-icon.png" alt="twitter icon">
                     </a><br>
                     <span style="color:#ffffff">mail</span>
