@@ -4,18 +4,17 @@
 
 ![main](images/main.jpg)
 
+SpineAnimationrig is a tool for control the **spine-runtime**.
+Until now, Spine-runtime was used by programmers. Designers could not touch it.
+This tool is intended to allow designers to use Spine-runtime functionality.
+
+SpineAnimationrigは **Spine-runtime** をコントロールするツールです。
+今まで Spine-runtime を使うのはプログラマーであり、デザイナーが触ることが出来ない領域でした。
+このツールは、Spine-runtime の機能をデザイナーにも使えるようにすることを目的としています。
+
 This software is **free-software**. Free to use forever.
 
 このソフトウェアは**フリーソフトウェア**です。ずっと無料。
-
-SpineAnimationrig is a tool for controlling Spine.
-Provides advanced operations using Spine-runtime functions.
-Runtime control requires program knowledge,
-If you use this tool, you can control it with GUI.
-
-SpineAnimationrigはSpineを制御するためのツールです。
-エディタより先にあたるSpineランタイムの機能を使った高度な操作を行います。
-ランタイムの操作にはプログラム知識が必要とされますが、このツールを使えばGUI上で操作できます。
 
 # Caution
 
