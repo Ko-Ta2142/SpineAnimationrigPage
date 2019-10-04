@@ -4,23 +4,25 @@
 
 ![main](images/main.jpg)
 
-This software is **free-software**. Free to use forever.<br>
+This software is **free-software**. Free to use forever.
+
 このソフトウェアは**フリーソフトウェア**です。ずっと無料。
 
 SpineAnimationrig is a tool for controlling Spine.
 Provides advanced operations using Spine-runtime functions.
-Runtime control requires program knowledge, but if you use this tool it is not necessary.
+Runtime control requires program knowledge,
+If you use this tool, you can control it with GUI.
 
 SpineAnimationrigはSpineを制御するためのツールです。
-エディタより先にあたるSpineランタイムの機能を使った高度な操作が可能です。
-ランタイム操作はプログラム知識が必要になりますが、このツールを使えばそれは不要です。
+エディタより先にあたるSpineランタイムの機能を使った高度な操作を行います。
+ランタイムの操作にはプログラム知識が必要とされますが、このツールを使えばGUI上で操作できます。
 
 # Caution
 
 This editor(SpineAnimationrig.exe) is provided for each version of Spine. 3.8 was officially released, we are developing mainly 3.8.<br>
 エディタ（SpineAnimationrig.exe)はSpineのバージョンごとに用意されています。3.8が正式リリースされたので、3.8をメインに開発しています。
 
-Please refer to [File-Version](#fileversion).<br>
+Please refer to [file version compatibility](#fileversion).<br>
 詳しくはファイルバージョンを参照ください。
 
 # Contact , Support , Product homepage
@@ -53,6 +55,7 @@ Please access the following :)<br>
     * [How to basic](#howto_basic)
     * [How to make base animation](#howto_base)
     * [How to export images](#howto_export)
+    * [How to physics](#howto_physics)
 * Feature & Spine misc
     * [Export images , Snapshot , movie](#exportimages)
     * [Physics](#physics)
@@ -80,13 +83,15 @@ Please access the following :)<br>
 
 ## Spine
 
-Even if you do not have a Spine-License, you are allowed to use Spine in the editor.<br>
-Spineライセンスを持っていなくても、エディタ上でSpineを自由に使用することが許されています。
+Anyone is allowed to view the exported Spine file. 
+You don't need to purchase a Spine license to use this editor.<br>
+エクスポートされたSpineファイルはだれでも表示させることが許されています。
+このエディタの使用するためにSpineライセンスを購入する必要はありません。
 
-To edit Spine files, you need to purchase Spine-Editor and a license.
-This editor mainly uses pro-version features.<br>
-Spineファイルを編集する場合はSpine-Editorとライセンスを購入する必要があります。
-このエディタでは主にプロバージョンの機能が使用されます。
+But, some features require the Spine editor (pro version).
+please consider purchasing.<br>
+しかし、いくつかの機能はSpineエディタ(pro version)を必要とします。
+購入をご検討ください。
 
 * Spine
 
@@ -122,11 +127,6 @@ If delete a layer, Affects all animations.<br>
 # File verion compatibility
 <a name="fileversion"></a>
 
-## Animationrig file compatibility
-
-The editor or runtime can read all old version files (**backward compatible**).<br>
-基本的に、エディタやランタイムは古いバージョンのファイルをすべて読み込むことができます（**後方互換性**）。
-
 The version of the Animtionrig file and Spine-loader are displayed in the form caption.<br>
 Animtionrigファイルのバージョン、Spineローダーのバージョンはフォームキャプションに表示されます。
 
@@ -138,7 +138,12 @@ Animtionrigファイルのバージョン、Spineローダーのバージョン�
 |latest|Animationrig file version|
 |Spine|Spine file loader version|
 
-## Spine loder(runtime) compatibility
+## Animationrig file
+
+The editor and runtime can read all old version files (**backward compatible**).<br>
+基本的に、エディタやランタイムは古いバージョンのファイルをすべて読み込むことができます（**後方互換性**）。
+
+## Spine file (runtime loader)
 
 Spine-runtime-loader has not backward compatible.
 Please output the file in a near version.<br>
@@ -155,10 +160,11 @@ So the editor does not support 3.6.<br>
 MixAddを使用するには3.7以上が必要です。
 なので、エディタは3.6に対応しません。
 
-But, can be run at runtime level using 3.6.
-Please refer to the runtime readme.<br>
-が、ランタイムレベルでは3.6を使って実行が可能です。
-ランタイムのreadmeを参照ください。
+The runtime source code will need to be modified,
+If you omit the function, it will work in 3.6.<br>
+ランタイムのソースコードに修正が必要になりますが、
+いくつかの機能をオミットすれば3.6でも動きます。
+
 
 # Preview area
 <a name="previewform"></a>
@@ -580,6 +586,13 @@ Use lowercase , Space is not allowed.<br>
 指定できるプロパティは以下の通りです。
 小文字で表記、スペースなどは入れないでください。
 
+![physics_settingform](images/physics_settingform.gif)
+
+Double click (or right click menu) on the setting text to open the configuration form.
+Use it if you need advanced settings.<br>
+テキストの個所をダブルクリック（または右クリックメニュー）すると設定フォームが開きます。
+複雑な設定が必要な場合は使ってください。
+
 The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
 物理計算フレームレートは100fps(dt=0.01)固定です。
 
@@ -592,7 +605,8 @@ The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
 |damping (def:10)|Velocity damping value.<br>速度減衰値。|
 |mass (def:1.0)|Mass, weight. Larger , move slowly.<br>質量、重さ。大きいほどゆっくり動きます。|
 |**control**||
-|force (def:1.0)|Sets the strength of the force. Zero : disable. Minus : invert.<br>加わる力の強さを設定します。０で無効、マイナスで反転。|
+|alpha (def:1.0)|Physics blend ratio. Allow negative values.<br>物理計算の合成率。マイナスを許容します。|
+|force (def:1.0)|Sets the strength of the force. Zero : disable. Negative : invert.<br>加わる力の強さを設定します。０で無効、マイナスで反転。|
 |**gravity**||
 |gravity (def:0.0)|Unsupported. Gravity power. I think ,not used it often.<br>現在未対応。重力。バネではあまり使わないと思います。|
 |gravityvector (def:0,-1,0)|Unsupported. Gravity direction.<br>現在未対応。重力方向。<br>example : aaa.gravityvector=0,-1,0|
@@ -616,27 +630,26 @@ Each mode has the characteristics of returning to original shape.<br>
 * bone
 
 The length is a fixed. Affects bone angle(rotate).
-Used for accessory and ahoge-hair(anime hair).<br>
+The most basic and most versatile spring.<br>
 長さが固定のバネで、ボーンの角度に影響を与えます。
-アクセサリやアホ毛に最適です。
+最も基本的で何にでも使えるスプリングです。
 
 * strbone
 
 This mode can stretch in bone length. 
-Not used often.<br>
+Can be used for hair and cloth.<br>
 伸び縮みする **bone** です。
-あまり出番はありません。
+髪の毛や布に使えます。
+
 
 * point
 
-The length is a fixed. Affects bone position.
-Used for hair and cloth.<br>
-長さが固定のバネで、ボーンの位置に影響を与えます。
-髪の毛や布に最適です。
+The length is a fixed. Affects bone position only.<br>
+長さが固定のバネで、ボーンの位置のみ影響を与えます。
 
 * strpoint
 
-Basic spring. Swiiiiing! Affects bone position.
+Swiiiiing spring. Affects bone position only.
 Used for breast and body sagging.<br>
 基本的な伸び縮みするビヨンビヨンするバネです。
 ボーンの位置に影響を与えます。胸や体のたるみに最適です。
@@ -746,8 +759,8 @@ This work becomes unnecessary. Yeah---!<br>
 これにより、はみ出たKeyをぶつ切りにして、ループ範囲に合わせて整える、という作業をする必要がなくなります。いえーーー。
 
 ```
-loopbegin : 60
-loopend : 150
+loopbegin : 2.0 (60frame)
+loopend : 5.0 (150frame)
 play loop
 ```
 ![ParentBone](images/customloop02.gif)
@@ -827,7 +840,7 @@ Editor support status.<br>
 |---|---|
 |blend|yes|
 |tintcolor|no (diffuse * modulatecolor + tintcolor)|
-|mask| no|
+|clipping|yes|
 
 ### property
 
@@ -950,7 +963,7 @@ If you set multi-layers, values ​​will be composite from top to bottom.<br>
 Composite animations with using 4(or 1,2) tracks on spine.<br>
 **spine** の4(または1,2)トラックを使用して、アニメーションを合成します。
 
-If 2 tracks, animation is inverted when BlendAlpha is minus.<br>
+If 2 tracks, animation is inverted when BlendAlpha is negative value.<br>
 2トラックの場合はBlendAlphaがマイナス値でアニメーションが反転します。
 
 ## Animation name format (spine side)
@@ -1153,8 +1166,8 @@ Create a SpineBoy action.<br>
 それでは実際に作ってみましょう。
 Spineに付属するサンプル、SpineBoyを使ってアクションさせてみましょう。
 
-The data is in `Animationrig/testdata/boy/`.<br>
-データは `Animationrig/testdata/boy/` にあります。
+The data is in `editor/sample_data/boy/`.<br>
+データは `editor/sample_data/boy/` にあります。
 
 Spine data license below.<br>
 spineファイルの使用ライセンスを一応載せておきますね。
@@ -1478,9 +1491,9 @@ jump
 ## Setup spine
 
 As a sample, Use Spine's official sample "owl".
-The data is in `Animationrig/testdata/owl/`.<br>
+The data is in `editor/sample_data/owl/`.<br>
 サンプルとして、Spine公式のown（フクロウ）さんを使います。
-データは `Animationrig/testdata/owl/` にあります。
+データは `editor/sample_data/owl/` にあります。
 
 Create a working directory and export it.<br>
 作業ディレクトリを用意して、SpineでExportしてください。
@@ -1509,7 +1522,7 @@ owl（フクロウ）のアニメーションはこのようになっていま�
 
 ![how to image](images/howto_base_base01.png)
 
-It consists of three parts: blink, idle and dir (face direction).<br>
+It consists of three animations: blink, idle and dir (face direction).<br>
 blink（瞬き）、idle（呼吸）、dir（顔の向き）の３つで構成されます。
 
 Let's combine three animations by adding layers.<br>
@@ -1723,3 +1736,159 @@ Press the **export** button to get started.<br>
 
 Was it output?<br>
 出力されましたか？
+
+# How to physics
+<a name="howto_physics"></a>
+
+Let's use **physics** simulation.<br>
+物理計算を使ってみましょう。
+
+Physics simulate real motion, but they also help make animations.
+You can easily make the swing motion that is difficult to do manually.<br>
+物理計算はリアルをシミュレートするものですが、アニメーションの作成を手助けするものでもあります。
+手付けでは難しい揺れる動きが簡単に作れます。
+
+## Settings on Spine
+
+As a sample, Use Spine's official sample "raptor".
+The data is in `editor/sample_data/raptor/`.
+Let's replace the tail with physics motion.<br>
+サンプルとして、Spine公式の raptor さんを使います。
+データは `editor/sample_data/raptor/` にあります。
+尻尾の部分を物理計算に置き換えてみましょう。
+
+Load it with Spine and check the animation.<br>
+Spineで読み込んでアニメーションを確認します。
+
+![how to image](images/howto_physics_raptor01.gif)
+
+In this file, the animation of the tail part has been deleted.<br>
+このファイルは尻尾の部分のアニメーションが削除されています。
+
+![how to image](images/howto_physics_bonename01.png)
+
+Also, the tail bone name has been changed to `tail2@spring`.
+Add `@spring` to the end of the name to enable physics.
+In this case, physics is applied from `tail2` to` tail10`.<br>
+また、尻尾のボーンの名前が `tail2@spring` に変更されています。
+`@spring`を名前の後ろに追加すると物理計算が有効になります。
+このケースでは `tail2` から `tail10` まで物理計算が適用されます。
+
+## Settings on Animationrig
+
+Let's load it with SpineAnimationrig.<br>
+では、SpineAnimationrigで読み込んでみましょう。
+
+![how to image](images/howto_physics_preview01.png)
+
+The physics bone part is displayed in pink.<br>
+物理計算の部分がピンク色で表示されます。
+
+Let's play the `walk` animation.<br>
+キーを追加して、`walk`アニメーションを再生してみましょう。
+
+![how to image](images/howto_physics_preview02.gif)
+
+Oops! It looks like a snake and is creepy...<br>
+うわ！気持ち悪い！ヘビみたいですね。
+
+Then, set the physics settings. Adjust settings by writing text.<br>
+では、物理計算の設定を行います。設定はテキストを書いて調整します。
+
+Select **object** in the right side panel , and open **settings**.<br>
+右のサイドパネルの **object** を選んで、**settings** を開いてください。
+
+![how to image](images/howto_physics_settings01.png)
+
+Press the **Refresh setting text** button below to add the current settings.<br>
+下の **Refresh setting text** ボタンを押すと現在の設定が追加されます。
+
+```
+tail2.mode=bone
+tail2.k=100.00
+tail2.damping=10.00
+tail2.mass=1.00
+tail2.alpha=1.0
+```
+
+Settings format is `{bone}. {property}`.
+These are the default setting. 
+This values are used if settings text is nothing.<br>
+`{bone}.{property}` という書式になっています。
+上記がデフォルト設定であり、なにも書かれていない場合はこの値が使用されます。
+
+See <a href="#physics">physics</a> for details. see later.<br>
+詳しくは <a href="#physics">physics</a> で説明していますが、後で見てください。
+
+Double click on the setting text to open the configuration form.
+Use it if you need advanced settings.<br>
+テキストの個所をダブルクリックすると設定フォームが開きます。
+複雑な設定が必要な場合は使ってください。
+
+![how to image](images/physics_settingform.gif)
+
+|property||
+|---|---|
+|mode|Spring model.|
+|k|Spring power. Swing.<br>バネ係数。揺れ。|
+|damping|Force decay.<br>力の減衰率。|
+|mass|Mass of object.<br>物体の質量。|
+|alpha|Physics blend ratio.<br>物理計算のブレンド率。|
+
+Please set with feeling. I'm not sure too!<br>
+となっています。が、適当に設定してください。私も良くわかりません！
+
+Adjust with `k` and `damping`,
+Increase or decrease the `mass` value if you do not get a good motion.<br>
+`k` と `damping` で調整して、良い動きにならなかったら `mass` を増減させてください。
+
+```
+tail2.mode=bone
+tail2.k=200.00
+tail2.damping=10.00
+tail2.mass=0.4
+tail2.alpha=1.0
+```
+
+Change to this settings.<br>
+この設定に変更します。
+
+![how to image](images/howto_physics_preview03.gif)
+
+It feels nice.<br>
+良い感じですね。
+
+<video width="auto" height="400" controls loop>
+<source src="images/howto_physics_raptor02.mp4" type="video/mp4">
+</video>
+
+Let the raptor do the sequence animations.
+It moves like this.<br>
+一連の動きをさせるとこのように動きます。
+
+There is also a negative effect due to physics.
+The scene of the `roar` animation has become subtle difference.
+So I made a supplementary animation of the tail and combined it with physics.
+That is why the tail and the pink bone are different.<br>
+物理計算故の弊害もあります。
+`吠える` アニメーションのシーンが微妙になってしまいました。
+そこで、尻尾の部分の補足アニメーション作って、物理計算と組み合わせました。
+尻尾とピンクのボーンが異なるのはそのためです。
+
+Finally, Make overall adjustments.<br>
+最後に、全体の動きを調整しましょう。
+
+Maybe the effect of physics is too great.
+In this case, adjust the blend ratio `alpha` of the physics.<br>
+ちょっと物理計算の影響が大きすぎるかも。
+この場合は物理計算の合成率 `alpha` を調整しましょう。
+
+```
+tail2.alpha=0.6
+```
+<video width="auto" height="300" controls loop>
+<source src="images/howto_physics_blend01.mp4" type="video/mp4">
+</video>
+
+Just feeling good.<br>
+こんなもんでしょうか。

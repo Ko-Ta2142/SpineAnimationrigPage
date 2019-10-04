@@ -13,11 +13,10 @@
 <meta property="og:url" content="https://sameasm.net/spineanimationrig/">
 <meta property="og:image" content="https://sameasm.net/spineanimationrig/thumbnail.jpg">
 <meta name="thumbnail" content="https://sameasm.net/spineanimationrig/thumbnail.jpg">
--->
+--->
 <meta property="og:url" content="https://ko-ta2142.github.io/SpineAnimationrigPage/">
 <meta property="og:image" content="https://ko-ta2142.github.io/SpineAnimationrigPage/thumbnail.jpg">
 <meta name="thumbnail" content="https://ko-ta2142.github.io/SpineAnimationrigPage/thumbnail.jpg">
-
 <!-- mobile tag -->
 <meta name="viewport" content="width=800">
 <!-- favicon -->
@@ -34,10 +33,10 @@
 <body style="background-color: #9cb800">    
 <div class="container-fluid">
     <section id="top" class="row">
-        <div class="col-lg-5 block" style="background-color: #4D4D4D">
+        <div class="col-lg-6 block" style="background-color: #4D4D4D">
             <video src="images/topimage.mp4" loop muted controls style="width:100%; height:auto"></video>
         </div>
-        <div class="col-lg-7 block" style="background-color: #00838f">
+        <div class="col-lg-6 block" style="background-color: #00838f">
             <div style="width:100%; height:100%; display: flex; justify-content: center; align-items: center;">
                 <div style="text-align:center; padding:20px">
                     <img src="images/SpineAnimationrig.png" alt="SpineAnimationrig"><br>
@@ -53,11 +52,13 @@
             <div class="maintext">
                 SpineAnimationrig is a tool for controlling <sapn class = "strong">Spine</sapn>.
                 Provides advanced operations using <sapn class = "strong">Spine-runtime</sapn> functions.
-                Runtime operation requires a program, but it is not necessary with this tool.
-                <br>
-                SpineAnimationrigは<sapn class="strong">Spine</sapn>を制御するためのツールです。
-                エディタより先にあたる<sapn class="strong">Spineランタイム</sapn>の機能を使った高度な操作が可能です。
-                本来ランタイム操作はプログラムが必要になりますが、このツールを使えば不要です。
+                Runtime control requires program knowledge,
+                If you use this tool, you can control it with <sapn class = "strong">GUI</sapn>.
+            </div><br>
+            <div class="maintext">
+                SpineAnimationrigはSpineを制御するためのツールです。
+                エディタより先にあたるSpineランタイムの機能を使った高度な操作を行います。
+                ランタイムの操作にはプログラム知識が必要とされますが、このツールを使えばGUI上で操作できます
             </div><br>
             <div class="maintext">
                 This tool is <sapn class = "strong">free software</sapn>. Free to use forever.
@@ -75,11 +76,11 @@
             <h1 class="featureheadder">Multi track animations</h1>
             <img style="width:100%" src="images/feature_multitrack.png" alt="multi track">
             <div class="maintext">
-                An important feature at runtime is the <sapn class = "strong">multi track animation</sapn>.
-                Do you want to use the <sapn class = "strong">timeline</sapn> to switch animations or combine them at the same time?
+                You can control <span class="strong">multi-track animations</span> on the <sapn class = "strong">timeline</sapn>.
+                Don't you think you want to switch and combine animations?
                 <br>
-                ランタイムで重要な機能がマルチトラックアニメーションです。
-                タイムラインを使ってタイミングを合わせてアニメーションを切り替えたり、合成したりしたいですよね？
+                マルチトラックアニメーションをタイムラインでコントロールできます。
+                タイミングを合わせてアニメーションを切り替えたり、合成したりしたいですよね？
             </div>
         </div>
         <div class="col-lg-6 featureblock">
@@ -208,15 +209,14 @@
     <section class="row sentenceblock" style="background-color: #ADBC57;">
         <div class="col-12 block" style="text-align: center">
             <h1 class="inout inout-box">Release notes</h1>
-            
             <div class="maintext" style="padding: 20px">
-                <img src="releasenote/physics_animationblend.gif" style="width:30%" alt="physics blend">
+                <video src="releasenote/physics_raptor02.mp4" loop muted controls style="width:40%; height:auto"></video>
                 <br>
-                2019/09/28<br>
-                You can combine  animations and physics. <br>
-                Physics values are added to the designed animation.<br>
-                物理計算にアニメーションを合成できるようになりました。<br>
-                デザインされたアニメーションに物理計算の値が加算されます。
+                2019/10/04<br>
+                Support blend animation and physics, physics blend ratio. <br>
+                Please refer <a href="readme/readme.html#howto_physics">readme - how to physics</a> for details.<br>
+                物理計算とアニメーションの合成、物理計算合成率をサポートしました。<br>
+                詳しくは readme - howto physics をご覧ください。
             </div>
             
             <div class="maintext" style="padding: 20px">
@@ -230,7 +230,7 @@
                 <img src="releasenote/parentbone01.png" style="width:30%" alt="parent bone">
                 <br>
                 2019/09/11<br>
-                You can give Power (wind)  to physics.<br>
+                Support give power (wind) to physics.<br>
                 and you can link the object position to the parent object bone.<br>
                 物理計算に力（風）を与えられるようになりました。<br>
                 オブジェクト位置を親オブジェクトのボーンにリンク出来るようになりました。
@@ -243,13 +243,13 @@
             <h1 class="inout inout-box">Download</h1>
             <div class="maintext" style="padding: 20px;">
                 FreeSoftware<br>
-                Version : 0.6 , rev 412 , latest 35<br>
+                Version : 0.6 , rev 417 , latest 35<br>
                 Editor-platform : windows<br>
                 Runtime-language : c++ , c-sharp , UnityComponent<br>
                 Spine file version : 3.7 , 3.8.71
             </div>
             <div>
-                <a href="https://sameasm.net/spineanimationrig/binary/animationrig412_35.7z">
+                <a href="https://sameasm.net/spineanimationrig/binary/animationrig417_35.7z">
                     <img class="linkhover" src="images/DownloadButton.png" alt="download">
                 </a>
             </div>
@@ -260,6 +260,7 @@
             </div>
             <div class="maintext">
                 old files<br>
+                <a href="https://sameasm.net/spineanimationrig/binary/animationrig412_35.7z" style="color: #002C60">rev400 latest32 spine3.8.71</a><br>
                 <a href="https://sameasm.net/spineanimationrig/binary/animationrig400_32.7z" style="color: #002C60">rev400 latest32 spine3.8.71</a><br>
                 <a href="https://sameasm.net/spineanimationrig/binary/animationrig395_32.7z" style="color: #002C60">rev395 latest32 spine3.8.71</a><br>
                 <a href="https://sameasm.net/spineanimationrig/binary/animationrig389_30.7z" style="color: #002C60">rev389 latest30 spine3.8.32</a><br>
