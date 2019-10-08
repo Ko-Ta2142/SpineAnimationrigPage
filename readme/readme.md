@@ -1367,7 +1367,7 @@ Did he jump?<br>
 
 ## Multi track animation blending
 
-The main feature of Spine! A **multi-animation composition** function.<br>
+The main feature of Spine! A **multi-animation blend** function.<br>
 Spineの目玉商品！ 複数アニメーションの合成 機能です。
 
 Add the set up a gun animation to this.<br>
