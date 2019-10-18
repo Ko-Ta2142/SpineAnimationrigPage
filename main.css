@@ -60,6 +60,19 @@ body {
     font-weight: bold;
 }
 
+.sampleframe{
+    display : inline-block;
+    overflow: hidden;
+    width : 300px;
+    height : auto;
+    background: #eeeeee;
+    border-radius: 16px;
+    border-style: solid;
+    border-color: #224940;
+}
+.sample img{
+      
+}
 a.linkhover{
     display: inline-block;
     background-color: rgba(0,0,0,0.00);

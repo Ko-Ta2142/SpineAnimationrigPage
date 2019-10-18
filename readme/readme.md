@@ -66,6 +66,7 @@ Please access the following :)<br>
     * [Common object](#commonobject)
     * [Null object](#nullobject)
     * [Spine object](#spineobject)
+    * [Camera object](#cameraobject)
 * Layer , key
     * [PreviousKey](#previouskey)
     * [Common layer](#commonlayer)
@@ -300,7 +301,7 @@ Key項目を参照ください。
 This application also supports animation track blending.
 You can check and preview in **AnimationTest mode**.<br>
 このツールにもアニメーションを重ねる機能があります。
-重ねた際の動きをプレビューしたい場合はモードを **AnimationTest** に切り替えます。
+重ねた際の動きをプレビューしたい場合はモードを AnimationTest に切り替えます。
 
 ## Shortcut
 
@@ -350,7 +351,7 @@ The following settings are required to output.<br>
 |---|---|
 |Framerate|Output rendering framerate.|
 |Start frame , End frame|Time area.|
-|BGColor|Background color. Used only on `RGB` format.|
+|BGColor|Background color. Used only on **RGB** format.|
 |Preset rendering|Output for each preset. Set a target object to apply Preset.<br>プリセットごとに動画を出力します。プリセットを適用するオブジェクトを設定してください。|
 
 ![export image](images/exportimages03.png)
@@ -358,7 +359,7 @@ The following settings are required to output.<br>
 |property||
 |---|---|
 |Format|Output image format.<br>RGB : color<br>ARGB : color + alpha<br> A : alpha grayscale|
-|Bleed,PreMultiplyAlpha|Color blend calculation. Used only on `ARGB` format.|
+|Bleed,PreMultiplyAlpha|Color blend calculation. Used only on **ARGB** format.|
 |Base filename|Sets the output file name format. File-exe is unnecessary.<br>出力ファイル名のフォーマットを設定します。拡張子は不要です。|
 |Output directory|Set by relative or absolute output directory path.<br>出力パスを相対、または絶対パスで指定します。|
 
@@ -442,16 +443,16 @@ Please select a value from the **right click menu**.<br>
 ![preset](images/preset01.gif)
 
 You can store(save) the state of values.
-It is saved as `*.animrig.preset.txt` in the same location as the file.<br>
+It is saved as `.animrig.preset.txt` in the same location as the file.<br>
 値の状態を記憶しておくことが出来ます。
-この情報はファイルと同じ場所に ***.animrig.preset.txt** で保存されます。
+この情報はファイルと同じ場所に `.animrig.preset.txt` で保存されます。
 
 ## Export to clipboard
 
 Export the state of all values to clipboard.
 You can edit the output text format with **export menu**.<br>
 値の情報をクリップボードにコピーします。
-出力テキストのフォーマットは **export メニュー** より設定が可能です。
+出力テキストのフォーマットは export メニューより設定が可能です。
 
 |replace word||
 |---|---|
@@ -564,12 +565,12 @@ For example, ears.<br>
 Physical settings are edited on the Animationrig editor.
 Edit with **setting field**.<br>
 物理計算の設定はAnimationrigエディタ上で行います。
-オブジェクトの **setting field** で編集します。
+オブジェクトの setting field で編集します。
 
 At first there is nothing(use default setting).
 Please push the **Refresh setting text** button.
 The settings are written to text area.<br>
-最初はなにも無い状態（デフォルト設定が適用）なので **Refresh setting text** ボタンを押してください。
+最初はなにも無い状態（デフォルト設定が適用）なので Refresh setting text ボタンを押してください。
 設定が書き込まれます。
 
 ![physics_setting](images/physics_setting01.png)
@@ -620,11 +621,20 @@ The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
 
 ![physics_springmode](images/physics_springmode01.gif)
 
-There are four types of springs : **bone,strbone,point,strpoint**.
+There are four types of springs : `bone,strbone,point,strpoint`.
 Each mode has the characteristics of returning to original shape.<br>
-バネには **bone,strbone,point,strpoint** の４種類があります。
+バネには `bone,strbone,point,strpoint` の４種類があります。
 ケースにより使い分けましょう。
 どれも元の形状に戻ろうとする性質を持ちます。
+
+
+|mode|stretch length|angle/rotation|
+|---|---|---|
+|bone|no|yes|
+|strbone|yes|yes|
+|point|no|no|
+|strpoint|yes|no|
+
 
 * bone
 
@@ -637,7 +647,7 @@ The most basic and most versatile spring.<br>
 
 This mode can stretch in bone length. 
 Can be used for hair and cloth.<br>
-伸び縮みする **bone** です。
+伸び縮みする bone です。
 髪の毛や布に使えます。
 
 
@@ -693,7 +703,7 @@ This technique is very useful for hair.<br>
 
 Spine's **empty-animation**(SetEmptyAnimation) is a function that restores the default pose (setup).
 However, be careful when using it because it behaves a bit specially.<br>
-はSpineの **empty-animation**(SetEmptyAnimation) はデフォルトポーズ(setup)に戻す機能です。
+Spineの empty-animation(SetEmptyAnimation) はデフォルトポーズ(setup)に戻す機能です。
 が、少し特殊な動きをするので、使用には注意を払ってください。
 
 ## Remove animation
@@ -704,13 +714,13 @@ Fade to default pose at trasition time.<br>
 遷移時間でデフォルトポーズにフェードします。
 
 **track** is then initialized to `null`.<br>
-その後、**track** は `null` に初期化されます。
+その後、track は `null` に初期化されます。
 
 ## Entry animation on null track
 
 Spine will not fade animation if **track** is `null`.
 This behavior may cause the animation to be skipped.<br>
-Spineは **track** が `null` の場合、アニメーションがフェードしません。
+Spineは track が `null` の場合、アニメーションがフェードしません。
 この挙動はしばしばアニメーションが飛ぶような挙動を生み出します。
 
 ## Best practice
@@ -780,9 +790,8 @@ You can inherit the transformation(move,rotate,scale) of the parent.<br>
 Set the parent object with **Group(Parent)** in the Object panel.
 For Spine objects, you can set bones.
 In that case, the bone transformation is also inherited.<br>
-オブジェクトパネルの **Group(Parent)** で親オブジェクトを設定してください
-Spineオブジェクトの場合は、ボーンを設定することも出来ます。
-その場合は、ボーンの変形も継承します。
+オブジェクトパネルの Group(Parent) で親オブジェクトを設定してください
+Spineオブジェクトの場合は、対象ボーンも設定することも出来ます。
 
 
 # Object type
@@ -797,6 +806,7 @@ Shared property of all Objects.<br>
 |---|---|
 |**common**||
 |name|Object name. Allow duplicate names.|
+|alias name|Alias. Used for some physics target.<br>エイリアス名。物理計算対象などで使用します。|
 |enable|Update & show object.|
 |visible|Show object.|
 |offset|Offset position.|
@@ -822,13 +832,15 @@ You can display the temporary image.<br>
 # Spine Object
 <a name="spineobject"></a>
 
+![spine image](images/spineobject01.png)
+
 This object controls the **spine** file.<br>
-**spine**をコントロールするためのオブジェクトです。
+spine をコントロールするためのオブジェクトです。
 
 Spine file-path is recorded with relative path.
 Please be careful not to include personal information such as desktop pass.<br>
 spineファイルは相対パスで記録されます。
-**パスに個人情報が入らないようにご注意ください。**
+パスに**個人情報**が入らないようにご注意ください。
 
 ### preview support function
 
@@ -850,6 +862,38 @@ Editor support status.<br>
 |PreMultiplyAlpha|Change the blending method to PreMultiplyAlpha.<br>ブレンドをPreMultiplyAlpha方式に切り替えます。|
 |Default skin (def:default)|Set starting skin name. <br>開始時のスキン名を指定します。|
 
+# Camera object
+<a name="cameraobject"></a>
+
+![camera image](images/cameraobject01.jpg)
+
+Move viewpoint.<br>
+視点移動を行います。
+
+Strictly, this is not a camera. Give the root(all objects) to inverted deformation.<br>
+正確にはカメラではありません。ルート（全てのオブジェクトに）に逆変形を加えるものです。
+
+The difference from the transform layer is that No physics force occur with the movement.<br>
+transform layer と異なる点は、移動に伴い物理計算が発生しません。
+
+## move , zoom , rotate
+
+Control move(offset), zoom, and rotate with **Transform layer**.
+The field of view moves in the reverse direction.<br>
+Transform layer で移動(offset)、伸縮、回転を制御します。
+カメラなので視界は逆方向に動きます。
+
+## Camera rotate offset
+
+**Rotate offset** is the camera rotation center position setting.
+The default setting is `0,0,0`, which rotates at the origin.
+Set it to `0,0,-1000` to rotate like the viewpoint.
+However, 3D editing is not assumed and should only be used for tilting.<br>
+Rotate offset はカメラの回転中心位置の設定です。
+初期設定は `0,0,0` で原点で回転します。
+視点のように回転させる場合は `0,0,-1000` と設定してください。
+ただし、3D編集は想定されていませんので、傾ける程度の使用に留めてください。
+
 # Layer type , key property
 <a name="layertype"></a>
 
@@ -861,7 +905,7 @@ Editor support status.<br>
 Layer has normal-key and **PreviousKey**.
 PreviousKey Holds the previous (changed)animation values. 
 This key is used to control transition of animation switching.<br>
-Layerには通常Keyと **PreviousKey** が存在します。
+Layerには通常の Key と PreviousKey が存在します。
 PreviousKeyは変更前のアニメーションの状態を保持します。
 このKeyはアニメーション切り替えの遷移を制御する時に使用します。
 
@@ -960,7 +1004,7 @@ If you set multi-layers, values ​​will be composite from top to bottom.<br>
 ![image](images/animblend01.gif)
 
 Composite animations with using 4(or 1,2) tracks on spine.<br>
-**spine** の4(または1,2)トラックを使用して、アニメーションを合成します。
+spine の4(または1,2)トラックを使用して、アニメーションを合成します。
 
 If 2 tracks, animation is inverted when BlendAlpha is negative value.<br>
 2トラックの場合はBlendAlphaがマイナス値でアニメーションが反転します。
@@ -1048,8 +1092,8 @@ Please refer to <a href="#customloop">CustomLoop</a>.<br>
 
 ![image](images/seekblend01.gif)
 
-Composite **time-stretched** animations with using 4(or 1) tracks on spine.<br>
-再生時間をコントロール（タイムストレッチ）されたアニメーションを合成します。
+Composite **time-stretched,remap** animations with using 4(or 1) tracks on spine.<br>
+再生時間をコントロール（タイムストレッチ、リマップ）されたアニメーションを合成します。
 
 
 When used 4 animation, Composed with alpha 1.0.
@@ -1067,7 +1111,7 @@ Please refer to [animations blend layer](#animblend4layer).<br>
 Set playback-time. 
 if enabled **loop** in animation properties, Will loop-play over terminate(animation end) time.<br>
 合成値の代わりに再生時間を設定します。
-アニメーションに **loop** が設定されている場合は、終端時間以上でループするようになります。
+アニメーションに loop が設定されている場合は、終端時間以上でループするようになります。
 
 # Event layer
 <a name="eventlayer"></a>
@@ -1079,9 +1123,9 @@ Execute the event on the application side.<br>
 
 ## ID
 
-event name. In the case of **none**, it passes.<br>
+event name. In the case of `none`, it passes.<br>
 イベント名。自由な名前を設定出来ます。
-**none**の場合は無視されます。
+`none` の場合は無視されます。
 
 ## allow
 
@@ -1125,7 +1169,7 @@ If enable is false, object update will not be called. But The timeline advances.
 enableをfalseにすると、objectのupdateを呼ばなくなります。が、タイムラインは進みます。
 
 # Physics force layer
-<a name="@hysicsforcelayer"></a>
+<a name="physicsforcelayer"></a>
 
 ![physics force](images/physicsforce01.gif)
 
@@ -1154,7 +1198,6 @@ Give wiggle to force.<br>
 |---|---|
 |ratio|Ratio of wiggle to give to DirectionVector.<br>DirectionVectorに与えるwiggleの比率。|
 |cycle|Rundom cycle. per 1sec.<br>1秒間の乱数サイクル。|
-
 
 
 # How to basic
@@ -1187,15 +1230,15 @@ for derivative work.
 To load Spine file with this tool, you must first output in **json, atlas** format.
 Start Spine application and load `boy.spine`.
 Select **export (ctrl + E)** from the menu.<br>
-このツールでSpineを読み込むには、まず **json,atlas** 形式で出力する必要があります。
-Spineを起動して `boy.spine` を読み込みましょう。メニューから **export (ctrl + E)** を選択します。
+このツールでSpineを読み込むには、まず json,atlas 形式で出力する必要があります。
+Spineを起動して `boy.spine` を読み込みましょう。メニューから export (ctrl + E) を選択します。
 
 ![how to image](images/howto_basic_export01.png)
 
-Can be load Binary format, but `json` is recommended for compatibility.
-Enable `TextureAtlas` and configure `Pack Settings`.<br>
-Binaryも読み込めますが互換性等で `json` をお勧めします。
-`TextureAtlas` も有効にして、`Pack Settings` の設定も行いましょう。
+Can be load Binary format, but **json** is recommended for compatibility.
+Enable **TextureAtlas** and configure **Pack Settings**.<br>
+Binaryも読み込めますが互換性等で json をお勧めします。
+TextureAtlas も有効にして、PackSettings の設定も行いましょう。
 
 ![how to image](images/howto_basic_export02.png)
 
@@ -1217,7 +1260,7 @@ spineboy-pro.png
 ## Run Animationrig and save as file
 
 Start Animationrig. If the Spine version is 3.8, Please start **Animationrig38.exe**.<br>
-Animationrigを起動します。Spineのバージョンが3.8系なら、**Animationrig38.exe** を起動してください。
+Animationrigを起動します。Spineのバージョンが3.8系なら、Animationrig38.exe を起動してください。
 
 First, save file in the working directory.
 Since relative path is used for data, Copy the use files into working directory as much as possible.<br>
@@ -1239,16 +1282,16 @@ Load the Spine file.
 Use **SpineObject** to display it.
 One SpineObject is prepared in the initial state of the project.<br>
 Spineファイルを読み込みます。
-表示するには **SpineObject** を使用します。
+表示するには SpineObject を使用します。
 起動時、プロジェクトの初期状態では、SpineObjectが１つ用意されています。
 
 In the right side panel, select **Object**.<br>
-右のサイドパネルで、**Object** を選択します。
+右のサイドパネルで、Object を選択します。
 
 ![how to image](images/howto_basic_object01.png)
 
 Select the Spine file (spineboy-pro.json) from **browse** button.<br>
-**browse** ボタンからSpineファイル(spineboy-pro.json)を選んでください。
+browse ボタンからSpineファイル(spineboy-pro.json)を選んでください。
 
 ![how to image](images/howto_basic_object02.png)
 
@@ -1259,7 +1302,7 @@ Is it displayed?<br>
 
 If you modified the Spine file, select **rebuild** from the object menu.
 It will be reloaded.<br>
-もしSpineファイルを修正した場合は、オブジェクトメニューから **rebuild** を選択してください。再読込されます。
+もしSpineファイルを修正した場合は、オブジェクトメニューから rebuild を選択してください。再読込されます。
 
 ![how to image](images/howto_basic_objectrefresh.png)
 
@@ -1330,7 +1373,7 @@ Click at 1 second on the timeline, to add a key (ctrl + I).<br>
 Set `X coordinate: 500` in the Key property.
 **easing** can add weight to the movement.<br>
 Keyのプロパティで `X座標:500` に設定しましょう。
-**easing** で動きに重みをつけることができますよ。
+easing で動きに重みをつけることができますよ。
 
 ![how to image](images/howto_basic_move02.png)
 
@@ -1455,9 +1498,9 @@ Why did this happen?<br>
 
 ![how to image](images/howto_basic_dir02.png)
 
-Looking at the animation list in Spine, **@down, @up** behind the name.
+Looking at the animation list in Spine, `@down, @up` behind the name.
 You can see that it is determined by a special name.<br>
-Spineでアニメーション一覧を見ると、 **@down, @up** が名前の後ろについています。
+Spineでアニメーション一覧を見ると、 `@down, @up` が名前の後ろについています。
 特殊な名前で決められています。
 
 The above is the basic. Congratulations!<br>
@@ -1584,7 +1627,7 @@ Add and name an animation.<br>
 Select the added animation and set **Preview background animation**.
 Play the set animation in the background.
 Set `base`.<br>
-追加したアニメーションを選択して、**Preview background animation** を設定します。
+追加したアニメーションを選択して、Preview background animation を設定します。
 これは、設定されたアニメーションを背後で再生します。
 `base` を設定します。
 
@@ -1627,7 +1670,7 @@ Let's output the owl to **sequential number image**.<br>
 ## Change mode
 
 To output, switch to **Animation test mode (F5)**.<br>
-出力するには **Animation test mode(F5)** に切り替えます。
+出力するには Animation test mode(F5) に切り替えます。
 
 ![how to image](images/howto_export_testmode02.png)
 
@@ -1637,7 +1680,7 @@ In this mode, you can check the animation combination.<br>
 ## Setup
 
 Let's select **Export images (shift + ctrl + alt + E)** from the menu.<br>
-ではメニューから **Export images(shift+ctrl+alt+E)** を選んでみましょう。
+ではメニューから Export images (shift + ctrl + alt + E) を選んでみましょう。
 
 ![how to image](images/howto_export_menu01.png)
 
@@ -1648,8 +1691,8 @@ Error!!!
 You need to set the canvas size.<br>
 出力するにはキャンバスサイズを設定する必要があります。
 
-Select **global** from the side panel.<br>
-サイドパネルから **グローバル** を選択。
+Select **Global** from the side panel.<br>
+サイドパネルから Global を選択。
 
 ![how to image](images/howto_export_canvas01.png)
 
@@ -1659,7 +1702,7 @@ Pink line is canvas size. Surround the owl.<br>
 ![how to image](images/howto_export_canvas02.png)
 
 Let's select **Export images** again. Error!!!<br>
-もう一度メニューから **Export images(shift+ctrl+alt+E)** を選んでみましょう。Error!!!
+もう一度メニューから Export images (shift + ctrl + alt + E) を選んでみましょう。Error!!!
 
 ![how to image](images/howto_export_error02.png)
 
@@ -1678,7 +1721,7 @@ Let's play it and see if it animates correctly.<br>
 再生させて正しくアニメーションするか確かめましょう。
 
 Let's select **Export images** again.<br>
-もう一度メニューから **Export images** を選んでみましょう。
+もう一度メニューから Export images を選んでみましょう。
 
 ## Export settings
 
@@ -1729,7 +1772,7 @@ output : c:\hoge\sample01\output\
 ```
 
 Press the **export** button to get started.<br>
-**export** ボタンを押して開始しましょう。
+export ボタンを押して開始しましょう。
 
 ![how to image](images/howto_export_output01.png)
 
@@ -1746,6 +1789,15 @@ Physics simulate real motion, but they also help make animations.
 You can easily make the swing motion that is difficult to do manually.<br>
 物理計算はリアルをシミュレートするものですが、アニメーションの作成を手助けするものでもあります。
 手付けでは難しい揺れる動きが簡単に作れます。
+
+## Movie
+
+Please also watch this video.<br>
+動画も、併せてご覧ください。
+
+* YouTube : Spine + Physics : How to setup animations
+
+<iframe width="640" height="320" src="https://www.youtube.com/embed/wqOF3bvopPE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Settings on Spine
 
@@ -1794,13 +1846,13 @@ Oops! It looks like a snake and is creepy...<br>
 Then, set the physics settings. Adjust settings by writing text.<br>
 では、物理計算の設定を行います。設定はテキストを書いて調整します。
 
-Select **object** in the right side panel , and open **settings**.<br>
-右のサイドパネルの **object** を選んで、**settings** を開いてください。
+Select **Object** in the right side panel , and open **settings**.<br>
+右のサイドパネルの Object を選んで、Settings を開いてください。
 
 ![how to image](images/howto_physics_settings01.png)
 
 Press the **Refresh setting text** button below to add the current settings.<br>
-下の **Refresh setting text** ボタンを押すと現在の設定が追加されます。
+下の Refresh setting text ボタンを押すと現在の設定が追加されます。
 
 ```
 tail2.mode=bone
@@ -1816,8 +1868,10 @@ This values are used if settings text is nothing.<br>
 `{bone}.{property}` という書式になっています。
 上記がデフォルト設定であり、なにも書かれていない場合はこの値が使用されます。
 
-See <a href="#physics">physics</a> for details. see later.<br>
-詳しくは <a href="#physics">physics</a> で説明していますが、後で見てください。
+**physics** page for details. see later.<br>
+詳しくは physics で説明していますが、後で見てください。
+
++ <a href="#physics">How to Physics</a>
 
 Double click on the setting text to open the configuration form.
 Use it if you need advanced settings.<br>

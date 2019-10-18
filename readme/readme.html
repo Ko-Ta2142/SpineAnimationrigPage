@@ -454,6 +454,7 @@ This tool is intended to allow designers to use Spine-runtime functionality.</p>
 <li><a href="#commonobject">Common object</a></li>
 <li><a href="#nullobject">Null object</a></li>
 <li><a href="#spineobject">Spine object</a></li>
+<li><a href="#cameraobject">Camera object</a></li>
 </ul>
 </li>
 <li>Layer , key
@@ -798,7 +799,7 @@ Key項目を参照ください。</p>
 <p>This application also supports animation track blending.
 You can check and preview in <strong>AnimationTest mode</strong>.<br>
 このツールにもアニメーションを重ねる機能があります。
-重ねた際の動きをプレビューしたい場合はモードを <strong>AnimationTest</strong> に切り替えます。</p>
+重ねた際の動きをプレビューしたい場合はモードを AnimationTest に切り替えます。</p>
 <h2 id="shortcut">Shortcut</h2>
 <table>
 <thead>
@@ -868,7 +869,7 @@ It is a rough control, but a very powerful(useful) feature.<br>
 </tr>
 <tr>
 <td>BGColor</td>
-<td>Background color. Used only on <code>RGB</code> format.</td>
+<td>Background color. Used only on <strong>RGB</strong> format.</td>
 </tr>
 <tr>
 <td>Preset rendering</td>
@@ -891,7 +892,7 @@ It is a rough control, but a very powerful(useful) feature.<br>
 </tr>
 <tr>
 <td>Bleed,PreMultiplyAlpha</td>
-<td>Color blend calculation. Used only on <code>ARGB</code> format.</td>
+<td>Color blend calculation. Used only on <strong>ARGB</strong> format.</td>
 </tr>
 <tr>
 <td>Base filename</td>
@@ -975,14 +976,14 @@ Please select a value from the <strong>right click menu</strong>.<br>
 <h2 id="preset">Preset</h2>
 <p><img src="images/preset01.gif" alt="preset"></p>
 <p>You can store(save) the state of values.
-It is saved as <code>*.animrig.preset.txt</code> in the same location as the file.<br>
+It is saved as <code>.animrig.preset.txt</code> in the same location as the file.<br>
 値の状態を記憶しておくことが出来ます。
-この情報はファイルと同じ場所に *<strong>.animrig.preset.txt</strong> で保存されます。</p>
+この情報はファイルと同じ場所に <code>.animrig.preset.txt</code> で保存されます。</p>
 <h2 id="export-to-clipboard">Export to clipboard</h2>
 <p>Export the state of all values to clipboard.
 You can edit the output text format with <strong>export menu</strong>.<br>
 値の情報をクリップボードにコピーします。
-出力テキストのフォーマットは <strong>export メニュー</strong> より設定が可能です。</p>
+出力テキストのフォーマットは export メニューより設定が可能です。</p>
 <table>
 <thead>
 <tr>
@@ -1086,11 +1087,11 @@ For example, ears.<br>
 <p>Physical settings are edited on the Animationrig editor.
 Edit with <strong>setting field</strong>.<br>
 物理計算の設定はAnimationrigエディタ上で行います。
-オブジェクトの <strong>setting field</strong> で編集します。</p>
+オブジェクトの setting field で編集します。</p>
 <p>At first there is nothing(use default setting).
 Please push the <strong>Refresh setting text</strong> button.
 The settings are written to text area.<br>
-最初はなにも無い状態（デフォルト設定が適用）なので <strong>Refresh setting text</strong> ボタンを押してください。
+最初はなにも無い状態（デフォルト設定が適用）なので Refresh setting text ボタンを押してください。
 設定が書き込まれます。</p>
 <p><img src="images/physics_setting01.png" alt="physics_setting"></p>
 <pre class="hljs"><code><div>{physics group name / alias name}.{property name}=value
@@ -1188,11 +1189,42 @@ Use it if you need advanced settings.<br>
 </table>
 <h2 id="spring-mode">Spring mode</h2>
 <p><img src="images/physics_springmode01.gif" alt="physics_springmode"></p>
-<p>There are four types of springs : <strong>bone,strbone,point,strpoint</strong>.
+<p>There are four types of springs : <code>bone,strbone,point,strpoint</code>.
 Each mode has the characteristics of returning to original shape.<br>
-バネには <strong>bone,strbone,point,strpoint</strong> の４種類があります。
+バネには <code>bone,strbone,point,strpoint</code> の４種類があります。
 ケースにより使い分けましょう。
 どれも元の形状に戻ろうとする性質を持ちます。</p>
+<table>
+<thead>
+<tr>
+<th>mode</th>
+<th>stretch length</th>
+<th>angle/rotation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bone</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>strbone</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>point</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>strpoint</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li>bone</li>
 </ul>
@@ -1205,7 +1237,7 @@ The most basic and most versatile spring.<br>
 </ul>
 <p>This mode can stretch in bone length.
 Can be used for hair and cloth.<br>
-伸び縮みする <strong>bone</strong> です。
+伸び縮みする bone です。
 髪の毛や布に使えます。</p>
 <ul>
 <li>point</li>
@@ -1245,7 +1277,7 @@ It ’s a good idea to add a bone in front.<br>
 <p><img src="images/spine_empty01.png" alt="empty animation"></p>
 <p>Spine's <strong>empty-animation</strong>(SetEmptyAnimation) is a function that restores the default pose (setup).
 However, be careful when using it because it behaves a bit specially.<br>
-はSpineの <strong>empty-animation</strong>(SetEmptyAnimation) はデフォルトポーズ(setup)に戻す機能です。
+Spineの empty-animation(SetEmptyAnimation) はデフォルトポーズ(setup)に戻す機能です。
 が、少し特殊な動きをするので、使用には注意を払ってください。</p>
 <h2 id="remove-animation">Remove animation</h2>
 <p>There is no problem when erasing the animation.
@@ -1253,11 +1285,11 @@ Fade to default pose at trasition time.<br>
 アニメーションを消す場合は問題ありません。
 遷移時間でデフォルトポーズにフェードします。</p>
 <p><strong>track</strong> is then initialized to <code>null</code>.<br>
-その後、<strong>track</strong> は <code>null</code> に初期化されます。</p>
+その後、track は <code>null</code> に初期化されます。</p>
 <h2 id="entry-animation-on-null-track">Entry animation on null track</h2>
 <p>Spine will not fade animation if <strong>track</strong> is <code>null</code>.
 This behavior may cause the animation to be skipped.<br>
-Spineは <strong>track</strong> が <code>null</code> の場合、アニメーションがフェードしません。
+Spineは track が <code>null</code> の場合、アニメーションがフェードしません。
 この挙動はしばしばアニメーションが飛ぶような挙動を生み出します。</p>
 <h2 id="best-practice">Best practice</h2>
 <p><img src="images/spine_empty02.png" alt="empty animation"></p>
@@ -1307,9 +1339,8 @@ play loop
 <p>Set the parent object with <strong>Group(Parent)</strong> in the Object panel.
 For Spine objects, you can set bones.
 In that case, the bone transformation is also inherited.<br>
-オブジェクトパネルの <strong>Group(Parent)</strong> で親オブジェクトを設定してください
-Spineオブジェクトの場合は、ボーンを設定することも出来ます。
-その場合は、ボーンの変形も継承します。</p>
+オブジェクトパネルの Group(Parent) で親オブジェクトを設定してください
+Spineオブジェクトの場合は、対象ボーンも設定することも出来ます。</p>
 <h1 id="object-type">Object type</h1>
 <p><a name="objecttype"></a></p>
 <h1 id="common-object">Common Object</h1>
@@ -1331,6 +1362,10 @@ Shared property of all Objects.<br>
 <tr>
 <td>name</td>
 <td>Object name. Allow duplicate names.</td>
+</tr>
+<tr>
+<td>alias name</td>
+<td>Alias. Used for some physics target.<br>エイリアス名。物理計算対象などで使用します。</td>
 </tr>
 <tr>
 <td>enable</td>
@@ -1377,12 +1412,13 @@ Not displayed by default.<br>
 仮画像を表示することが出来ます。</p>
 <h1 id="spine-object">Spine Object</h1>
 <p><a name="spineobject"></a></p>
+<p><img src="images/spineobject01.png" alt="spine image"></p>
 <p>This object controls the <strong>spine</strong> file.<br>
-<strong>spine</strong>をコントロールするためのオブジェクトです。</p>
+spine をコントロールするためのオブジェクトです。</p>
 <p>Spine file-path is recorded with relative path.
 Please be careful not to include personal information such as desktop pass.<br>
 spineファイルは相対パスで記録されます。
-<strong>パスに個人情報が入らないようにご注意ください。</strong></p>
+パスに<strong>個人情報</strong>が入らないようにご注意ください。</p>
 <h3 id="preview-support-function">preview support function</h3>
 <p>Editor support status.<br>
 エディタ上での表示対応状況です。</p>
@@ -1435,6 +1471,29 @@ spineファイルは相対パスで記録されます。
 </tr>
 </tbody>
 </table>
+<h1 id="camera-object">Camera object</h1>
+<p><a name="cameraobject"></a></p>
+<p><img src="images/cameraobject01.jpg" alt="camera image"></p>
+<p>Move viewpoint.<br>
+視点移動を行います。</p>
+<p>Strictly, this is not a camera. Give the root(all objects) to inverted deformation.<br>
+正確にはカメラではありません。ルート（全てのオブジェクトに）に逆変形を加えるものです。</p>
+<p>The difference from the transform layer is that No physics force occur with the movement.<br>
+transform layer と異なる点は、移動に伴い物理計算が発生しません。</p>
+<h2 id="move-zoom-rotate">move , zoom , rotate</h2>
+<p>Control move(offset), zoom, and rotate with <strong>Transform layer</strong>.
+The field of view moves in the reverse direction.<br>
+Transform layer で移動(offset)、伸縮、回転を制御します。
+カメラなので視界は逆方向に動きます。</p>
+<h2 id="camera-rotate-offset">Camera rotate offset</h2>
+<p><strong>Rotate offset</strong> is the camera rotation center position setting.
+The default setting is <code>0,0,0</code>, which rotates at the origin.
+Set it to <code>0,0,-1000</code> to rotate like the viewpoint.
+However, 3D editing is not assumed and should only be used for tilting.<br>
+Rotate offset はカメラの回転中心位置の設定です。
+初期設定は <code>0,0,0</code> で原点で回転します。
+視点のように回転させる場合は <code>0,0,-1000</code> と設定してください。
+ただし、3D編集は想定されていませんので、傾ける程度の使用に留めてください。</p>
 <h1 id="layer-type-key-property">Layer type , key property</h1>
 <p><a name="layertype"></a></p>
 <h1 id="previouskey">PreviousKey</h1>
@@ -1443,7 +1502,7 @@ spineファイルは相対パスで記録されます。
 <p>Layer has normal-key and <strong>PreviousKey</strong>.
 PreviousKey Holds the previous (changed)animation values.
 This key is used to control transition of animation switching.<br>
-Layerには通常Keyと <strong>PreviousKey</strong> が存在します。
+Layerには通常の Key と PreviousKey が存在します。
 PreviousKeyは変更前のアニメーションの状態を保持します。
 このKeyはアニメーション切り替えの遷移を制御する時に使用します。</p>
 <p>PreviousKey is displayed in blue color。You can not edit the value or time.
@@ -1515,7 +1574,7 @@ out = track0.AlphaX * 0.0 + track1.AlphaX * 1.0
 <p><a name="animblend4layer"></a></p>
 <p><img src="images/animblend01.gif" alt="image"></p>
 <p>Composite animations with using 4(or 1,2) tracks on spine.<br>
-<strong>spine</strong> の4(または1,2)トラックを使用して、アニメーションを合成します。</p>
+spine の4(または1,2)トラックを使用して、アニメーションを合成します。</p>
 <p>If 2 tracks, animation is inverted when BlendAlpha is negative value.<br>
 2トラックの場合はBlendAlphaがマイナス値でアニメーションが反転します。</p>
 <h2 id="animation-name-format-spine-side">Animation name format (spine side)</h2>
@@ -1680,8 +1739,8 @@ Please refer to <a href="#customloop">CustomLoop</a>.<br>
 <h1 id="animation-seek-time-layer">Animation seek time layer</h1>
 <p><a name="seekblend4layer"></a></p>
 <p><img src="images/seekblend01.gif" alt="image"></p>
-<p>Composite <strong>time-stretched</strong> animations with using 4(or 1) tracks on spine.<br>
-再生時間をコントロール（タイムストレッチ）されたアニメーションを合成します。</p>
+<p>Composite <strong>time-stretched,remap</strong> animations with using 4(or 1) tracks on spine.<br>
+再生時間をコントロール（タイムストレッチ、リマップ）されたアニメーションを合成します。</p>
 <p>When used 4 animation, Composed with alpha 1.0.
 The 0 frame should be in the same pose.<br>
 アニメーションを４つ使用する場合は、alpha1.0で合成されます。
@@ -1693,16 +1752,16 @@ The 0 frame should be in the same pose.<br>
 <p>Set playback-time.
 if enabled <strong>loop</strong> in animation properties, Will loop-play over terminate(animation end) time.<br>
 合成値の代わりに再生時間を設定します。
-アニメーションに <strong>loop</strong> が設定されている場合は、終端時間以上でループするようになります。</p>
+アニメーションに loop が設定されている場合は、終端時間以上でループするようになります。</p>
 <h1 id="event-layer">Event layer</h1>
 <p><a name="eventlayer"></a></p>
 <p><img src="images/event01.gif" alt="image"></p>
 <p>Execute the event on the application side.<br>
 組み込みアプリケーションに対してイベント（コールバック）を実行します。</p>
 <h2 id="id">ID</h2>
-<p>event name. In the case of <strong>none</strong>, it passes.<br>
+<p>event name. In the case of <code>none</code>, it passes.<br>
 イベント名。自由な名前を設定出来ます。
-<strong>none</strong>の場合は無視されます。</p>
+<code>none</code> の場合は無視されます。</p>
 <h2 id="allow">allow</h2>
 <p>Execution allow from event-ID.<br>
 IDを比較、実行を許可、禁止します。</p>
@@ -1772,7 +1831,7 @@ Line return code <code>crlf(0x0D,0x0A)</code> is used.<br>
 <p>If enable is false, object update will not be called. But The timeline advances.<br>
 enableをfalseにすると、objectのupdateを呼ばなくなります。が、タイムラインは進みます。</p>
 <h1 id="physics-force-layer">Physics force layer</h1>
-<p><a name="@hysicsforcelayer"></a></p>
+<p><a name="physicsforcelayer"></a></p>
 <p><img src="images/physicsforce01.gif" alt="physics force"></p>
 <p>Give power to physics.<br>
 物理計算に力を加えます。</p>
@@ -1828,13 +1887,13 @@ for derivative work.
 <p>To load Spine file with this tool, you must first output in <strong>json, atlas</strong> format.
 Start Spine application and load <code>boy.spine</code>.
 Select <strong>export (ctrl + E)</strong> from the menu.<br>
-このツールでSpineを読み込むには、まず <strong>json,atlas</strong> 形式で出力する必要があります。
-Spineを起動して <code>boy.spine</code> を読み込みましょう。メニューから <strong>export (ctrl + E)</strong> を選択します。</p>
+このツールでSpineを読み込むには、まず json,atlas 形式で出力する必要があります。
+Spineを起動して <code>boy.spine</code> を読み込みましょう。メニューから export (ctrl + E) を選択します。</p>
 <p><img src="images/howto_basic_export01.png" alt="how to image"></p>
-<p>Can be load Binary format, but <code>json</code> is recommended for compatibility.
-Enable <code>TextureAtlas</code> and configure <code>Pack Settings</code>.<br>
-Binaryも読み込めますが互換性等で <code>json</code> をお勧めします。
-<code>TextureAtlas</code> も有効にして、<code>Pack Settings</code> の設定も行いましょう。</p>
+<p>Can be load Binary format, but <strong>json</strong> is recommended for compatibility.
+Enable <strong>TextureAtlas</strong> and configure <strong>Pack Settings</strong>.<br>
+Binaryも読み込めますが互換性等で json をお勧めします。
+TextureAtlas も有効にして、PackSettings の設定も行いましょう。</p>
 <p><img src="images/howto_basic_export02.png" alt="how to image"></p>
 <p>There are about two important points.
 Texture size setting choose <code>Power of two</code>.
@@ -1850,7 +1909,7 @@ spineboy-pro.png
 </div></code></pre>
 <h2 id="run-animationrig-and-save-as-file">Run Animationrig and save as file</h2>
 <p>Start Animationrig. If the Spine version is 3.8, Please start <strong>Animationrig38.exe</strong>.<br>
-Animationrigを起動します。Spineのバージョンが3.8系なら、<strong>Animationrig38.exe</strong> を起動してください。</p>
+Animationrigを起動します。Spineのバージョンが3.8系なら、Animationrig38.exe を起動してください。</p>
 <p>First, save file in the working directory.
 Since relative path is used for data, Copy the use files into working directory as much as possible.<br>
 まず最初に、先ほど作った作業ディレクトに保存してください。データは相対パスが使われるので、使用するファイルはできる限り作業ディレクトリ内にコピーして使いましょう。</p>
@@ -1867,20 +1926,20 @@ boy.animrig.preset.txt
 Use <strong>SpineObject</strong> to display it.
 One SpineObject is prepared in the initial state of the project.<br>
 Spineファイルを読み込みます。
-表示するには <strong>SpineObject</strong> を使用します。
+表示するには SpineObject を使用します。
 起動時、プロジェクトの初期状態では、SpineObjectが１つ用意されています。</p>
 <p>In the right side panel, select <strong>Object</strong>.<br>
-右のサイドパネルで、<strong>Object</strong> を選択します。</p>
+右のサイドパネルで、Object を選択します。</p>
 <p><img src="images/howto_basic_object01.png" alt="how to image"></p>
 <p>Select the Spine file (spineboy-pro.json) from <strong>browse</strong> button.<br>
-<strong>browse</strong> ボタンからSpineファイル(spineboy-pro.json)を選んでください。</p>
+browse ボタンからSpineファイル(spineboy-pro.json)を選んでください。</p>
 <p><img src="images/howto_basic_object02.png" alt="how to image"></p>
 <p>Is it displayed?<br>
 表示されましたか？</p>
 <p><img src="images/howto_basic_object04.png" alt="how to image"></p>
 <p>If you modified the Spine file, select <strong>rebuild</strong> from the object menu.
 It will be reloaded.<br>
-もしSpineファイルを修正した場合は、オブジェクトメニューから <strong>rebuild</strong> を選択してください。再読込されます。</p>
+もしSpineファイルを修正した場合は、オブジェクトメニューから rebuild を選択してください。再読込されます。</p>
 <p><img src="images/howto_basic_objectrefresh.png" alt="how to image"></p>
 <h2 id="play-animation">Play animation</h2>
 <p>Let's play the animation.
@@ -1932,7 +1991,7 @@ Click at 1 second on the timeline, to add a key (ctrl + I).<br>
 <p>Set <code>X coordinate: 500</code> in the Key property.
 <strong>easing</strong> can add weight to the movement.<br>
 Keyのプロパティで <code>X座標:500</code> に設定しましょう。
-<strong>easing</strong> で動きに重みをつけることができますよ。</p>
+easing で動きに重みをつけることができますよ。</p>
 <p><img src="images/howto_basic_move02.png" alt="how to image"></p>
 <p>Let's <strong>play (ctrl + Space)</strong>. Did he go forward?<br>
 再生 (ctrl + Space) してみましょう。彼は前に進みましたか？</p>
@@ -2015,9 +2074,9 @@ Why did this happen?<br>
 アニメーション名を1つしか設定してないのに上下２つのアニメーションが設定されました。
 どういうことでしょうか？</p>
 <p><img src="images/howto_basic_dir02.png" alt="how to image"></p>
-<p>Looking at the animation list in Spine, <strong>@down, @up</strong> behind the name.
+<p>Looking at the animation list in Spine, <code>@down, @up</code> behind the name.
 You can see that it is determined by a special name.<br>
-Spineでアニメーション一覧を見ると、 <strong>@down, @up</strong> が名前の後ろについています。
+Spineでアニメーション一覧を見ると、 <code>@down, @up</code> が名前の後ろについています。
 特殊な名前で決められています。</p>
 <p>The above is the basic. Congratulations!<br>
 以上が基本です。お疲れ様。</p>
@@ -2111,7 +2170,7 @@ key[0]
 <p>Select the added animation and set <strong>Preview background animation</strong>.
 Play the set animation in the background.
 Set <code>base</code>.<br>
-追加したアニメーションを選択して、<strong>Preview background animation</strong> を設定します。
+追加したアニメーションを選択して、Preview background animation を設定します。
 これは、設定されたアニメーションを背後で再生します。
 <code>base</code> を設定します。</p>
 <p><img src="images/howto_base_extra02.png" alt="how to image"></p>
@@ -2140,26 +2199,26 @@ keyのブレンド値をぐりぐり動かします。</p>
 先ほど作ったowl（フクロウ）を <strong>連番画像</strong> に出力してみましょう。</p>
 <h2 id="change-mode">Change mode</h2>
 <p>To output, switch to <strong>Animation test mode (F5)</strong>.<br>
-出力するには <strong>Animation test mode(F5)</strong> に切り替えます。</p>
+出力するには Animation test mode(F5) に切り替えます。</p>
 <p><img src="images/howto_export_testmode02.png" alt="how to image"></p>
 <p>In this mode, you can check the animation combination.<br>
 このモードは作ったアニメーションを組み合わせて、動作を確認するモードです。</p>
 <h2 id="setup">Setup</h2>
 <p>Let's select <strong>Export images (shift + ctrl + alt + E)</strong> from the menu.<br>
-ではメニューから <strong>Export images(shift+ctrl+alt+E)</strong> を選んでみましょう。</p>
+ではメニューから Export images (shift + ctrl + alt + E) を選んでみましょう。</p>
 <p><img src="images/howto_export_menu01.png" alt="how to image"></p>
 <p>Error!!!</p>
 <p><img src="images/howto_export_error01.png" alt="how to image"></p>
 <p>You need to set the canvas size.<br>
 出力するにはキャンバスサイズを設定する必要があります。</p>
-<p>Select <strong>global</strong> from the side panel.<br>
-サイドパネルから <strong>グローバル</strong> を選択。</p>
+<p>Select <strong>Global</strong> from the side panel.<br>
+サイドパネルから Global を選択。</p>
 <p><img src="images/howto_export_canvas01.png" alt="how to image"></p>
 <p>Pink line is canvas size. Surround the owl.<br>
 ピンクの線がキャンバスサイズ。フクロウを囲います。</p>
 <p><img src="images/howto_export_canvas02.png" alt="how to image"></p>
 <p>Let's select <strong>Export images</strong> again. Error!!!<br>
-もう一度メニューから <strong>Export images(shift+ctrl+alt+E)</strong> を選んでみましょう。Error!!!</p>
+もう一度メニューから Export images (shift + ctrl + alt + E) を選んでみましょう。Error!!!</p>
 <p><img src="images/howto_export_error02.png" alt="how to image"></p>
 <p>At least one animation must be set.
 Set the animation in the right panel.<br>
@@ -2173,7 +2232,7 @@ Let's play it and see if it animates correctly.<br>
 基本ポーズに拡張ポーズを重ねるようにしましょう。
 再生させて正しくアニメーションするか確かめましょう。</p>
 <p>Let's select <strong>Export images</strong> again.<br>
-もう一度メニューから <strong>Export images</strong> を選んでみましょう。</p>
+もう一度メニューから Export images を選んでみましょう。</p>
 <h2 id="export-settings">Export settings</h2>
 <p>Do the output settings.<br>
 出力設定を行います。</p>
@@ -2208,7 +2267,7 @@ animrig file : c:\hoge\sample01\sample.animrig
 output : c:\hoge\sample01\output\
 </div></code></pre>
 <p>Press the <strong>export</strong> button to get started.<br>
-<strong>export</strong> ボタンを押して開始しましょう。</p>
+export ボタンを押して開始しましょう。</p>
 <p><img src="images/howto_export_output01.png" alt="how to image"></p>
 <p>Was it output?<br>
 出力されましたか？</p>
@@ -2220,6 +2279,13 @@ output : c:\hoge\sample01\output\
 You can easily make the swing motion that is difficult to do manually.<br>
 物理計算はリアルをシミュレートするものですが、アニメーションの作成を手助けするものでもあります。
 手付けでは難しい揺れる動きが簡単に作れます。</p>
+<h2 id="movie">Movie</h2>
+<p>Please also watch this video.<br>
+動画も、併せてご覧ください。</p>
+<ul>
+<li>YouTube : Spine + Physics : How to setup animations</li>
+</ul>
+<iframe width="640" height="320" src="https://www.youtube.com/embed/wqOF3bvopPE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <h2 id="settings-on-spine">Settings on Spine</h2>
 <p>As a sample, Use Spine's official sample &quot;raptor&quot;.
 The data is in <code>editor/sample_data/raptor/</code>.
@@ -2252,11 +2318,11 @@ In this case, physics is applied from <code>tail2</code> to<code> tail10</code>.
 うわ！気持ち悪い！ヘビみたいですね。</p>
 <p>Then, set the physics settings. Adjust settings by writing text.<br>
 では、物理計算の設定を行います。設定はテキストを書いて調整します。</p>
-<p>Select <strong>object</strong> in the right side panel , and open <strong>settings</strong>.<br>
-右のサイドパネルの <strong>object</strong> を選んで、<strong>settings</strong> を開いてください。</p>
+<p>Select <strong>Object</strong> in the right side panel , and open <strong>settings</strong>.<br>
+右のサイドパネルの Object を選んで、Settings を開いてください。</p>
 <p><img src="images/howto_physics_settings01.png" alt="how to image"></p>
 <p>Press the <strong>Refresh setting text</strong> button below to add the current settings.<br>
-下の <strong>Refresh setting text</strong> ボタンを押すと現在の設定が追加されます。</p>
+下の Refresh setting text ボタンを押すと現在の設定が追加されます。</p>
 <pre class="hljs"><code><div>tail2.mode=bone
 tail2.k=100.00
 tail2.damping=10.00
@@ -2268,8 +2334,11 @@ These are the default setting.
 This values are used if settings text is nothing.<br>
 <code>{bone}.{property}</code> という書式になっています。
 上記がデフォルト設定であり、なにも書かれていない場合はこの値が使用されます。</p>
-<p>See <a href="#physics">physics</a> for details. see later.<br>
-詳しくは <a href="#physics">physics</a> で説明していますが、後で見てください。</p>
+<p><strong>physics</strong> page for details. see later.<br>
+詳しくは physics で説明していますが、後で見てください。</p>
+<ul>
+<li><a href="#physics">How to Physics</a></li>
+</ul>
 <p>Double click on the setting text to open the configuration form.
 Use it if you need advanced settings.<br>
 テキストの個所をダブルクリックすると設定フォームが開きます。

@@ -90,9 +90,10 @@ spine_runtime_patch/3.8/
 
 |unity||
 |---|---|
-|AnimationrigIUnityStateRenderer|StateRenderer interface.|
-|AnimationrigStateComponent|AnimationrigState component.|
-|AnimationrigSpineRendererComponent|StateRenderer-Spine component.|
+|UnityStateRenderer|Unity interface.|
+|AnimrigState|AnimationrigState component.|
+|AnimrigRendererSpine|Spine renderer component.|
+|AnimrigRendererGameObject|GameObject renderer component.|
 
 |spine mix-add patch||
 |---|---|
@@ -102,12 +103,15 @@ spine_runtime_patch/3.8/
 # How to implement
 <a name="howto"></a>
 
-## Need a drawing environment(workspace) for spine
-
 This runtime only has function to control spine. You need to setup an environment(workspace) to load and draw the spine.<br>
 このランタイムはspineを制御するだけの機能しか有していません。spineを読み込んで表示させる環境をご用意ください。
 
-![runtime](images/runtime01.png)
+Take a look at the unity sample first. 
+If unity can be used, the following preparation is not necessary.<br>
+まずは unity サンプルをご覧ください。
+もし、unityが使えるなら以下の下準備は不要です。
+
+[How to implement in Unity](#howtounity)
 
 ## Load and create
 
@@ -186,10 +190,6 @@ Set that class to the **Renderer** property.<br>
     // [1] : null object
     state.InputObjects[0].Renderer = spinerenderer;
 ```
-
-If you set a different object-type in the animation file objects, throw the exception error.<br>
-もしアニメーション中のオブジェクトと異なるタイプ(object-type)を指定した場合、例外が投げられます。
-
 
 # How to setup physics
 <a name="howtophysics"></a>
@@ -363,6 +363,14 @@ You can easily setup spine. At first I think that it is good to test with Unity.
 Unityで使う場合は、コンポーネントが用意されています。
 spineの準備も楽ちんなので、まずはUnityで触って感触を掴むと良いと思います。
 
+Please also watch this video.<br>
+動画も、併せてご覧ください。
+
+* Youtube : How to play on Unity
+
+<iframe width="640" height="320" src="https://www.youtube.com/embed/N0xzGjrnlHc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
 ## Setup spine
 
 Please see the official page or etc.<br>
@@ -386,7 +394,7 @@ runtime/csharp/lib_unity/*.cs
 
 ![unity component](images/unity_component01.png)
 
-## Setup AnimationrigState Component
+## AnimationrigState Component
 
 First, setup **AnimationrigState** object.
 Create an empty GameObject and attach the **AnimationrigState** component.<br>
@@ -395,34 +403,17 @@ Create an empty GameObject and attach the **AnimationrigState** component.<br>
 
 ![unity component](images/unity_state01.png)
 
-+ Animrig TextAsset
-
+### Animrig TextAsset
 
 Set Animationrig **binary file**. To use binary files in Unity, you need to change the file-extension to **.bytes**.<br>
 Animationrig**バイナリファイル**を指定します。Unityでバイナリファイルを扱うには **.bytes** に拡張子を変更する必要があります。
 
-+ Preset TextAsset
+### Preset TextAsset
 
 Set the Preset text file. This file is used in text format **.txt**.<br>
 Presetテキストファイルを指定します。これはテキスト形式 **.txt** で取り扱います。
 
-+ AutoUpdate (def : true)
-
-Automatically update time using Unity's **Update()**. If you want to control manually, please disable.<br>
-Unityの **Update()** を使用して自動で時間更新を行います。手動でコントロールする場合は無効にしてください。
-
-+ UpdateOnce (def : true)
-
-Call object update only once.<br>
-一回のUpdateでオブジェクトのUpdateを一回だけ呼び出します。60フレームで動作するなら問題ありません。
-
-+ Renderer Objects
-
-
-Set the GameObject to link with the animation. It will be explained in the next section.<br>
-リンクさせるGameObjectを指定します。次のセクションで説明します。
-
-## Setup SpineRenderer Component
+## SpineRenderer Component
 
 Attach **Animationrig-SpineRenderer** component to the spine game object.<br>
 spineのゲームオブジェクトに **Animationrig - SpineRenderer** コンポーネントを追加します。
@@ -433,52 +424,72 @@ spineのゲームオブジェクトに **Animationrig - SpineRenderer** コン�
 **SpineRenderer** は **AnimationrigState** の操作を中継する役割を持ちます。
 このコンポーネントを追加しないかぎり影響を受けません。
 
-+ Override Update (def : false)
-
-In Unity, spine components update time. If AnimationrigState does it, please enable.<br>
-Unityではspineのコンポーネントが時間更新を行います。AnimationrigStateに委ねる場合は有効にしてください。
-
-+ Override Enable
-
-Synchronize with GameObject.selfActive.<br>
-GameObject.selfActiveと連動させます。
-
-+ Override Transform
+### Override Transform
 
 Synchronize with GameObject.Transform. Set the Local coordinates. Create a **RootTransformObject** like the image.<br>
-GameObject.Transformと連動させます。ローカル座標が設定されるので、画像の **RootTransformObject** のようにルートを設けてください。
+GameObject.Transformと連動させます。エディタでデザインした座標が設定されるので、画像の **RootTransformObject** のようにルートを設けてください。
 
-+ Override Color
-
-Synchronize with the Spine.Skeleton-color.<br>
-Spine.Skeletonの色と連動させます。
-
-+ Override Default Mix
-
-Overwrite spine-DefaultMix. If you want to set it manually, please disable it.<br>
-SpineのDefaultMixの値を上書きします。手動で設定する場合は無効にしてください。
-
-+ Pixel per Unit (def : 100)
+### Pixel per Unit (def : 100)
 
 Set the spine(GameObject) scale. There is a factor of 100 between editor and unity.<br>
 spine(GameObject)の倍率を指定します。エディタとunityでは100倍の差があります。
 
-+ Transform Scale (def : 1.0)
+I think that this item will be deleted soon.<br>
+この項目はそのうち削除すると思います。
+
+### Transform Scale (def : 1.0)
 
 Set the overall scale.<br>
 全体の倍率を設定します。大きさ、位置全てに影響を与えます。
 
+This value is different for **SkeletonAnimation** or **SkeletonGraphic**. 
+For Graphic set 1 `(1unit = 1pixel)`,
+For Animation, set 0.01 `(1unit = 0.01pixel)`.<br>
+この値は SkeletonAnimation と SkeletonGraphic で異なります。
+Graphicの場合は 1(1unit = 1pixel)、Aimationの場合は 0.01(1unit = 0.01pixel)を設定します。
+
 ## Attach Spine GameObject
 
 Back to the **AnimationrigState** component.
-Set **RendererObjects** to **GameObject**.<br>
+Set GameObjects to **RendererObjects**.<br>
 **AnimationrigState** コンポーネントに戻ります。
-**RendererObjects**にアニメーションと対応する**GameObject**を設定していきます。
+RendererObjects にアニメーションと対応する GameObject を設定していきます。
 
 ![unity component](images/unity_renderer01.png)
 
-If the RendererObjects name is none, please update it with the reload button.<br>
+If the RendererObjects name is none, please update it with the **reload** button.<br>
 もしRendererObjectsの名前などがnoneの場合は、reloadボタンで更新してください。
+
+## Set startup animations
+
+![unity component](images/unity_tracks01.png)
+
+If you want the animation to play at the start, set the "tracks" property.
+You can also change animations from the Unity timeline.<br>
+再生させるだけなら、AnimationrigStateコンポーネントで設定するのが簡単です。一応、Unityタイムラインからもアニメーションの切り替えが可能です。
+
+If you need more advanced operations, access AnimationrigState directly as shown in the sample.<br>
+より高度な操作を必要とする場合は、サンプルのように AnimationrigState に直接アクセスしてください。
+
+```cs
+// main.cs
+// change animation & AutoFade
+public void OnAnimation0Change(int value)
+{
+    if (EventLock) return;
+    if (value < 0) return;
+    var name = AnimationCombo0.options[value].text;
+    if (name == "empty")
+    {
+        anim.State.ClearTrackFade(2, 1.0f);
+    }
+    else
+    {
+        anim.State.EntryTrackFade(2, name, 1.0f);
+    }
+}
+```
+
 
 # Run unity sample program
 <a name="runsample"></a>
@@ -571,40 +582,8 @@ The editor does not support 3.6, but you can run 3.6 Spine by changing the progr
 エディタは3.6に対応していませんが、プログラムをちょっと変更することで、3.6のSpineを実行することが出来ます。
 
 However, You  can not be used MixAdd function.<br>
-ただし、MixAddの機能は使用できません。
+ただし、MixAddの機能などは使用できません。
 
-## Editor side
-
-The editor uses output in the format 3.7 or higher. These are for editor only , and not use it for programs.<br>
-エディタは3.7以上の形式で出力した物を使用します。これらはエディタ専用で、プログラムでは使用しません。
-
-## Program side
-
-This time **Animrig.SpineRenderer** corresponds to 3.6.<br>
-今回はこの **Animrig.SpineRenderer** を3.6に対応させます。
-
-This work is easy. Change Spine-runtime version to 3.6 and compile. Then you will get errors.<br>
-作業は簡単です。まずSpine-runtimeを3.6に変更し、コンパイルします。すると数カ所でエラーが出ます。
-
-```csharp
-    // mix blend
-    /* comment out
-    if ((track.MixBlend == Spine.MixBlend.Replace)||(track.MixBlend == Spine.MixBlend.Add))     // safe code
-    {
-        switch (trackmix)
-        {
-            case MixBlend.Add:
-                track.MixBlend = Spine.MixBlend.Add;
-                break;
-            case MixBlend.Replace:
-                track.MixBlend = Spine.MixBlend.Replace;
-                break;
-        }
-    }
-    */
-```
-Please comment out all of MixBlend code.<br>
-MixBlendの箇所をすべてコメントアウトしてください。
 
 # Classes
 
@@ -931,6 +910,8 @@ ObjectType は Constructor で必ず決定してください。
             Clear();
         }
 ```
+Since **State** accepts any ObjectType, it can be anything.<br>
+Stateは全てのObjectTypeを受け入れるため、どのようなものでもかまいません。
 
 ## RendererEnable , RendererVisible , RendererInheritedEnable , RendererInheritedVisible
 Return object state. **Inherited** is returns the inherited value.<br>
@@ -953,7 +934,7 @@ Draw priority value.<br>
 In the editor, it is sorted by the following formula.<br>
 エディタでは以下の式を元にソートされます。
 ```
-    sortvalue = PriorityZ + PriorityDesign * 0x10000;
+    double sortvalue = PriorityZ + PriorityDesign * 0x10000;
 ```
 
 ## TransMatrix , TransPosition , TransColor
@@ -970,10 +951,10 @@ Returns the base position and matrix of the object.<br>
 Return object modulate color.<br>
 乗算色を返します。
 ```csharp
-    float a = renderer.TransColor[0];
-    float r = renderer.TransColor[1];
-    float g = renderer.TransColor[2];
-    float b = renderer.TransColor[3];
+    float a = renderer.TransColor.a;    // 0.0f to 1.0f
+    float r = renderer.TransColor.r;
+    float g = renderer.TransColor.g;
+    float b = renderer.TransColor.b;
 ```
 
 ## Clear()
