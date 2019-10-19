@@ -70,8 +70,8 @@ body {
     border-style: solid;
     border-color: #224940;
 }
-.sample img{
-      
+.sampleframe img{
+    border-radius: 16px;
 }
 a.linkhover{
     display: inline-block;
