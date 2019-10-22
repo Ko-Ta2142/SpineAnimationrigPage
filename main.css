@@ -76,7 +76,8 @@ body {
 .releasenote{
     display : inline-block;
     background:#eeeeee;
-    font-size : 90%;
+    font-size : 0.8em;
+    color : #262626;
     border-radius: 16px;
     margin : 5px;
     padding : 10px;
