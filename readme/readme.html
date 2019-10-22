@@ -1485,6 +1485,11 @@ transform layer と異なる点は、移動に伴い物理計算が発生しま�
 The field of view moves in the reverse direction.<br>
 Transform layer で移動(offset)、伸縮、回転を制御します。
 カメラなので視界は逆方向に動きます。</p>
+<h1 id="target-priority-area">Target priority area</h1>
+<p>Perform camera transformation on objects in the priority area.
+If the value is the same, it will affect everything.<br>
+この優先度間に存在するオブジェクトに対して、カメラ変換を行います。
+同値の場合は全てに影響を及ぼします。</p>
 <h2 id="camera-rotate-offset">Camera rotate offset</h2>
 <p><strong>Rotate offset</strong> is the camera rotation center position setting.
 The default setting is <code>0,0,0</code>, which rotates at the origin.

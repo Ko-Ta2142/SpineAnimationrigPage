@@ -883,6 +883,13 @@ The field of view moves in the reverse direction.<br>
 Transform layer で移動(offset)、伸縮、回転を制御します。
 カメラなので視界は逆方向に動きます。
 
+# Target priority area
+
+Perform camera transformation on objects in the priority area.
+If the value is the same, it will affect everything.<br>
+この優先度間に存在するオブジェクトに対して、カメラ変換を行います。
+同値の場合は全てに影響を及ぼします。
+
 ## Camera rotate offset
 
 **Rotate offset** is the camera rotation center position setting.

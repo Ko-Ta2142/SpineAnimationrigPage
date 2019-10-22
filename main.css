@@ -73,6 +73,20 @@ body {
 .sampleframe img{
     border-radius: 16px;
 }
+.releasenote{
+    display : inline-block;
+    background:#eeeeee;
+    font-size : 90%;
+    border-radius: 16px;
+    margin : 5px;
+    padding : 10px;
+}
+.releasenote img{
+    border-style: solid;
+    border-color: #444444;
+    border-radius: 16px;
+}
+
 a.linkhover{
     display: inline-block;
     background-color: rgba(0,0,0,0.00);
