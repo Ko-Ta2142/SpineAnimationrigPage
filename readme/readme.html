@@ -434,9 +434,9 @@ This tool is intended to allow designers to use Spine-runtime functionality.</p>
 <li>How to
 <ul>
 <li><a href="#howto_basic">How to basic</a></li>
-<li><a href="#howto_base">How to make base animation</a></li>
+<li><a href="#howto_base">How to make animation</a></li>
 <li><a href="#howto_export">How to export images</a></li>
-<li><a href="#howto_physics">How to physics</a></li>
+<li><a href="#howto_physics">How to setup physics</a></li>
 </ul>
 </li>
 <li>Feature &amp; Spine misc
@@ -577,7 +577,11 @@ If you omit the function, it will work in 3.6.<br>
 <td>play at top.</td>
 </tr>
 <tr>
-<td>mouse right</td>
+<td>left</td>
+<td>edit</td>
+</tr>
+<tr>
+<td>right<br>alt + left</td>
 <td>move view position.</td>
 </tr>
 <tr>
@@ -622,7 +626,7 @@ If you omit the function, it will work in 3.6.<br>
 <tbody>
 <tr>
 <td>select</td>
-<td>object select</td>
+<td>select</td>
 </tr>
 <tr>
 <td>move</td>
@@ -662,23 +666,23 @@ Edit layers and keys.<br>
 <td>play at top.</td>
 </tr>
 <tr>
-<td>mouse left</td>
+<td>left</td>
 <td>select key.</td>
 </tr>
 <tr>
-<td>shift + mouse left</td>
+<td>shift + left</td>
 <td>grid time.</td>
 </tr>
 <tr>
-<td>mouse right</td>
-<td>move view time position.</td>
+<td>right<br>alt + left</td>
+<td>move time position.</td>
 </tr>
 <tr>
 <td>mouse wheel</td>
 <td>time zoom.</td>
 </tr>
 <tr>
-<td>ctrl + mouse left</td>
+<td>ctrl + left (+shift)</td>
 <td>multi select.</td>
 </tr>
 <tr>
@@ -1027,7 +1031,9 @@ Accuracy and behavior are never perfect, But I think it can be used enough to ex
 簡単な物理計算（バネモデル）を搭載しています。
 Unityを使わないと難しい物理計算を、簡単にSpineに適用できます。
 精度も機能も決して良い物ではありませんが、髪の毛を揺らしたりする分には十分使えると思います。</p>
-<h2 id="how-to-set-physics">How to set physics</h2>
+<p>The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
+物理計算フレームレートは100fps(dt=0.01)固定です。</p>
+<h2 id="how-to-setup-physics">How to setup physics</h2>
 <p>In the Spine editor, add <code>@spring</code> to the end of the bone name. Apply physics to this bones and children bones.<br>
 Spineエディタで、bone名に <code>@spring</code> を語尾に付け加えてください。そのボーンを含む子に対して物理計算を適用します。</p>
 <p><img src="images/physics_how01.png" alt="physics_how"></p>
@@ -1094,21 +1100,14 @@ The settings are written to text area.<br>
 最初はなにも無い状態（デフォルト設定が適用）なので Refresh setting text ボタンを押してください。
 設定が書き込まれます。</p>
 <p><img src="images/physics_setting01.png" alt="physics_setting"></p>
-<pre class="hljs"><code><div>{physics group name / alias name}.{property name}=value
-
-boneL2.k=100
-</div></code></pre>
-<p>Property is below.
-Use lowercase , Space is not allowed.<br>
-指定できるプロパティは以下の通りです。
+<p>Use lowercase , Space is not allowed.<br>
 小文字で表記、スペースなどは入れないでください。</p>
 <p><img src="images/physics_settingform.gif" alt="physics_settingform"></p>
 <p>Double click (or right click menu) on the setting text to open the configuration form.
 Use it if you need advanced settings.<br>
 テキストの個所をダブルクリック（または右クリックメニュー）すると設定フォームが開きます。
 複雑な設定が必要な場合は使ってください。</p>
-<p>The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
-物理計算フレームレートは100fps(dt=0.01)固定です。</p>
+<h2 id="setting-params">setting params</h2>
 <table>
 <thead>
 <tr>
@@ -1147,11 +1146,15 @@ Use it if you need advanced settings.<br>
 </tr>
 <tr>
 <td>alpha (def:1.0)</td>
-<td>Physics blend ratio. Allow negative values.<br>物理計算の合成率。マイナスを許容します。</td>
+<td>Physics blend ratio.<br>物理計算の合成率。</td>
 </tr>
 <tr>
 <td>force (def:1.0)</td>
-<td>Sets the strength of the force. Zero : disable. Negative : invert.<br>加わる力の強さを設定します。０で無効、マイナスで反転。</td>
+<td>Strength of the force. Zero : disable. Negative : invert.<br>加わる力の強さを設定します。０で無効、マイナスで反転。</td>
+</tr>
+<tr>
+<td>wiggle (def:0.0)</td>
+<td>Give random fluctuate(wiggler).<br>力にランダムな揺らぎを与えます。</td>
 </tr>
 <tr>
 <td><strong>gravity</strong></td>
@@ -1225,32 +1228,6 @@ Each mode has the characteristics of returning to original shape.<br>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>bone</li>
-</ul>
-<p>The length is a fixed. Affects bone angle(rotate).
-The most basic and most versatile spring.<br>
-長さが固定のバネで、ボーンの角度に影響を与えます。
-最も基本的で何にでも使えるスプリングです。</p>
-<ul>
-<li>strbone</li>
-</ul>
-<p>This mode can stretch in bone length.
-Can be used for hair and cloth.<br>
-伸び縮みする bone です。
-髪の毛や布に使えます。</p>
-<ul>
-<li>point</li>
-</ul>
-<p>The length is a fixed. Affects bone position only.<br>
-長さが固定のバネで、ボーンの位置のみ影響を与えます。</p>
-<ul>
-<li>strpoint</li>
-</ul>
-<p>Swiiiiing spring. Affects bone position only.
-Used for breast and body sagging.<br>
-基本的な伸び縮みするビヨンビヨンするバネです。
-ボーンの位置に影響を与えます。胸や体のたるみに最適です。</p>
 <h2 id="attention-of-bone-angle">Attention of bone angle</h2>
 <p>The spring is a model that controls the position.
 So, there is a limit to the bone structure in the <code>bone,strbone</code> mode that controls the angle.<br>
@@ -2085,7 +2062,7 @@ Spineでアニメーション一覧を見ると、 <code>@down, @up</code> が�
 特殊な名前で決められています。</p>
 <p>The above is the basic. Congratulations!<br>
 以上が基本です。お疲れ様。</p>
-<h1 id="how-to-make-base-animations">How to make base animations</h1>
+<h1 id="how-to-make-animations">How to make animations</h1>
 <p><a name="howto_base"></a></p>
 <p>This is how to build a basic animation in SpineAnimationrig.<br>
 SpineAnimationrigにおけるアニメーションのお作法です。</p>
@@ -2276,7 +2253,7 @@ export ボタンを押して開始しましょう。</p>
 <p><img src="images/howto_export_output01.png" alt="how to image"></p>
 <p>Was it output?<br>
 出力されましたか？</p>
-<h1 id="how-to-physics">How to physics</h1>
+<h1 id="how-to-setup-physics">How to setup physics</h1>
 <p><a name="howto_physics"></a></p>
 <p>Let's use <strong>physics</strong> simulation.<br>
 物理計算を使ってみましょう。</p>

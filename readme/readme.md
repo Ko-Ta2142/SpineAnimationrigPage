@@ -52,9 +52,9 @@ Please access the following :)<br>
     * [AnimationTest mode](#animationtest)
 * How to
     * [How to basic](#howto_basic)
-    * [How to make base animation](#howto_base)
+    * [How to make animation](#howto_base)
     * [How to export images](#howto_export)
-    * [How to physics](#howto_physics)
+    * [How to setup physics](#howto_physics)
 * Feature & Spine misc
     * [Export images , Snapshot , movie](#exportimages)
     * [Physics](#physics)
@@ -180,7 +180,8 @@ Display a preview of the current state.<br>
 |---|---|
 |space|play.|
 |shift + space|play at top.|
-|mouse right|move view position.|
+|left|edit|
+|right<br>alt + left|move view position.|
 |mouse wheel|zoom.|
 
 ## Option
@@ -198,7 +199,7 @@ Edit-handle-mode can be used when selected **Transform layer**.<br>
 
 |handle|function|
 |---|---|
-|select|object select|
+|select|select|
 |move|edit position|
 |scale|edit scale|
 |rotate|edit rotate|
@@ -217,11 +218,11 @@ Edit layers and keys.<br>
 |---|---|
 |space|play.|
 |shift + space|play at top.|
-|mouse left|select key.|
-|shift + mouse left|grid time.|
-|mouse right|move view time position.|
+|left|select key.|
+|shift + left|grid time.|
+|right<br>alt + left|move time position.|
 |mouse wheel|time zoom.|
-|ctrl + mouse left|multi select.|
+|ctrl + left (+shift)|multi select.|
 |ctrl + a|select all keys in layer.|
 |ctrl + i|add key.|
 |ctrl + r|clear key.|
@@ -483,7 +484,10 @@ Accuracy and behavior are never perfect, But I think it can be used enough to ex
 Unityを使わないと難しい物理計算を、簡単にSpineに適用できます。
 精度も機能も決して良い物ではありませんが、髪の毛を揺らしたりする分には十分使えると思います。
 
-## How to set physics
+The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
+物理計算フレームレートは100fps(dt=0.01)固定です。
+
+## How to setup physics
 
 In the Spine editor, add `@spring` to the end of the bone name. Apply physics to this bones and children bones.<br>
 Spineエディタで、bone名に `@spring` を語尾に付け加えてください。そのボーンを含む子に対して物理計算を適用します。
@@ -575,15 +579,7 @@ The settings are written to text area.<br>
 
 ![physics_setting](images/physics_setting01.png)
 
-```
-{physics group name / alias name}.{property name}=value
-
-boneL2.k=100
-```
-
-Property is below.
 Use lowercase , Space is not allowed.<br>
-指定できるプロパティは以下の通りです。
 小文字で表記、スペースなどは入れないでください。
 
 ![physics_settingform](images/physics_settingform.gif)
@@ -593,8 +589,7 @@ Use it if you need advanced settings.<br>
 テキストの個所をダブルクリック（または右クリックメニュー）すると設定フォームが開きます。
 複雑な設定が必要な場合は使ってください。
 
-The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
-物理計算フレームレートは100fps(dt=0.01)固定です。
+## setting params
 
 |property||
 |---|---|
@@ -605,8 +600,9 @@ The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
 |damping (def:10)|Velocity damping value.<br>速度減衰値。|
 |mass (def:1.0)|Mass, weight. Larger , move slowly.<br>質量、重さ。大きいほどゆっくり動きます。|
 |**control**||
-|alpha (def:1.0)|Physics blend ratio. Allow negative values.<br>物理計算の合成率。マイナスを許容します。|
-|force (def:1.0)|Sets the strength of the force. Zero : disable. Negative : invert.<br>加わる力の強さを設定します。０で無効、マイナスで反転。|
+|alpha (def:1.0)|Physics blend ratio.<br>物理計算の合成率。|
+|force (def:1.0)|Strength of the force. Zero : disable. Negative : invert.<br>加わる力の強さを設定します。０で無効、マイナスで反転。|
+|wiggle (def:0.0)|Give random fluctuate(wiggler).<br>力にランダムな揺らぎを与えます。|
 |**gravity**||
 |gravity (def:0.0)|Unsupported. Gravity power. I think ,not used it often.<br>現在未対応。重力。バネではあまり使わないと思います。|
 |gravityvector (def:0,-1,0)|Unsupported. Gravity direction.<br>現在未対応。重力方向。<br>example : aaa.gravityvector=0,-1,0|
@@ -634,34 +630,6 @@ Each mode has the characteristics of returning to original shape.<br>
 |strbone|yes|yes|
 |point|no|no|
 |strpoint|yes|no|
-
-
-* bone
-
-The length is a fixed. Affects bone angle(rotate).
-The most basic and most versatile spring.<br>
-長さが固定のバネで、ボーンの角度に影響を与えます。
-最も基本的で何にでも使えるスプリングです。
-
-* strbone
-
-This mode can stretch in bone length. 
-Can be used for hair and cloth.<br>
-伸び縮みする bone です。
-髪の毛や布に使えます。
-
-
-* point
-
-The length is a fixed. Affects bone position only.<br>
-長さが固定のバネで、ボーンの位置のみ影響を与えます。
-
-* strpoint
-
-Swiiiiing spring. Affects bone position only.
-Used for breast and body sagging.<br>
-基本的な伸び縮みするビヨンビヨンするバネです。
-ボーンの位置に影響を与えます。胸や体のたるみに最適です。
 
 ## Attention of bone angle
 
@@ -1514,7 +1482,7 @@ The above is the basic. Congratulations!<br>
 以上が基本です。お疲れ様。
 
 
-# How to make base animations
+# How to make animations
 <a name="howto_base"></a>
 
 This is how to build a basic animation in SpineAnimationrig.<br>
@@ -1786,7 +1754,7 @@ export ボタンを押して開始しましょう。
 Was it output?<br>
 出力されましたか？
 
-# How to physics
+# How to setup physics
 <a name="howto_physics"></a>
 
 Let's use **physics** simulation.<br>
@@ -1878,7 +1846,7 @@ This values are used if settings text is nothing.<br>
 **physics** page for details. see later.<br>
 詳しくは physics で説明していますが、後で見てください。
 
-+ <a href="#physics">How to Physics</a>
++ <a href="#physics">Physics</a>
 
 Double click on the setting text to open the configuration form.
 Use it if you need advanced settings.<br>
