@@ -817,8 +817,9 @@ Editor support status.<br>
 
 |function||
 |---|---|
+|PreMultipliedAlpha|yes (*alpha 1.0 only)|
 |blend|yes|
-|tintcolor|no (diffuse * modulatecolor + tintcolor)|
+|tintcolor|yes|
 |clipping|yes|
 
 ### property
@@ -844,12 +845,17 @@ Strictly, this is not a camera. Give the root(all objects) to inverted deformati
 The difference from the transform layer is that No physics force occur with the movement.<br>
 transform layer と異なる点は、移動に伴い物理計算が発生しません。
 
-## move , zoom , rotate
+## Move , zoom , rotate
 
 Control move(offset), zoom, and rotate with **Transform layer**.
 The field of view moves in the reverse direction.<br>
 Transform layer で移動(offset)、伸縮、回転を制御します。
 カメラなので視界は逆方向に動きます。
+
+## Color
+
+The color of the object is affected.<br>
+オブジェクトの色に影響を与えます。
 
 # Target priority area
 
