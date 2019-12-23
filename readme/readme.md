@@ -57,7 +57,8 @@ Please access the following :)<br>
     * [How to setup physics](#howto_physics)
 * Feature & Spine misc
     * [Export images , Snapshot , movie](#exportimages)
-    * [Physics](#physics)
+    * [Physics - spring](#physics)
+    * [Physics - element](#physics_element)
     * [Group(Parent)](#parent)
     * [Empty animation](#empty)
     * [Skin](#skin)
@@ -470,7 +471,7 @@ eye:{ position:[{eyepos.x},{eyepos.y}] , size:[{eyesize.x},{eyesize.y}] }
 eye:{ position:[0.400,0.200] , size:[0.100,0.000] }
 ```
 
-# Physics
+# Physics - spring
 <a name="physics"></a>
 
 <video width="auto" height="500" controls>
@@ -487,7 +488,7 @@ Unityを使わないと難しい物理計算を、簡単にSpineに適用でき�
 The physics calculation frame rate is fixed at 100 fps (dt=0.01).<br>
 物理計算フレームレートは100fps(dt=0.01)固定です。
 
-## How to setup physics
+## How to setup on spine
 
 In the Spine editor, add `@spring` to the end of the bone name. Apply physics to this bones and children bones.<br>
 Spineエディタで、bone名に `@spring` を語尾に付け加えてください。そのボーンを含む子に対して物理計算を適用します。
@@ -663,6 +664,84 @@ It ’s a good idea to add a bone in front.<br>
 This technique is very useful for hair.<br>
 髪の毛などでとても使えるテクニックです。
 
+# Physics - element
+<a name="physics_element"></a>
+
+You can apply a physics-spring to the values ​​of the bone elements (position, scale, rotation).
+Only works when bone values ​​change.
+Therefore, even if the parent moves, it does not interlock.
+Used to smooth out rough movements.<br>
+物理計算と言っていいのかわかりませんが、ボーンの要素(position,scale,rotate)の値にバネを適用することができます。
+ボーンの値が変わったときのみ作用します。
+そのため、親が動いても連動したりはしません。
+主に、雑に作った動きを滑らかにするために使用します。
+
+![physics element](images/physics_element01.gif)
+
+## How to setup on spine
+
+In the Spine editor, add `@element` to the end of the bone name.
+Only applies to that bone<br>
+Spineエディタで、bone名に `@element` を語尾に付け加えてください。
+そのボーンのみ適用されます。
+
+![physics_how](images/physics_element02.png)
+
+Use an alias name to share bone settings.<br>
+設定を一括管理するにはエイリアス名を使用してください。
+
+```
+leg_l@element,base
+leg_r@element,base
+```
+
+## Spring setting
+
+Physical settings are edited on the Animationrig editor.
+Edit with **setting field**.<br>
+物理計算の設定はAnimationrigエディタ上で行います。
+オブジェクトの setting field で編集します。
+
+At first there is nothing(use default setting).
+Please push the **Refresh setting text** button.
+The settings are written to text area.<br>
+最初はなにも無い状態（デフォルト設定が適用）なので Refresh setting text ボタンを押してください。
+設定が書き込まれます。
+
+```
+base.mode=spring
+base.k=200.00
+base.damping=10.00
+base.mass=1.00
+```
+
+## setting params
+
+|property||
+|---|---|
+|**basic**||
+|enable (def:true)|Used for disabling.<br>主に無効化する際に使用します。<br>example : aaa.enable=false
+|mode (def:spring)|Spring mode. **spring** only.<br>モードを設定します。springのみ。|
+|k (def:100)|Spring constant. Larger , more amplitude(swing).<br>バネ定数。値が大きいほど振幅します。|
+|damping (def:10)|Velocity damping value.<br>速度減衰値。|
+|mass (def:1.0)|Mass, weight. Larger , move slowly.<br>質量、重さ。大きいほどゆっくり動きます。|
+|**control**||
+|alpha (def:1.0)|Physics blend ratio.<br>物理計算の合成率。|
+|**mask**||
+|maskpos (def:xyz)|Position physics mask. set with the "xyz".|
+|maskscale (def:xyz)|Scale physics mask. set with the "xyz".|
+|maskrot (def:xyz)|Rotate physics mask. set with the "xyz".|
+
+## Mask
+
+You can mask the apply of physics with elements. Default is all(xyz).<br>
+物理計算を要素でマスクできます。デフォルトは全て(xyz)です。
+```
+// rotate z only
+base.maskpos=none
+base.maskscale=none
+base.maskrot=z
+```
 
 # Empty animation
 <a name="empty"></a>
